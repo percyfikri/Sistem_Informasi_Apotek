@@ -34,6 +34,10 @@ Route::get('/blank-page', function () {
     return view('pages.blank-page', ['type_menu' => '']);
 });
 
+Route::get('/obat-page', function () {
+    return view('pages.obat-page', ['type_menu' => '']);
+});
+
 // Bootstrap
 Route::get('/bootstrap-alert', function () {
     return view('pages.bootstrap-alert', ['type_menu' => 'bootstrap']);

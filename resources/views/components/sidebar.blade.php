@@ -4,7 +4,7 @@
             <a href="index.html">Apotek Arema</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">St</a>
+            <a href="index.html">AA</a>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
@@ -25,7 +25,7 @@
             <li class="menu-header">Apoteker</li>
             <li class="nav-item dropdown {{ $type_menu === 'dashboard' ? 'active' : '' }}">
                 <a class="nav-link"
-                    href="{{ url('blank-page') }}"><i class="far fa-file-alt"></i> <span>Obat</span></a>
+                    href="{{ url('obat-page') }}"><i class="far fa-file-alt"></i> <span>Obat</span></a>
             </li>
             <li class="nav-item dropdown {{ $type_menu === 'dashboard' ? 'active' : '' }}">
                 <a class="nav-link"
