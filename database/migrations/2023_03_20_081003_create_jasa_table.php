@@ -15,7 +15,8 @@ return new class extends Migration
   {
     Schema::create('jasa', function (Blueprint $table) {
       $table->increments('id_jasa');
-      $table->foreignId('id_pengguna');
+      $table->unsignedInteger('id_apoteker');
+      $table->foreign('id_apoteker')->references('id_pengguna')->on('pengguna')->onDelete('cascade');
       $table->string('tingkatan');
       $table->integer('harga');
       $table->timestamps();

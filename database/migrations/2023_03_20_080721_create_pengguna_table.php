@@ -15,7 +15,7 @@ return new class extends Migration
   {
     Schema::create('pengguna', function (Blueprint $table) {
       $table->increments('id_pengguna');
-      $table->string('nama');
+      $table->string('nama')->index();
       $table->string('umur');
       $table->string('status');
       $table->string('alamat');

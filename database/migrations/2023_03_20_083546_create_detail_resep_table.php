@@ -16,10 +16,12 @@ return new class extends Migration
     Schema::create('detail_resep', function (Blueprint $table) {
       $table->unsignedInteger('id_resep');
       $table->foreign('id_resep')->references('id_resep')->on('resep_obat')->onDelete('cascade');
-      $table->unsignedInteger('id_obat');
+      $table->unsignedInteger('id_obat')->nullable();
       $table->foreign('id_obat')->references('id_obat')->on('obat')->onDelete('cascade');
-      $table->unsignedInteger('id_racikan');
+      $table->unsignedInteger('id_racikan')->nullable();
       $table->foreign('id_racikan')->references('id_racikan')->on('racikan')->onDelete('cascade');
+      $table->integer('kuantitas');
+      $table->integer('satuan');
       $table->timestamps();
     });
   }

@@ -15,6 +15,7 @@ return new class extends Migration
   {
     Schema::create('racikan', function (Blueprint $table) {
       $table->increments('id_racikan');
+      $table->string('nama_racikan')->index();
       $table->integer('harga');
       $table->string('catatan');
       $table->timestamps();

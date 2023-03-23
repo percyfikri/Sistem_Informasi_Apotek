@@ -14,9 +14,9 @@ return new class extends Migration
   public function up()
   {
     Schema::create('detail_racikan', function (Blueprint $table) {
-      $table->unsignedInteger('id_racikan');
+      $table->unsignedInteger('id_racikan')->nullable();
       $table->foreign('id_racikan')->references('id_racikan')->on('racikan')->onDelete('cascade');
-      $table->unsignedInteger('id_obat');
+      $table->unsignedInteger('id_obat')->nullable();
       $table->foreign('id_obat')->references('id_obat')->on('obat')->onDelete('cascade');
       $table->integer('kuantitas');
       $table->integer('satuan');
