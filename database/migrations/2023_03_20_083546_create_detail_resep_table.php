@@ -20,7 +20,6 @@ return new class extends Migration
       $table->foreign('id_obat')->references('id_obat')->on('obat')->onDelete('cascade');
       $table->unsignedInteger('id_racikan');
       $table->foreign('id_racikan')->references('id_racikan')->on('racikan')->onDelete('cascade');
-
       $table->timestamps();
     });
   }

@@ -6,30 +6,31 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('detail_racikan', function (Blueprint $table) {
-            $table->unsignedInteger('id_racikan');
-            $table->foreign('id_racikan')->references('id_racikan')->on('racikan')->onDelete('cascade');
-            $table->unsignedInteger('id_obat');
-            $table->foreign('id_obat')->references('id_obat')->on('obat')->onDelete('cascade');
-            $table->integer('kuantitas');
-            $table->integer('satuan');
-        });
-    }
+  /**
+   * Run the migrations.
+   *
+   * @return void
+   */
+  public function up()
+  {
+    Schema::create('detail_racikan', function (Blueprint $table) {
+      $table->unsignedInteger('id_racikan');
+      $table->foreign('id_racikan')->references('id_racikan')->on('racikan')->onDelete('cascade');
+      $table->unsignedInteger('id_obat');
+      $table->foreign('id_obat')->references('id_obat')->on('obat')->onDelete('cascade');
+      $table->integer('kuantitas');
+      $table->integer('satuan');
+      $table->timestamps();
+    });
+  }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('detail_racikan');
-    }
+  /**
+   * Reverse the migrations.
+   *
+   * @return void
+   */
+  public function down()
+  {
+    Schema::dropIfExists('detail_racikan');
+  }
 };
