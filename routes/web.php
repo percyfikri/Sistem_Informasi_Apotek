@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\JasaController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ObatController;
+use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PenjualanController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,20 +24,22 @@ Route::redirect('/', '/dashboard-general-dashboard');
 
 
 // Login & Logout
-Route::controller(LoginController::class)->group(function(){
-    Route::get('login', 'index')->name('login');
-    Route::post('login/proses', 'proses');
-    Route::get('logout', 'logout');
+Route::controller(LoginController::class)->group(function () {
+  Route::get('login', 'index')->name('login');
+  Route::post('login/proses', 'proses');
+  Route::get('logout', 'logout');
 });
 
 
 // Middleware Login
-Route::group(['middleware' => ['auth']], function(){
-    Route::group(['middleware' => ['CekUserLogin:apoteker']], function(){
-        Route::resource('dashboard', DashboardController::class);
-    });
+Route::group(['middleware' => ['auth']], function () {
+  Route::group(['middleware' => ['CekUserLogin:apoteker']], function () {
+    Route::resource('dashboard', DashboardController::class);
+  });
 });
 
+// Jasa
+Route::resource('jasa', JasaController::class)->only(['index', 'show']);
 
 // Dashboard
 Route::get('/dashboard-general-dashboard', function () {
@@ -44,9 +48,11 @@ Route::get('/dashboard-general-dashboard', function () {
 Route::get('/dashboard-ecommerce-dashboard', function () {
   return view('pages.dashboard-ecommerce-dashboard', ['type_menu' => 'dashboard']);
 });
-Route::resource('penjualan', UserController::class)->only(['index']);
+Route::resource('penjualan', PenjualanController::class);
 
-Route::get('kasir', [PenjualanController::class, 'index']);
+Route::get('kasir', [PenjualanController::class, 'index'])->name('pengguna.index');
+
+Route::get('pengguna', [PenggunaController::class, 'index'])->name('pengguna.index');
 
 Route::get('obat-page', [ObatController::class, 'show']);
 

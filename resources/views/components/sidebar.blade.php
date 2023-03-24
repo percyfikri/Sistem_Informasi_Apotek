@@ -20,37 +20,38 @@
                 </ul>
             </li>
             <li class="menu-header">Apoteker</li>
-            <li class="nav-item dropdown">
-                <a class="nav-link" href="{{ url('kasir') }}"><i class="fa-solid fa-cash-register"></i>
+            <li class="{{ Request::is('kasir') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('kasir') }}"><i class="fas fa-cash-register"></i>
                     <span>Kasir</span></a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link" href="{{ url('penjualan') }}"><i class="fa-solid fa-money-bill-wave"></i>
+
+            <li class="{{ Request::is('penjualan') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('penjualan') }}"><i class="fas fa-money-bill-wave"></i>
                     <span>Penjualan</span></a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link" href="{{ url('obat-page') }}"><i class="fa-solid fa-pills"></i>
+            <li class="{{ Request::is('obat') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('obat-page') }}"><i class="fas fa-pills"></i>
                     <span>Obat</span></a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link" href="{{ url('resep-obat') }}"><i class="fa-solid fa-prescription"></i>
+            <li class="{{ Request::is('resep-obat') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('resep-obat') }}"><i class="fas fa-prescription"></i>
                     <span>Resep
                         Obat</span></a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link" href="{{ url('racikan') }}"><i class="fa-solid fa-prescription-bottle"></i>
+            <li class="{{ Request::is('racikan') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('racikan') }}"><i class="fas fa-prescription-bottle"></i>
                     <span>Racikan</span></a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link" href="{{ url('customer') }}"><i class="fa-solid fa-address-book"></i>
+            <li class="{{ Request::is('customer') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('customer') }}"><i class="fas fa-address-book"></i>
                     <span>Customer</span></a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link" href="{{ url('dokter') }}"><i class="fa-solid fa-user-doctor"></i>
+            <li class="{{ Request::is('dokter') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('dokter') }}"><i class="fas fa-user-doctor"></i>
                     <span>Dokter</span></a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link" href="{{ url('jasa') }}"><i class="fa-solid fa-user-nurse"></i>
+            <li class="{{ Request::is('jasa') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('jasa') }}"><i class="fas fa-user-nurse"></i>
                     <span>Jasa</span></a>
             </li>
     </aside>
