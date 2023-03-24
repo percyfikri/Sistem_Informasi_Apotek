@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PenjualanController;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +20,23 @@ use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/dashboard-general-dashboard');
 
+
+// Login & Logout
+Route::controller(LoginController::class)->group(function(){
+    Route::get('login', 'index')->name('login');
+    Route::post('login/proses', 'proses');
+    Route::get('logout', 'logout');
+});
+
+
+// Middleware Login
+Route::group(['middleware' => ['auth']], function(){
+    Route::group(['middleware' => ['CekUserLogin:apoteker']], function(){
+        Route::resource('dashboard', DashboardController::class);
+    });
+});
+
+
 // Dashboard
 Route::get('/dashboard-general-dashboard', function () {
   return view('pages.dashboard-general-dashboard', ['type_menu' => 'dashboard']);
@@ -26,21 +45,23 @@ Route::get('/dashboard-ecommerce-dashboard', function () {
   return view('pages.dashboard-ecommerce-dashboard', ['type_menu' => 'dashboard']);
 });
 Route::resource('penjualan', UserController::class)->only(['index']);
-
 Route::get('kasir', [PenjualanController::class, 'index']);
+
+
 // Layout
 Route::get('/layout-default-layout', function () {
   return view('pages.layout-default-layout', ['type_menu' => 'layout']);
 });
 
+
 // Blank Page
 Route::get('/blank-page', function () {
   return view('pages.blank-page', ['type_menu' => '']);
 });
-
 Route::controller(ObatController::class)->group(function () {
   Route::get('/obat-page', 'index');
 });
+
 
 // Bootstrap
 Route::get('/bootstrap-alert', function () {
@@ -146,6 +167,7 @@ Route::get('/components-wizard', function () {
   return view('pages.components-wizard', ['type_menu' => 'components']);
 });
 
+
 // forms
 Route::get('/forms-advanced-form', function () {
   return view('pages.forms-advanced-form', ['type_menu' => 'forms']);
@@ -157,8 +179,10 @@ Route::get('/forms-validation', function () {
   return view('pages.forms-validation', ['type_menu' => 'forms']);
 });
 
+
 // google maps
 // belum tersedia
+
 
 // modules
 Route::get('/modules-calendar', function () {
@@ -198,22 +222,24 @@ Route::get('/modules-weather-icon', function () {
   return view('pages.modules-weather-icon', ['type_menu' => 'modules']);
 });
 
+
 // auth
-Route::get('/auth-forgot-password', function () {
-  return view('pages.auth-forgot-password', ['type_menu' => 'auth']);
-});
-Route::get('/auth-login', function () {
-  return view('pages.auth-login', ['type_menu' => 'auth']);
-});
-Route::get('/auth-login2', function () {
-  return view('pages.auth-login2', ['type_menu' => 'auth']);
-});
-Route::get('/auth-register', function () {
-  return view('pages.auth-register', ['type_menu' => 'auth']);
-});
-Route::get('/auth-reset-password', function () {
-  return view('pages.auth-reset-password', ['type_menu' => 'auth']);
-});
+// Route::get('/auth-forgot-password', function () {
+//   return view('pages.auth-forgot-password', ['type_menu' => 'auth']);
+// });
+// Route::get('/auth-login', function () {
+//   return view('pages.auth-login', ['type_menu' => 'auth']);
+// });
+// Route::get('/auth-login2', function () {
+//   return view('pages.auth-login2', ['type_menu' => 'auth']);
+// });
+// Route::get('/auth-register', function () {
+//   return view('pages.auth-register', ['type_menu' => 'auth']);
+// });
+// Route::get('/auth-reset-password', function () {
+//   return view('pages.auth-reset-password', ['type_menu' => 'auth']);
+// });
+
 
 // error
 Route::get('/error-403', function () {
@@ -228,6 +254,7 @@ Route::get('/error-500', function () {
 Route::get('/error-503', function () {
   return view('pages.error-503', ['type_menu' => 'error']);
 });
+
 
 // features
 Route::get('/features-activities', function () {
@@ -252,6 +279,7 @@ Route::get('/features-tickets', function () {
   return view('pages.features-tickets', ['type_menu' => 'features']);
 });
 
+
 // utilities
 Route::get('/utilities-contact', function () {
   return view('pages.utilities-contact', ['type_menu' => 'utilities']);
@@ -262,6 +290,7 @@ Route::get('/utilities-invoice', function () {
 Route::get('/utilities-subscribe', function () {
   return view('pages.utilities-subscribe', ['type_menu' => 'utilities']);
 });
+
 
 // credits
 Route::get('/credits', function () {
