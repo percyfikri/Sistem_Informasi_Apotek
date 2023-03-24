@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ObatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,8 +35,8 @@ Route::get('/blank-page', function () {
     return view('pages.blank-page', ['type_menu' => '']);
 });
 
-Route::get('/obat-page', function () {
-    return view('pages.obat-page', ['type_menu' => '']);
+Route::controller(ObatController::class)->group(function () {
+    Route::get('/obat-page', 'index');
 });
 
 // Bootstrap
