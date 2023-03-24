@@ -28,6 +28,8 @@ Route::get('/dashboard-ecommerce-dashboard', function () {
 Route::resource('penjualan', UserController::class)->only(['index']);
 
 Route::get('kasir', [PenjualanController::class, 'index']);
+
+Route::get('obat-page', [ObatController::class, 'show']);
 // Layout
 Route::get('/layout-default-layout', function () {
   return view('pages.layout-default-layout', ['type_menu' => 'layout']);
@@ -36,10 +38,6 @@ Route::get('/layout-default-layout', function () {
 // Blank Page
 Route::get('/blank-page', function () {
   return view('pages.blank-page', ['type_menu' => '']);
-});
-
-Route::controller(ObatController::class)->group(function () {
-  Route::get('/obat-page', 'index');
 });
 
 // Bootstrap
