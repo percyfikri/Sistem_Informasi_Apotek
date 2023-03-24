@@ -17,6 +17,7 @@ return new class extends Migration
       $table->increments('id_jasa');
       $table->unsignedInteger('id_apoteker');
       $table->foreign('id_apoteker')->references('id_pengguna')->on('pengguna')->onDelete('cascade');
+      $table->string('nama_jasa');
       $table->string('tingkatan');
       $table->integer('harga');
       $table->timestamps();

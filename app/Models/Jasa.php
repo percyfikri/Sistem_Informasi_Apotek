@@ -16,6 +16,7 @@ class Jasa extends Model
 
   protected $fillable = [
     'id_apoteker',
+    'nama_jasa',
     'tingkatan',
     'harga'
   ];
