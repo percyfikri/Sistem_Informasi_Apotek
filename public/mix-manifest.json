@@ -4646,6 +4646,8 @@
     "/library/fullcalendar/package.json": "/library/fullcalendar/package.json",
     "/library/datatables/Readme.md": "/library/datatables/Readme.md",
     "/library/datatables/license.txt": "/library/datatables/license.txt",
+    "/library/datatables/media/css/bootstrap.css": "/library/datatables/media/css/bootstrap.css",
+    "/library/datatables/media/css/dataTables.bootstrap4.min.css": "/library/datatables/media/css/dataTables.bootstrap4.min.css",
     "/library/datatables/media/css/jquery.dataTables.css": "/library/datatables/media/css/jquery.dataTables.css",
     "/library/datatables/media/css/jquery.dataTables.min.css": "/library/datatables/media/css/jquery.dataTables.min.css",
     "/library/datatables/media/images/Sorting icons.psd": "/library/datatables/media/images/Sorting icons.psd",
