@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Obat;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class ObatController extends Controller
@@ -44,9 +45,10 @@ class ObatController extends Controller
    * @param  \App\Models\Obat  $obat
    * @return \Illuminate\Http\Response
    */
-  public function show(Obat $obat)
+  public function show() : View
   {
-    //
+    $posts = Obat::latest()->paginate(5);
+    return view('pages.obat-page', compact('posts'));
   }
 
   /**

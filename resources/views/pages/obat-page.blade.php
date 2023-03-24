@@ -32,61 +32,45 @@
                                 </div>
                             </div>
                             <div class="card-body p-0">
+                                <div class="card-header">
+                                    <div class="card-header-action">
+                                        <a href="{{ url('pages.create') }}"
+                                            class="btn btn-primary">Add</a>
+                                    </div>
+                                </div>
                                 <div class="table-responsive">
                                     <table class="table-striped table-md table">
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama Obat</th>
-                                            <th>Jenis Obat</th>
-                                            <th>Created At</th>
-                                            <th>Update At</th>
-                                            <th>Action</th>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Bodrex</td>
-                                            <td>Pil</td>
-                                            <td>2023-01-13</td>
-                                            <td>2023-01-16</td>
-                                            <td><a href="#"
-                                                    class="btn btn-primary">Detail</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Amoxilin</td>
-                                            <td>Pil</td>
-                                            <td>2022-08-10</td>
-                                            <td>2022-08-14</td>
-                                            <td><a href="#"
-                                                    class="btn btn-primary">Detail</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Panadol</td>
-                                            <td>Cair</td>
-                                            <td>2022-09-07</td>
-                                            <td>2022-09-10</td>
-                                            <td><a href="#"
-                                                    class="btn btn-primary">Detail</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Sangobion</td>
-                                            <td>Kapsul</td>
-                                            <td>2023-01-05</td>
-                                            <td>2023-01-07</td>
-                                            <td><a href="#"
-                                                    class="btn btn-primary">Detail</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>CDR</td>
-                                            <td>Pil</td>
-                                            <td>2023-04-02</td>
-                                            <td>2023-04-16</td>
-                                            <td><a href="#"
-                                                    class="btn btn-primary">Detail</a></td>
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Nama Obat</th>
+                                                <th>Jenis Obat</th>
+                                                <th>Action</th>
                                             </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                @php $no = 1; @endphp
+                                                @forelse ($posts as $post)
+                                                <td>{{ $no++ }}</td>
+                                                <td>{{ $post->nama_obat }}</td>
+                                                <td>{{ $post->jenis_obat }}</td>
+                                                <td>
+                                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ url('pages.destroy', $post->id) }}" method="POST">
+                                                    <a href="{{ url('pages.edit', $post->id) }}" class="btn btn-sm btn-warning" title="Edit">
+                                                    <i class="fas fa-pencil-alt"></i></a>
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm btn-danger" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                                @empty
+                                                <div class="alert alert-danger">
+                                                    Data Post belum Tersedia.
+                                                </div>
+                                                @endforelse
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
