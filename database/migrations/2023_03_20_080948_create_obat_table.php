@@ -18,6 +18,7 @@ return new class extends Migration
       $table->string('nama_obat')->index();
       $table->string('jenis_obat');
       $table->timestamps();
+      $table->softDeletes(); 
     });
   }
 

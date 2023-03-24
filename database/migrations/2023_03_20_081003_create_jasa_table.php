@@ -20,6 +20,7 @@ return new class extends Migration
       $table->string('tingkatan');
       $table->integer('harga');
       $table->timestamps();
+      $table->softDeletes();
     });
   }
 
