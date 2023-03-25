@@ -15,7 +15,7 @@ class ObatController extends Controller
    */
   public function index()
   {
-    return view('pages.obat-page', ['type_menu' => 'obat']);
+    return view('pages.obat.obat', ['type_menu' => 'obat']);
   }
 
   /**
@@ -48,7 +48,7 @@ class ObatController extends Controller
   public function show() : View
   {
     $posts = Obat::latest()->paginate(5);
-    return view('pages.obat-page', compact('posts'));
+    return view('pages.obat.obat', compact('posts'));
   }
 
   /**

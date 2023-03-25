@@ -54,7 +54,7 @@ Route::get('kasir', [PenjualanController::class, 'index'])->name('pengguna.index
 
 Route::get('pengguna', [PenggunaController::class, 'index'])->name('pengguna.index');
 
-Route::get('obat-page', [ObatController::class, 'show']);
+Route::get('obat', [ObatController::class, 'show']);
 
 
 // Layout

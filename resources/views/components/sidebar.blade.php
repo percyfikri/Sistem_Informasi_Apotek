@@ -30,7 +30,7 @@
                     <span>Penjualan</span></a>
             </li>
             <li class="{{ Request::is('obat') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('obat-page') }}"><i class="fas fa-pills"></i>
+                <a class="nav-link" href="{{ url('obat') }}"><i class="fas fa-pills"></i>
                     <span>Obat</span></a>
             </li>
             <li class="{{ Request::is('resep-obat') ? 'active' : '' }}">
