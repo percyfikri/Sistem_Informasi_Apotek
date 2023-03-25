@@ -71,9 +71,9 @@ class ObatController extends Controller
    * @param  \App\Models\Obat  $obat
    * @return \Illuminate\Http\Response
    */
-  public function edit(Obat $obat)
+  public function edit(Obat $obat) : View
   {
-    //
+    return view('pages.obat.edit-obat');
   }
 
   /**

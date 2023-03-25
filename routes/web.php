@@ -60,6 +60,8 @@ Route::get('obat', [ObatController::class, 'index']);
 
 Route::get('create-obat', [ObatController::class, 'create']);
 
+Route::get('edit-obat', [ObatController::class, 'edit']);
+
 // Layout
 Route::get('/layout-default-layout', function () {
   return view('pages.layout-default-layout', ['type_menu' => 'layout']);

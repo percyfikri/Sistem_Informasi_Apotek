@@ -57,7 +57,7 @@
                                                 <td>{{ $post->jenis_obat }}</td>
                                                 <td>
                                                     <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ url('pages.destroy', $post->id) }}" method="POST">
-                                                    <a href="{{ url('pages.edit', $post->id) }}" class="btn btn-sm btn-warning" title="Edit">
+                                                    <a href="{{ url('edit-obat', $post->id) }}" class="btn btn-sm btn-warning" title="Edit">
                                                     <i class="fas fa-pencil-alt"></i></a>
                                                         @csrf
                                                         @method('DELETE')
