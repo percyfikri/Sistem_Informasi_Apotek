@@ -25,7 +25,7 @@ class ObatController extends Controller
    */
   public function create()
   {
-    //
+    return view('pages.obat.create-obat');
   }
 
   /**

@@ -56,6 +56,8 @@ Route::get('pengguna', [PenggunaController::class, 'index'])->name('pengguna.ind
 
 Route::get('obat', [ObatController::class, 'show']);
 
+Route::get('create-obat', [ObatController::class, 'create']);
+
 
 // Layout
 Route::get('/layout-default-layout', function () {
