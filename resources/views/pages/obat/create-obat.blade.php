@@ -21,25 +21,35 @@
                                 <h4>Form Tambah Obat</h4>
                             </div>
                             <div class="card-body">
-                                <form>
+                                <form action="{{ route('posts.store')}}" method="POST" enctype="multipart/form-data">
+
+                                    @csrf
+
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label>Nama Obat</label>
                                             <input type="text"
-                                                class="form-control"
-                                                placeholder="Nama Obat"
+                                                class="form-control @error('nama_obat')
+                                                is-invalid @enderror"
+                                                name="nama_obat"
+                                                value="{{ old('nama_obat') }}"
+                                                placeholder="Masukkan Nama Obat"
                                                 required="">
                                         </div>
                                         <div class="form-group">
                                             <label>Jenis Obat</label>
                                             <input type="text"
-                                                class="form-control"
-                                                placeholder="Jenis Obat"
+                                                class="form-control @error('jenis_obat')
+                                                is-invalid @enderror"
+                                                name="jenis_obat"
+                                                value="{{ old('jenis_obat') }}"
+                                                placeholder="Masukkan Jenis Obat"
                                                 required="">
                                         </div>
                                     </div>
                                     <div class="card-footer text-right">
-                                        <button class="btn btn-primary">Submit</button>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="reset" class="btn btn-warning">Reset</button>
                                     </div>
                                 </form>
                             </div>

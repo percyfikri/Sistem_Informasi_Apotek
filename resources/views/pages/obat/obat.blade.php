@@ -34,7 +34,7 @@
                             <div class="card-body p-0">
                                 <div class="card-header">
                                     <div class="card-header-action">
-                                        <a href="{{ url('pages.create') }}"
+                                        <a href="{{ url('create-obat') }}"
                                             class="btn btn-primary">Add</a>
                                     </div>
                                 </div>

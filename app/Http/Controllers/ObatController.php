@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Obat;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ObatController extends Controller
@@ -13,9 +14,10 @@ class ObatController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
+  public function index() : View
   {
-    return view('pages.obat.obat', ['type_menu' => 'obat']);
+    $posts = Obat::latest()->paginate(5);
+    return view('pages.obat.obat', compact('posts'));
   }
 
   /**
@@ -23,7 +25,7 @@ class ObatController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function create()
+  public function create() : View
   {
     return view('pages.obat.create-obat');
   }
@@ -34,9 +36,22 @@ class ObatController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function store(Request $request)
-  {
-    //
+  public function store(Request $request): RedirectResponse
+  { 
+    //validate form
+    $this->validate($request, [
+      'nama_obat'  => 'required',
+      'jenis_obat' => 'required'
+    ]);
+
+    //create obat
+    Obat::create([
+      'nama_obat'  => $request->nama_obat,
+      'jenis_obat' => $request->jenis_obat
+    ]);
+
+    //redirect to index
+    return redirect()->route('posts.index')->with(['success' => 'Data Berhasil Disimpan!']);
   }
 
   /**
@@ -45,10 +60,9 @@ class ObatController extends Controller
    * @param  \App\Models\Obat  $obat
    * @return \Illuminate\Http\Response
    */
-  public function show() : View
+  public function show()
   {
-    $posts = Obat::latest()->paginate(5);
-    return view('pages.obat.obat', compact('posts'));
+    //
   }
 
   /**
