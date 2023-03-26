@@ -24,13 +24,14 @@
                             <div class="card-header">
                                 <h4>Data Obat</h4>
                                 <div class="card-header-form">
-                                    <form>
+                                    <form action="{{ url('obat') }}" method="GET">
                                         <div class="input-group">
-                                            <input type="text"
+                                            <input type="search" name="katakunci"
+                                                value="{{ Request::get('katakunci') }}"
                                                 class="form-control"
-                                                placeholder="Search">
+                                                placeholder="Masukkan kata kunci">
                                             <div class="input-group-btn">
-                                                <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                                                <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
                                             </div>
                                         </div>
                                     </form>
