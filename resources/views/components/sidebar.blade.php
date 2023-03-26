@@ -20,11 +20,14 @@
                 </ul>
             </li>
             <li class="menu-header">Apoteker</li>
+            <li class="{{ Request::is('pengguna') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('pengguna') }}"><i class="fas fa-user"></i>
+                    <span>Pengguna</span></a>
+            </li>
             <li class="{{ Request::is('kasir') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('kasir') }}"><i class="fas fa-cash-register"></i>
                     <span>Kasir</span></a>
             </li>
-
             <li class="{{ Request::is('penjualan') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('penjualan') }}"><i class="fas fa-money-bill-wave"></i>
                     <span>Penjualan</span></a>

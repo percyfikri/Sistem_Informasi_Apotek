@@ -14,7 +14,11 @@ class PenggunaController extends Controller
      */
     public function index()
     {
-        //
+        $data=[
+            'dataPengguna' => Pengguna::all()
+        ];
+
+        return view('pages.pengguna.tampil-pengguna', $data);
     }
 
     /**
@@ -24,7 +28,7 @@ class PenggunaController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.pengguna.tambah-pengguna');
     }
 
     /**
@@ -33,9 +37,30 @@ class PenggunaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function save(Request $request)
     {
-        //
+        $nama = $request->nama;
+        $umur = $request->umur;
+        $alamat = $request->alamat;
+        $status = $request->status;
+        $email = $request->email;
+        $password = $request->password;
+
+        try {
+            $pengguna = new Pengguna();
+            $pengguna->nama = $nama;
+            $pengguna->umur = $umur;
+            $pengguna->alamat = $alamat;
+            $pengguna->status = $status;
+            $pengguna->email = $email;
+            $pengguna->password = bcrypt($password);
+            $pengguna->save();
+
+            $request->flash('msg', "Data dengan nama $nama berhasil tersimpan!");
+            return redirect('pengguna/tambah-pengguna');
+        } catch (\Throwable $th) {
+            echo $th;
+        }
     }
 
     /**
@@ -78,8 +103,9 @@ class PenggunaController extends Controller
      * @param  \App\Models\Pengguna  $pengguna
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pengguna $pengguna)
+    public function delete($id)
     {
-        //
+        Pengguna::find($id)->delete();
+        return redirect()->back();
     }
 }

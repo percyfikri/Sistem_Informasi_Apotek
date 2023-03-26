@@ -38,6 +38,16 @@ Route::group(['middleware' => ['auth']], function () {
   });
 });
 
+
+// Pengguna
+Route::controller(PenggunaController::class)->group(function () {
+    Route::get('pengguna', 'index')->name('pengguna');
+    Route::get('pengguna/tambah-pengguna', 'create')->name('tambah-pengguna');
+    Route::post('pengguna/simpan-pengguna', 'save');
+    Route::delete('pengguna/hapus-pengguna/{id}', 'delete');
+});
+
+
 // Jasa
 Route::resource('jasa', JasaController::class)->only(['index', 'show']);
 
