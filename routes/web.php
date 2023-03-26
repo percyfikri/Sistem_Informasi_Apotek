@@ -54,11 +54,15 @@ Route::get('kasir', [PenjualanController::class, 'index'])->name('pengguna.index
 
 Route::get('pengguna', [PenggunaController::class, 'index'])->name('pengguna.index');
 
-Route::resource('posts', ObatController::class);
+Route::resource('obat', ObatController::class);
 
 Route::get('obat', [ObatController::class, 'index']);
 
-Route::get('create-obat', [ObatController::class, 'create']);
+// Route::get('create-obat', [ObatController::class, 'create']);
+
+Route::get('create-obat', function (){
+  return view('pages.obat.create-obat');
+});
 
 Route::get('edit-obat', [ObatController::class, 'edit']);
 

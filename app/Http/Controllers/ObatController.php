@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Obat;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -14,10 +15,11 @@ class ObatController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index() : View
+  public function index()
   {
-    $posts = Obat::latest()->paginate(5);
-    return view('pages.obat.obat', compact('posts'));
+    return view('pages.obat.obat')->with([
+      'obat' => Obat::all()
+    ]);
   }
 
   /**
@@ -51,7 +53,7 @@ class ObatController extends Controller
     ]);
 
     //redirect to index
-    return redirect()->route('posts.index')->with(['success' => 'Data Berhasil Disimpan!']);
+    return redirect('obat')->with(['msg' => 'Data Berhasil Disimpan!']);
   }
 
   /**

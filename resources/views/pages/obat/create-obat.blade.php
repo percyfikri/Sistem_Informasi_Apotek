@@ -21,7 +21,7 @@
                                 <h4>Form Tambah Obat</h4>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('posts.store')}}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ url('obat')}}" method="POST" enctype="multipart/form-data">
 
                                     @csrf
 

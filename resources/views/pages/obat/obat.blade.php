@@ -39,6 +39,11 @@
                                     </div>
                                 </div>
                                 <div class="table-responsive">
+                                    @if (session('msg'))
+                                        <div class="alert alert-success">
+                                            {{ session('msg') }}
+                                        </div>
+                                    @endif
                                     <table class="table-striped table-md table">
                                         <thead>
                                             <tr>
@@ -49,27 +54,21 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                @php $no = 1; @endphp
-                                                @forelse ($posts as $post)
-                                                <td>{{ $no++ }}</td>
-                                                <td>{{ $post->nama_obat }}</td>
-                                                <td>{{ $post->jenis_obat }}</td>
-                                                <td>
-                                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ url('pages.destroy', $post->id) }}" method="POST">
-                                                    <a href="{{ url('edit-obat', $post->id) }}" class="btn btn-sm btn-warning" title="Edit">
-                                                    <i class="fas fa-pencil-alt"></i></a>
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-danger" title="Delete"><i class="fas fa-trash-alt"></i></button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                                @empty
-                                                <div class="alert alert-danger">
-                                                    Data Post belum Tersedia.
-                                                </div>
-                                                @endforelse
+                                            @foreach ($obat as $row)
+                                                <tr>
+                                                    <th>{{ $loop->iteration }}</th>
+                                                    <td>{{ $row->nama_obat }}</td>
+                                                    <td>{{ $row->jenis_obat }}</td>
+                                                    <td>
+                                                        <button onclick="window.location='{{ url('obat/'.$row->id_obat) }}'" class="btn btn-sm btn-info" title="Edit Data">
+                                                            <i class="fas fa-pencil"></i>
+                                                        </button>
+                                                        <button onclick="window.location='{{ url('obat/'.$row->id_obat) }}'" class="btn btn-sm btn-danger" title="Delete Data">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
