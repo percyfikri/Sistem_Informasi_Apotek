@@ -63,9 +63,14 @@
                                                         <button onclick="window.location='{{ url('obat/'.$row->id_obat.'/edit') }}'" class="btn btn-sm btn-info" title="Edit Data">
                                                             <i class="fas fa-pencil"></i>
                                                         </button>
-                                                        <button onclick="window.location='{{ url('obat/'.$row->id_obat) }}'" class="btn btn-sm btn-danger" title="Delete Data">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
+                                                        <form onsubmit="return confirm('Apakah Anda yakin ingin menghapus data?')" action="{{ url('obat/'.$row->id_obat) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" 
+                                                                name="submit" class="btn btn-sm btn-danger" title="Delete Data">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             @endforeach
