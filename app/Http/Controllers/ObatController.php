@@ -16,9 +16,18 @@ class ObatController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
+  public function index(Request $request)
   {
-    $obat = Obat::orderBy('nama_obat', 'DESC')->get();
+    $katakunci = $request->katakunci;
+    $jumlahbaris = 4;
+    if(strlen($katakunci)){
+      $obat = Obat::where('id_obat', 'like', "%$katakunci%")
+              ->orWhere('nama_obat', 'like', "%$katakunci%")
+              ->orWhere('jenis_obat', 'like', "%$katakunci%")
+              ->paginate($jumlahbaris);
+    } else {
+      $obat = Obat::orderBy('nama_obat', 'DESC')->get();
+    }
     return view('pages.obat.obat')->with('obat', $obat);
   }
 
