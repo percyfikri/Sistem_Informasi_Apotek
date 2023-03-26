@@ -60,7 +60,7 @@
                                                     <td>{{ $row->nama_obat }}</td>
                                                     <td>{{ $row->jenis_obat }}</td>
                                                     <td>
-                                                        <button onclick="window.location='{{ url('obat/'.$row->id_obat) }}'" class="btn btn-sm btn-info" title="Edit Data">
+                                                        <button onclick="window.location='{{ url('obat/'.$row->id_obat.'/edit') }}'" class="btn btn-sm btn-info" title="Edit Data">
                                                             <i class="fas fa-pencil"></i>
                                                         </button>
                                                         <button onclick="window.location='{{ url('obat/'.$row->id_obat) }}'" class="btn btn-sm btn-danger" title="Delete Data">

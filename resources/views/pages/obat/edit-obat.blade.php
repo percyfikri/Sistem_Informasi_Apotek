@@ -10,10 +10,23 @@
 <div class="main-content">
     <section class="section">
         <div class="section-body">
+            @if ($errors->any())
+                <div class="pt-3">
+                    <div class="alert alert-danger">
+                        <ul>
+                        @foreach ($errors->all() as $item)
+                            <li>{{ $item }}</li>
+                        @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <form>
+                        <form action='{{ url('obat/'.$obat->id_obat) }}' method="POST">
+                            @csrf
+                            @method('PUT')
                             <div class="card-header">
                                 <h4>Form Edit Obat</h4>
                             </div>
@@ -21,18 +34,27 @@
                                 <div class="form-group">
                                     <label>Nama Obat</label>
                                     <input type="text"
-                                        class="form-control"
+                                        class="form-control @error('nama_obat')
+                                        is-invalid @enderror"
+                                        name="nama_obat"
+                                        id="nama_obat"
+                                        value="{{ $obat->nama_obat }}"
                                         required="">
                                 </div>
                                 <div class="form-group">
                                     <label>Jenis Obat</label>
                                     <input type="text"
-                                        class="form-control"
+                                        class="form-control @error('jenis_obat')
+                                        is-invalid @enderror"
+                                        name="jenis_obat"
+                                        id="jenis_obat"
+                                        value="{{ $obat->jenis_obat }}"
                                         required="">
                                 </div>
                             </div>
                             <div class="card-footer text-right">
                                 <button class="btn btn-primary">Submit</button>
+                                <a href='{{ url('obat') }}' class="btn btn-danger">Kembali</a>
                             </div>
                         </form>
                     </div>

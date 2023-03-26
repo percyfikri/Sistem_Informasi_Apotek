@@ -18,9 +18,8 @@ class ObatController extends Controller
    */
   public function index()
   {
-    return view('pages.obat.obat')->with([
-      'obat' => Obat::all()
-    ]);
+    $obat = Obat::orderBy('nama_obat', 'DESC')->get();
+    return view('pages.obat.obat')->with('obat', $obat);
   }
 
   /**
@@ -75,9 +74,10 @@ class ObatController extends Controller
    * @param  \App\Models\Obat  $obat
    * @return \Illuminate\Http\Response
    */
-  public function edit(Obat $obat) : View
+  public function edit($id)
   {
-    return view('pages.obat.edit-obat');
+    $obat = Obat::where('id_obat', $id)->first();
+    return view('pages.obat.edit-obat')->with('obat', $obat);
   }
 
   /**
@@ -87,9 +87,23 @@ class ObatController extends Controller
    * @param  \App\Models\Obat  $obat
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, Obat $obat)
+  public function update(Request $request, $id)
   {
-    //
+    $request->validate([
+      'nama_obat' => 'required|unique:obat,nama_obat',
+      'jenis_obat' => 'required',
+    ],[
+      'nama_obat.required' => 'Nama Obat wajib diisi',
+      'nama_obat.unique' => 'Nama Obat yang diisikan sudah ada dalam database',
+      'jenis_obat.required' => 'Jenis Obat wajib diisi',
+    ]);
+
+    $data = [
+      'nama_obat' => $request->nama_obat,
+      'jenis_obat' => $request->jenis_obat,
+    ];
+    Obat::where('id_obat',$id)->update($data);
+    return redirect()->to('obat')->with('msg', 'Berhasil melakukan update data');
   }
 
   /**

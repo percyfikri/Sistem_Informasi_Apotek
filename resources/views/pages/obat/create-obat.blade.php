@@ -60,6 +60,7 @@
                                     </div>
                                     <div class="card-footer text-right">
                                         <button type="submit" class="btn btn-primary">Submit</button>
+                                        <a href='{{ url('obat') }}' class="btn btn-danger">Kembali</a>
                                         <button type="reset" class="btn btn-warning">Reset</button>
                                     </div>
                                 </form>
