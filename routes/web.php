@@ -58,8 +58,6 @@ Route::resource('obat', ObatController::class);
 
 Route::get('obat', [ObatController::class, 'index']);
 
-// Route::get('create-obat', [ObatController::class, 'create']);
-
 Route::get('create-obat', function (){
   return view('pages.obat.create-obat');
 });

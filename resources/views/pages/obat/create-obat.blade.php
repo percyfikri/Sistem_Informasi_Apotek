@@ -14,6 +14,17 @@
             </div>
 
             <div class="section-body">
+                @if ($errors->any())
+                <div class="pt-3">
+                    <div class="alert alert-danger">
+                        <ul>
+                        @foreach ($errors->all() as $item)
+                            <li>{{ $item }}</li>
+                        @endforeach
+                        </ul>
+                    </div>
+                </div>
+                @endif
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -32,7 +43,7 @@
                                                 class="form-control @error('nama_obat')
                                                 is-invalid @enderror"
                                                 name="nama_obat"
-                                                value="{{ old('nama_obat') }}"
+                                                value="{{ old ('nama_obat') }}"
                                                 placeholder="Masukkan Nama Obat"
                                                 required="">
                                         </div>
@@ -42,7 +53,7 @@
                                                 class="form-control @error('jenis_obat')
                                                 is-invalid @enderror"
                                                 name="jenis_obat"
-                                                value="{{ old('jenis_obat') }}"
+                                                value="{{ old ('jenis_obat') }}"
                                                 placeholder="Masukkan Jenis Obat"
                                                 required="">
                                         </div>

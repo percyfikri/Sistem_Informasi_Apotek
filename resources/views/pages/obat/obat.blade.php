@@ -13,6 +13,11 @@
             </div>
 
             <div class="section-body">
+                @if (session('msg'))
+                <div class="alert alert-success">
+                    {{ session('msg') }}
+                </div>
+                @endif
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -39,11 +44,6 @@
                                     </div>
                                 </div>
                                 <div class="table-responsive">
-                                    @if (session('msg'))
-                                        <div class="alert alert-success">
-                                            {{ session('msg') }}
-                                        </div>
-                                    @endif
                                     <table class="table-striped table-md table">
                                         <thead>
                                             <tr>

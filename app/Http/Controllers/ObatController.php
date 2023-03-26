@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Obat;
 use GuzzleHttp\Psr7\Response;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -40,20 +41,21 @@ class ObatController extends Controller
    */
   public function store(Request $request): RedirectResponse
   { 
-    //validate form
-    $this->validate($request, [
-      'nama_obat'  => 'required',
-      'jenis_obat' => 'required'
+    $request->validate([
+      'nama_obat' => 'required|unique:obat,nama_obat',
+      'jenis_obat' => 'required',
+    ],[
+      'nama_obat.required' => 'Nama Obat wajib diisi',
+      'nama_obat.unique' => 'Nama Obat yang diisikan sudah ada dalam database',
+      'jenis_obat.required' => 'Jenis Obat wajib diisi',
     ]);
 
-    //create obat
-    Obat::create([
-      'nama_obat'  => $request->nama_obat,
-      'jenis_obat' => $request->jenis_obat
-    ]);
-
-    //redirect to index
-    return redirect('obat')->with(['msg' => 'Data Berhasil Disimpan!']);
+    $data = [
+      'nama_obat' => $request->nama_obat,
+      'jenis_obat' => $request->jenis_obat,
+    ];
+    Obat::create($data);
+    return redirect()->to('obat')->with('msg', 'Berhasil menambahkan data');
   }
 
   /**
