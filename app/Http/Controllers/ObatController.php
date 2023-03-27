@@ -33,7 +33,7 @@ class ObatController extends Controller
    */
   public function create() : View
   {
-    return view('pages.obat.create-obat');
+    return view('pages.obat.create');
   }
 
   /**
