@@ -14,8 +14,11 @@
 
             <div class="section-body">
                 @if (session('msg'))
-                <div class="alert alert-success">
-                    {{ session('msg') }}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('msg') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 @endif
                 <div class="row">
@@ -61,15 +64,12 @@
                                                     <td>{{ $row->nama_obat }}</td>
                                                     <td>{{ $row->jenis_obat }}</td>
                                                     <td>
-                                                        <button onclick="window.location='{{ url('obat/'.$row->id_obat.'/edit') }}'" class="btn btn-sm btn-info" title="Edit Data">
-                                                            <i class="fas fa-pencil"></i>
-                                                        </button>
-                                                        <form onsubmit="return confirm('Apakah Anda yakin ingin menghapus data?')" action="{{ url('obat/'.$row->id_obat) }}" method="POST">
+                                                        <a href='{{ url('obat/'.$row->id_obat.'/edit') }}' class="btn btn-sm btn-warning">Edit</a>
+                                                        <form style="display: inline;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data?')" action="{{ url('obat/'.$row->id_obat) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" 
-                                                                name="submit" class="btn btn-sm btn-danger" title="Delete Data">
-                                                                <i class="fas fa-trash"></i>
+                                                                name="submit" class="btn btn-sm btn-danger">Delete
                                                             </button>
                                                         </form>
                                                     </td>

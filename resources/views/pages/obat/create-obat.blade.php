@@ -16,12 +16,15 @@
             <div class="section-body">
                 @if ($errors->any())
                 <div class="pt-3">
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <ul>
                         @foreach ($errors->all() as $item)
                             <li>{{ $item }}</li>
                         @endforeach
                         </ul>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 </div>
                 @endif
