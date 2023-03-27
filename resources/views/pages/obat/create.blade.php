@@ -10,11 +10,11 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Detail Obat</h1>
+                <h1>Tambah Obat</h1>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="{{ url('dashboard-general-dashboard') }}">Dashboard</a></div>
                     <div class="breadcrumb-item active"><a href="{{ route('obat.index') }}">Obat</a></div>
-                    <div class="breadcrumb-item">Detail Obat</div>
+                    <div class="breadcrumb-item"><a href="{{ route('obat.create') }}">Tambah Obat</a></div>
                 </div>
             </div>
 
