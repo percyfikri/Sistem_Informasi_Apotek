@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Pengguna;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,8 @@ class ObatFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'nama_obat' => fake()->name(),
+            'jenis_obat' => fake()->name(),
         ];
     }
 }

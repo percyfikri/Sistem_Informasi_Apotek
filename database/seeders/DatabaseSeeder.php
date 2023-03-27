@@ -18,12 +18,14 @@ class DatabaseSeeder extends Seeder
     $this->call(
       [
         ObatSeeder::class,
-        PenggunaSeeder::class
+        PenggunaSeeder::class,
+        ObatSeeder::class
       ]
     );
 
     \App\Models\Pengguna::factory(100)->create();
-    \App\Models\Jasa::factory(10)->create();
+    \App\Models\Jasa::factory(100)->create();
+    \App\Models\Obat::factory(20)->create();
 
     // \App\Models\User::factory(10)->create();
 
