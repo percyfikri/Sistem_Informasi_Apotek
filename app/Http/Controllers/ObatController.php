@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Obat;
+use App\Models\Pengguna;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class ObatController extends Controller
 {
@@ -18,17 +20,10 @@ class ObatController extends Controller
    */
   public function index(Request $request)
   {
-    $katakunci = $request->katakunci;
-    $jumlahbaris = 4;
-    if(strlen($katakunci)){
-      $obat = Obat::where('id_obat', 'like', "%$katakunci%")
-              ->orWhere('nama_obat', 'like', "%$katakunci%")
-              ->orWhere('jenis_obat', 'like', "%$katakunci%")
-              ->paginate($jumlahbaris);
-    } else {
-      $obat = Obat::orderBy('nama_obat', 'DESC')->get();
+    if ($request->ajax()) {
+      return DataTables::of(Obat::query())->toJson();
     }
-    return view('pages.obat.obat')->with('obat', $obat);
+    return view('pages.obat.index');
   }
 
   /**
@@ -47,34 +42,34 @@ class ObatController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function store(Request $request): RedirectResponse
-  { 
+  public function store(Request $request)
+  {
     $request->validate([
       'nama_obat' => 'required|unique:obat,nama_obat',
       'jenis_obat' => 'required',
-    ],[
+
+    ], 
+    [
       'nama_obat.required' => 'Nama Obat wajib diisi',
       'nama_obat.unique' => 'Nama Obat yang diisikan sudah ada dalam database',
       'jenis_obat.required' => 'Jenis Obat wajib diisi',
     ]);
-
     $data = [
       'nama_obat' => $request->nama_obat,
       'jenis_obat' => $request->jenis_obat,
     ];
     Obat::create($data);
-    return redirect()->to('obat')->with('msg', 'Berhasil menambahkan data');
+    return redirect()->to('obat')->with('msg-success', 'Berhasil menambahkan data');
   }
-
   /**
    * Display the specified resource.
    *
    * @param  \App\Models\Obat  $obat
    * @return \Illuminate\Http\Response
    */
-  public function show()
+  public function show(Obat $obat)
   {
-    //
+    return view('pages.obat.show', compact('obat'));
   }
 
   /**
@@ -83,10 +78,9 @@ class ObatController extends Controller
    * @param  \App\Models\Obat  $obat
    * @return \Illuminate\Http\Response
    */
-  public function edit($id)
+  public function edit(Obat $obat)
   {
-    $obat = Obat::where('id_obat', $id)->first();
-    return view('pages.obat.edit-obat')->with('obat', $obat);
+    return view('pages.obat.edit', compact('obat'));
   }
 
   /**
@@ -96,7 +90,7 @@ class ObatController extends Controller
    * @param  \App\Models\Obat  $obat
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, $id)
+   public function update(Request $request, $id)
   {
     $request->validate([
       'nama_obat' => 'required|unique:obat,nama_obat',
@@ -112,7 +106,7 @@ class ObatController extends Controller
       'jenis_obat' => $request->jenis_obat,
     ];
     Obat::where('id_obat',$id)->update($data);
-    return redirect()->to('obat')->with('msg', 'Berhasil melakukan update data');
+    return redirect()->to('obat')->with('msg-success', 'Berhasil melakukan update data');
   }
 
   /**
@@ -121,9 +115,20 @@ class ObatController extends Controller
    * @param  \App\Models\Obat  $obat
    * @return \Illuminate\Http\Response
    */
-  public function destroy($id)
+  public function destroy(Obat $obat)
   {
-    Obat::where('id_obat',$id)->delete();
-    return redirect()->to('obat')->with('msg', 'Berhasil melakukan delete data');
+    $obat->delete();
+    return redirect()->route('obat.index')->with('msg-success', 'Berhasil menghapus data obat ' . $obat->nama_obat);
+  }
+
+  public function autocompleteApoteker(Request $request)
+  {
+    $dataApoteker = [];
+    if ($request->has('q')) {
+      $search = $request->q;
+      $dataApoteker = Pengguna::select("id_pengguna", "nama")
+        ->where('nama', 'LIKE', "%$search%")->get();
+    }
+    return response()->json($dataApoteker);
   }
 }

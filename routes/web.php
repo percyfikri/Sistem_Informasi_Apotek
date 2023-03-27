@@ -65,15 +65,19 @@ Route::get('kasir', [PenjualanController::class, 'index'])->name('pengguna.index
 
 Route::get('pengguna', [PenggunaController::class, 'index'])->name('pengguna.index');
 
+// Obat
 Route::resource('obat', ObatController::class);
+Route::get('/obat/autocomplete/apoteker', [ObatController::class, 'autocompleteApoteker']);
 
-Route::get('obat', [ObatController::class, 'index']);
+// Route::resource('obat', ObatController::class);
 
-Route::get('create-obat', function () {
-  return view('pages.obat.create-obat');
-});
+// Route::get('obat', [ObatController::class, 'index']);
 
-Route::get('edit-obat', [ObatController::class, 'edit']);
+// Route::get('create-obat', function () {
+//   return view('pages.obat.create-obat');
+// });
+
+// Route::get('edit-obat', [ObatController::class, 'edit']);
 
 // Layout
 Route::get('/layout-default-layout', function () {
