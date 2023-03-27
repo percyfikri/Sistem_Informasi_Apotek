@@ -18,9 +18,9 @@ class JasaFactory extends Factory
   public function definition()
   {
     return [
-      'id_apoteker' => Pengguna::inRandomOrder()->first()->id_pengguna,
+      'id_apoteker' => Pengguna::where('status', 'apoteker')->inRandomOrder()->first()->id_pengguna,
       'nama_jasa' => fake()->name(),
-      'tingkatan' => fake()->randomDigit(),
+      'tingkatan' => fake()->randomElement(['1', '2']),
       'harga' => fake()->randomNumber()
     ];
   }

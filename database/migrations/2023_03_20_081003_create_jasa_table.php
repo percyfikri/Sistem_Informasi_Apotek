@@ -19,7 +19,7 @@ return new class extends Migration
       $table->foreign('id_apoteker')->references('id_pengguna')->on('pengguna')->onDelete('cascade');
       $table->string('nama_jasa');
       $table->string('tingkatan');
-      $table->integer('harga');
+      $table->decimal('harga', 12, 2);
       $table->timestamps();
       $table->softDeletes();
     });

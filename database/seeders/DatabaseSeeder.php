@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
     );
 
     \App\Models\Pengguna::factory(100)->create();
-    \App\Models\Jasa::factory(5)->create();
+    \App\Models\Jasa::factory(10)->create();
 
     // \App\Models\User::factory(10)->create();
 

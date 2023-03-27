@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Pengguna;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -20,4 +21,9 @@ class Jasa extends Model
     'tingkatan',
     'harga'
   ];
+
+  public function apoteker()
+  {
+    return $this->belongsTo(Pengguna::class, 'id_apoteker', 'id_pengguna');
+  }
 }
