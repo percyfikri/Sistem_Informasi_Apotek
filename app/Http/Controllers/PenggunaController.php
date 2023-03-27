@@ -56,7 +56,7 @@ class PenggunaController extends Controller
             $pengguna->password = bcrypt($password);
             $pengguna->save();
 
-            $request->flash('msg', "Data dengan nama $nama berhasil tersimpan!");
+            $request->session()->flash('msg', "Data dengan nama $nama berhasil tersimpan!");
             return redirect('pengguna/tambah-pengguna');
         } catch (\Throwable $th) {
             echo $th;
