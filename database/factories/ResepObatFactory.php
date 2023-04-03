@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Factories;
-
+use App\Models\Pengguna;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +17,12 @@ class ResepObatFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'id_dokter' => Pengguna::where('status', 'dokter')->inRandomOrder()->first()->id_pengguna,
+            'id_customer' => Pengguna::where('status', 'customer')->inRandomOrder()->first()->id_pengguna,
+            'nama_resep' => fake()->name(),
+            'deskripsi' => fake()->name(),
+            'tanggal'=> fake()->datetime(),
+            'status' => fake()->name(),
         ];
     }
 }

@@ -26,6 +26,13 @@ class DatabaseSeeder extends Seeder
     \App\Models\Pengguna::factory(100)->create();
     \App\Models\Jasa::factory(100)->create();
     \App\Models\Obat::factory(20)->create();
+    \App\Models\ResepObat::factory(20)->create();
+    \App\Models\Racikan::factory(20)->create();
+    \App\Models\StokObat::factory(20)->create();
+    \App\Models\Penjualan::factory(20)->create();
+    \App\Models\DetailPenjualan::factory(20)->create();
+    \App\Models\DetailRacikan::factory(20)->create();
+    \App\Models\DetailResep::factory(20)->create();
 
     // \App\Models\User::factory(10)->create();
 

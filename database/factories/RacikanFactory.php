@@ -17,7 +17,9 @@ class RacikanFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'nama_racikan' => fake()->name(),
+            'harga' => fake()->randomNumber(),
+            'catatan' => fake()->name(),
         ];
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Factories;
-
+use App\Models\Obat;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +17,10 @@ class StokObatFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'id_obat' => Obat::inRandomOrder()->first()->id_obat,
+            'statuan' => fake()->randomNumber(),
+            'kuantitas' => fake()->randomNumber(),
+            'harga' => fake()->randomNumber(),
         ];
     }
 }
