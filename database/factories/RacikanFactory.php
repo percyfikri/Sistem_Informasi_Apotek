@@ -19,7 +19,7 @@ class RacikanFactory extends Factory
         return [
             'nama_racikan' => fake()->name(),
             'harga' => fake()->randomNumber(),
-            'catatan' => fake()->name(),
+            'catatan' => fake()->realText(),
         ];
     }
 }
