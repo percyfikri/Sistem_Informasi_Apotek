@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pengguna;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class PenggunaController extends Controller
 {
@@ -12,13 +13,18 @@ class PenggunaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data=[
-            'dataPengguna' => Pengguna::all()
-        ];
+        // $data=[
+        //     'dataPengguna' => Pengguna::all()
+        // ];
 
-        return view('pages.pengguna.tampil-pengguna', $data);
+        // return view('pages.pengguna.tampil-pengguna', $data);
+
+        if ($request->ajax()) {
+            return DataTables::of(Pengguna::query())->toJson();
+        }
+        return view('pages.pengguna.index');
     }
 
     /**
@@ -37,8 +43,25 @@ class PenggunaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function save(Request $request)
+    public function store(Request $request)
     {
+        $request->validate([
+            'nama' => 'required',
+            'umur' => 'required',
+            'alamat' => 'required',
+            'status' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+        ],
+        [
+            'nama.required' => 'Nama Pengguna wajib diisi',
+            'umur.required' => 'Umur Pengguna wajib diisi',
+            'alamat.required' => 'Alamat Pengguna wajib diisi',
+            'status.required' => 'Status Pengguna wajib diisi',
+            'email.required' => 'Email Pengguna wajib diisi',
+            'password.required' => 'Password Pengguna wajib diisi',
+        ]);
+
         $nama = $request->nama;
         $umur = $request->umur;
         $alamat = $request->alamat;
@@ -56,11 +79,22 @@ class PenggunaController extends Controller
             $pengguna->password = bcrypt($password);
             $pengguna->save();
 
-            $request->session()->flash('msg', "Data dengan nama $nama berhasil tersimpan!");
+            $request->session()->flash('msg', "Data dengan nama $nama berhasil ditambahkan!");
             return redirect('pengguna/tambah-pengguna');
         } catch (\Throwable $th) {
             echo $th;
         }
+
+        // $data = [
+        //     'nama' => $request->nama,
+        //     'umur' => $request->umur,
+        //     'alamat' => $request->alamat,
+        //     'status' => $request->status,
+        //     'email' => $request->email,
+        //     'password' => $request->password,
+        // ];
+        // Pengguna::create($data);
+        // return redirect()->to('obat')->with('msg-success', 'Berhasil menambahkan data');
     }
 
     /**
