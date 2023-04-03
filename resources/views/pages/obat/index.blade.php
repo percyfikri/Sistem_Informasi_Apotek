@@ -116,6 +116,9 @@
                                 data-action="${window.location.href}/${data.id_obat}}}" data-toggle="modal"
                                 data-target="#confirm-delete-modal"> <i class="fas fa-trash"></i>
                                 Delete</button>
+                                                    <a
+                                                        href="${window.location.href}/${data.id_obat}" class="btn btn-icon icon-left btn-success"><i
+                                                            class="fas fa-circle-plus"></i>Stok Obat</a>
                                                 </div>`
                         }
                     },

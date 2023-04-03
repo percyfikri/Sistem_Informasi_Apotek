@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\StokObatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -68,6 +69,9 @@ Route::resource('obat', ObatController::class);
 Route::get('/obat/autocomplete/apoteker', [ObatController::class, 'autocompleteApoteker']);
 
 Route::get('show', [ObatController::class, 'show']);
+
+// Stok Obat
+Route::resource('stok_obat', StokObatController::class);
 
 // Layout
 Route::get('/layout-default-layout', function () {
