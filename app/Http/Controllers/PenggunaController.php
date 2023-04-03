@@ -106,7 +106,7 @@ class PenggunaController extends Controller
      */
     public function show(Pengguna $pengguna)
     {
-        //
+        return view('pages.pengguna.show',compact('pengguna'));
     }
 
     /**
