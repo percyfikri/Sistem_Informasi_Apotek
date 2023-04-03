@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Default Layout')
+@section('title', 'Halaman Detail Obat')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -10,35 +10,33 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Detail Jasa</h1>
+                <h1>Detail Obat</h1>
                 <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item active"><a href="{{ route('jasa.index') }}">Jasa</a></div>
-                    <div class="breadcrumb-item">Detail Jasa</div>
+                    <div class="breadcrumb-item active"><a href="{{ url('dashboard-general-dashboard') }}">Dashboard</a></div>
+                    <div class="breadcrumb-item active"><a href="{{ route('obat.index') }}">Obat</a></div>
+                    <div class="breadcrumb-item">Detail Obat</div>
                 </div>
             </div>
 
             <div class="section-body">
                 <div class="card">
                     <div class="card-header">
-                        <h4>{{ $jasa->nama_jasa }}</h4>
+                        <h4>{{ $obat->nama_obat }}</h4>
                         <div class="card-header-action">
 
-                            <a href="{{ route('jasa.edit', $jasa->id_jasa) }}" class="btn btn-icon btn-warning icon-left"><i
+                            <a href="{{ route('obat.edit', $obat->id_obat) }}" class="btn btn-icon btn-warning icon-left"><i
                                     class="far fa-edit"></i>
                                 Edit</a>
                             <button class="btn btn-danger btn-icon icon-left"
-                                data-action="{{ route('jasa.destroy', $jasa->id_jasa) }}" data-toggle="modal"
+                                data-action="{{ route('obat.destroy', $obat->id_obat) }}" data-toggle="modal"
                                 data-target="#confirm-delete-modal"> <i class="fas fa-trash"></i>
                                 Delete</button>
 
                         </div>
                     </div>
                     <div class="card-body">
-                        <p>{{ $jasa->id_apoteker }}</p>
-                        <p>{{ $jasa->nama_jasa }}</p>
-                        <p>{{ $jasa->tingkatan }}</p>
-                        <p>{{ $jasa->harga }}</p>
+                        <p>{{ $obat->nama_obat }}</p>
+                        <p>{{ $obat->jenis_obat }}</p>
 
                     </div>
                     <div class="card-footer bg-whitesmoke">

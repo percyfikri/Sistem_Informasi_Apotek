@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jasa;
+use App\Models\Pengguna;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+
 
 class JasaController extends Controller
 {
@@ -28,7 +30,7 @@ class JasaController extends Controller
    */
   public function create()
   {
-    //
+    return view('pages.jasa.create');
   }
 
   /**
@@ -39,7 +41,21 @@ class JasaController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    $request->validate([
+      'id_apoteker' => 'required|exists:pengguna,id_pengguna',
+      'nama_jasa' => 'required|string|max:255',
+      'tingkatan' => 'required|in:1,2,3',
+      'harga' => 'required',
+
+    ], [
+      'nama_jasa.required' => 'Nama Jasa harus diisi',
+      'tingkatan.required' => 'Tingkatan Jasa harus diisi',
+      'harga.required' => 'Harga Jasa harus diisi',
+    ]);
+    $formatedHarga = str_replace(',', '', $request->harga);
+    Jasa::create($request->merge(['harga' => $formatedHarga])->all());
+    return redirect()->route('jasa.index')
+      ->with('msg-success', 'Berhasil membuat data jasa ' . $request->nama_jasa);
   }
 
   /**
@@ -62,7 +78,7 @@ class JasaController extends Controller
    */
   public function edit(Jasa $jasa)
   {
-    //
+    return view('pages.jasa.edit', compact('jasa'));
   }
 
   /**
@@ -74,7 +90,23 @@ class JasaController extends Controller
    */
   public function update(Request $request, Jasa $jasa)
   {
-    //
+    $request->validate([
+      'id_apoteker' => 'required|exists:pengguna,id_pengguna',
+      'nama_jasa' => 'required|string|max:255',
+      'tingkatan' => 'required|in:1,2,3',
+      'harga' => 'required',
+
+    ], [
+      'nama_jasa.required' => 'Nama Jasa harus diisi',
+      'tingkatan.required' => 'Tingkatan Jasa harus diisi',
+      'harga.required' => 'Harga Jasa harus diisi',
+    ]);
+
+    $formatedHarga = str_replace(',', '', $request->harga);
+    $jasa->update($request->merge(['harga' => $formatedHarga])->all());
+
+    return redirect()->route('jasa.index')
+      ->with('msg-success', 'Berhasil mengubah data jasa ' . $jasa->nama_jasa);
   }
 
   /**
@@ -85,6 +117,18 @@ class JasaController extends Controller
    */
   public function destroy(Jasa $jasa)
   {
-    //
+    $jasa->delete();
+    return redirect()->route('jasa.index')->with('msg-success', 'Berhasil menghapus data jasa ' . $jasa->nama_jasa);
+  }
+
+  public function autocompleteApoteker(Request $request)
+  {
+    $dataApoteker = [];
+    if ($request->has('q')) {
+      $search = $request->q;
+      $dataApoteker = Pengguna::select("id_pengguna", "nama")
+        ->where('nama', 'LIKE', "%$search%")->get();
+    }
+    return response()->json($dataApoteker);
   }
 }

@@ -20,9 +20,9 @@ return new class extends Migration
       $table->string('status');
       $table->string('alamat');
       $table->string('email')->unique();
-      $table->string('password');
+      $table->string('password')->nullable();
       $table->timestamps();
-      $table->softDeletes(); 
+      $table->softDeletes();
     });
   }
 

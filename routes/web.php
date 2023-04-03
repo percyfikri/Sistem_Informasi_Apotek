@@ -49,7 +49,8 @@ Route::controller(PenggunaController::class)->group(function () {
 
 
 // Jasa
-Route::resource('jasa', JasaController::class)->only(['index', 'show']);
+Route::resource('jasa', JasaController::class);
+Route::get('/jasa/autocomplete/apoteker', [JasaController::class, 'autocompleteApoteker']);
 
 // Dashboard
 Route::get('/dashboard-general-dashboard', function () {
@@ -64,15 +65,11 @@ Route::get('kasir', [PenjualanController::class, 'index'])->name('pengguna.index
 
 Route::get('pengguna', [PenggunaController::class, 'index'])->name('pengguna.index');
 
+// Obat
 Route::resource('obat', ObatController::class);
+Route::get('/obat/autocomplete/apoteker', [ObatController::class, 'autocompleteApoteker']);
 
-Route::get('obat', [ObatController::class, 'index']);
-
-Route::get('create-obat', function (){
-  return view('pages.obat.create-obat');
-});
-
-Route::get('edit-obat', [ObatController::class, 'edit']);
+Route::get('show', [ObatController::class, 'show']);
 
 // Layout
 Route::get('/layout-default-layout', function () {
