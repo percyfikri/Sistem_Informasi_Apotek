@@ -10,11 +10,11 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Detail Obat</h1>
+                <h1>Edit Obat</h1>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="{{ url('dashboard-general-dashboard') }}">Dashboard</a></div>
                     <div class="breadcrumb-item active"><a href="{{ route('obat.index') }}">Obat</a></div>
-                    <div class="breadcrumb-item">Detail Obat</div>
+                    <div class="breadcrumb-item">Edit Obat</div>
                 </div>
             </div>
 
@@ -35,7 +35,7 @@
                 @endif
                 <div class="card">
                     <div class="card-header">
-                        <h4>Tambah Obat</h4>
+                        <h4>Edit Obat</h4>
 
                     </div>
                     <form action="{{ route('obat.update', $obat->id_obat) }}" method="POST">
