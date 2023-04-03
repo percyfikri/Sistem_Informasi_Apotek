@@ -17,4 +17,8 @@ class Racikan extends Model
     'harga',
     'catatan'
   ];
+  public function racikan()
+  {
+    return $this->hasOne(Racikan::class, 'id_racikan');
+  }
 }

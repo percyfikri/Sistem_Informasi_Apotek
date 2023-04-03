@@ -17,4 +17,13 @@ class DetailRacikan extends Model
     'kuantitas',
     'satuan'
   ];
+  public function racikan()
+  {
+    return $this->belongsTo(Racikan::class, 'id_racikan');
+  }
+  public function obat()
+  {
+    return $this->belongsTo(Obat::class, 'id_obat');
+  }
 }
+

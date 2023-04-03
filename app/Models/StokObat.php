@@ -17,4 +17,8 @@ class StokObat extends Model
     'harga',
     'kuantitas'
   ];
+  public function stokObat()
+  {
+    return $this->belongsTo(Obat::class, 'id_obat');
+  }
 }

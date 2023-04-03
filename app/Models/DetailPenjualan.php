@@ -19,4 +19,16 @@ class DetailPenjualan extends Model
     'satuan',
     'harga'
   ];
+  public function penjualan()
+  {
+    return $this->belongsTo(Penjualan::class, 'id_penjualan');
+  }
+  public function resep()
+  {
+    return $this->belongsTo(Obat::class, 'id_resep');
+  }
+  public function obat()
+  {
+    return $this->belongsTo(Obat::class, 'id_obat');
+  }
 }

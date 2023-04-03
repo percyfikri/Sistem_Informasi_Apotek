@@ -18,4 +18,17 @@ class DetailResep extends Model
     'kuantitas',
     'satuan',
   ];
+  public function resep()
+  {
+    return $this->belongsTo(Obat::class, 'id_resep');
+  }
+  public function obat()
+  {
+    return $this->belongsTo(Obat::class, 'id_obat');
+  }
+  public function racikan()
+  {
+    return $this->belongsTo(Racikan::class, 'id_racikan');
+  }
+  
 }

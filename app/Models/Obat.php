@@ -18,4 +18,8 @@ class Obat extends Model
     'nama_obat',
     'jenis_obat',
   ];
+  public function obat()
+  {
+    return $this->hasOne(Obat::class, 'id_obat');
+  }
 }

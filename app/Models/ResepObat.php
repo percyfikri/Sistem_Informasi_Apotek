@@ -24,4 +24,17 @@ class ResepObat extends Model
   protected $casts = [
     'tanggal' => 'datetime:d-m-Y H:i:s'
   ];
+
+  public function resep()
+  {
+    return $this->hasOne(Obat::class, 'id_resep');
+  }
+  public function dokter()
+  {
+    return $this->belongsTo(Pengguna::class, 'id_dokter', 'id_pengguna');
+  }
+  public function customer()
+  {
+    return $this->belongsTo(Pengguna::class, 'id_customer', 'id_pengguna');
+  }
 }

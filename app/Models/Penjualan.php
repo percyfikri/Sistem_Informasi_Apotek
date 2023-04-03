@@ -22,4 +22,16 @@ class Penjualan extends Model
   protected $casts = [
     'tanggal' => 'datetime:d-m-Y H:i:s'
   ];
+    public function customer()
+  {
+    return $this->belongsTo(Pengguna::class, 'id_customer', 'id_pengguna');
+  }
+  public function apoteker()
+  {
+    return $this->belongsTo(Pengguna::class, 'id_apoteker', 'id_pengguna');
+  }
+  public function jasa()
+  {
+    return $this->belongsTo(Jasa::class, 'id_jasa');
+  }
 }

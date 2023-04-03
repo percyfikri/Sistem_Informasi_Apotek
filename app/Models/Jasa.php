@@ -21,6 +21,10 @@ class Jasa extends Model
     'tingkatan',
     'harga'
   ];
+  public function jasa()
+  {
+    return $this->hasMany(Jasa::class, 'id_jasa');
+  }
 
   public function apoteker()
   {
