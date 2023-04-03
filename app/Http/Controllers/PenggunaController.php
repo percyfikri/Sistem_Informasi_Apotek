@@ -34,7 +34,7 @@ class PenggunaController extends Controller
      */
     public function create()
     {
-        return view('pages.pengguna.tambah-pengguna');
+        return view('pages.pengguna.create');
     }
 
     /**
@@ -79,8 +79,9 @@ class PenggunaController extends Controller
             $pengguna->password = bcrypt($password);
             $pengguna->save();
 
-            $request->session()->flash('msg', "Data dengan nama $nama berhasil ditambahkan!");
-            return redirect('pengguna/tambah-pengguna');
+            // $request->session()->flash('msg', "Data dengan nama $nama berhasil ditambahkan!");
+            // return redirect('pengguna')->with('msg', "Data dengan nama $nama berhasil ditambahkan!");
+            return redirect()->to('pengguna')->with('msg-success', 'Berhasil menambahkan data');
         } catch (\Throwable $th) {
             echo $th;
         }
