@@ -20,9 +20,9 @@ class ResepObatFactory extends Factory
             'id_dokter' => Pengguna::where('status', 'dokter')->inRandomOrder()->first()->id_pengguna,
             'id_customer' => Pengguna::where('status', 'customer')->inRandomOrder()->first()->id_pengguna,
             'nama_resep' => fake()->name(),
-            'deskripsi' => fake()->name(),
+            'deskripsi' => fake()->realText(),
             'tanggal'=> fake()->datetime(),
-            'status' => fake()->name(),
+            'status' => fake()->randomElement(['racikan', 'non racikan']),
         ];
     }
 }
