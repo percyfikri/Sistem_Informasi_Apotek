@@ -57,5 +57,9 @@
                 <a class="nav-link" href="{{ url('jasa') }}"><i class="fas fa-user-nurse"></i>
                     <span>Jasa</span></a>
             </li>
+            <li class="{{ Request::is('laporan-penjualan') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('laporan-penjualan') }}"><i class="fas fa-user-nurse"></i>
+                    <span>Jasa</span></a>
+            </li>
     </aside>
 </div>
