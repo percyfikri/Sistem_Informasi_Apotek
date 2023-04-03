@@ -18,7 +18,7 @@ class StokObatFactory extends Factory
     {
         return [
             'id_obat' => Obat::inRandomOrder()->first()->id_obat,
-            'statuan' => fake()->randomNumber(),
+            'satuan' => fake()->randomNumber(),
             'kuantitas' => fake()->randomNumber(),
             'harga' => fake()->randomNumber(),
         ];

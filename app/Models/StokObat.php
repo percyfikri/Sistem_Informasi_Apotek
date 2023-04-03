@@ -15,8 +15,8 @@ class StokObat extends Model
   protected $fillable = [
     'id_obat',
     'satuan',
-    'harga',
-    'kuantitas'
+    'kuantitas',
+    'harga'
   ];
   public function obat()
   {
