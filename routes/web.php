@@ -40,12 +40,13 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 // Pengguna
-Route::controller(PenggunaController::class)->group(function () {
-    Route::get('pengguna', 'index')->name('pengguna');
-    Route::get('pengguna/tambah-pengguna', 'create')->name('tambah-pengguna');
-    Route::post('pengguna/simpan-pengguna', 'save');
-    Route::delete('pengguna/hapus-pengguna/{id}', 'delete');
-});
+// Route::controller(PenggunaController::class)->group(function () {
+//     Route::get('pengguna', 'index')->name('pengguna');
+//     Route::get('pengguna/tambah-pengguna', 'create')->name('tambah-pengguna');
+//     Route::post('pengguna/simpan-pengguna', 'save');
+//     Route::delete('pengguna/hapus-pengguna/{id}', 'delete');
+// });
+Route::resource('pengguna', PenggunaController::class);
 
 
 // Jasa
@@ -61,9 +62,6 @@ Route::get('/dashboard-ecommerce-dashboard', function () {
 });
 Route::resource('penjualan', PenjualanController::class);
 
-Route::get('kasir', [PenjualanController::class, 'index'])->name('pengguna.index');
-
-Route::get('pengguna', [PenggunaController::class, 'index'])->name('pengguna.index');
 
 // Obat
 Route::resource('obat', ObatController::class);

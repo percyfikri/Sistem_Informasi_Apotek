@@ -44,14 +44,14 @@
                             <div class="form-group">
                                 <label>Nama obat</label>
                                 <input type="text" name="nama_obat"
-                                    class="form-control @if (old('nama_obat')) is-valid @endif 
+                                    class="form-control @if (old('nama_obat')) is-valid @endif
                                 @error('nama_obat') is-invalid @enderror"
                                     value="{{ old('nama_obat') }}">
                             </div>
                             <div class="form-group">
                                 <label>Jenis obat</label>
                                 <input type="text" name="jenis_obat"
-                                    class="form-control @if (old('jenis_obat')) is-valid @endif 
+                                    class="form-control @if (old('jenis_obat')) is-valid @endif
                                 @error('jenis_obat') is-invalid @enderror"
                                     value="{{ old('jenis_obat') }}">
                             </div>
