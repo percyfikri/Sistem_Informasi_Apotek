@@ -122,7 +122,7 @@
         $('#id-apoteker').select2({
             placeholder: 'Pilih Apoteker',
             ajax: {
-                url: '/jasa/autocomplete/apoteker',
+                url: '/autocomplete/apoteker',
                 dataType: 'json',
                 delay: 250,
                 processResults: function(data) {

@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AutocompleteController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JasaController;
+use App\Http\Controllers\KasirController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PenggunaController;
@@ -39,20 +41,17 @@ Route::group(['middleware' => ['auth']], function () {
   });
 });
 
-
+// Kasir
+Route::resource('kasir', KasirController::class)->only(['index', 'store']);
 // Pengguna
-// Route::controller(PenggunaController::class)->group(function () {
-//     Route::get('pengguna', 'index')->name('pengguna');
-//     Route::get('pengguna/tambah-pengguna', 'create')->name('tambah-pengguna');
-//     Route::post('pengguna/simpan-pengguna', 'save');
-//     Route::delete('pengguna/hapus-pengguna/{id}', 'delete');
-// });
 Route::resource('pengguna', PenggunaController::class);
-
 
 // Jasa
 Route::resource('jasa', JasaController::class);
-Route::get('/jasa/autocomplete/apoteker', [JasaController::class, 'autocompleteApoteker']);
+Route::prefix('autocomplete')->controller(AutocompleteController::class)->group(function () {
+  Route::get('apoteker', 'getApoteker')->name('autocomplete.apoteker');
+  Route::get('obat', 'getObat')->name('autocomplete.obat');
+})->name('autocomplete');
 
 // Dashboard
 Route::get('/dashboard-general-dashboard', function () {
@@ -66,7 +65,6 @@ Route::resource('penjualan', PenjualanController::class);
 
 // Obat
 Route::resource('obat', ObatController::class);
-Route::get('/obat/autocomplete/apoteker', [ObatController::class, 'autocompleteApoteker']);
 
 Route::get('show', [ObatController::class, 'show']);
 

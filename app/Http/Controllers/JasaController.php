@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jasa;
-use App\Models\Pengguna;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -66,7 +65,6 @@ class JasaController extends Controller
    */
   public function show(Jasa $jasa)
   {
-
     return view('pages.jasa.show', compact('jasa'));
   }
 
@@ -119,16 +117,5 @@ class JasaController extends Controller
   {
     $jasa->delete();
     return redirect()->route('jasa.index')->with('msg-success', 'Berhasil menghapus data jasa ' . $jasa->nama_jasa);
-  }
-
-  public function autocompleteApoteker(Request $request)
-  {
-    $dataApoteker = [];
-    if ($request->has('q')) {
-      $search = $request->q;
-      $dataApoteker = Pengguna::select("id_pengguna", "nama")
-        ->where('nama', 'LIKE', "%$search%")->get();
-    }
-    return response()->json($dataApoteker);
   }
 }

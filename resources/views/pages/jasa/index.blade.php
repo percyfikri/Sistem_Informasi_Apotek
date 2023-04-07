@@ -20,14 +20,14 @@
             </div>
             <div class="section-body">
                 @if (session('msg-success'))
-                    <div class="alert alert-success alert-has-icon">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
                         <div class="alert-body">
-                            <button class="close" data-dismiss="alert">
-                                <span>&times;</span>
-                            </button>
                             <div class="alert-title">Sukses</div>
                             {{ session('msg-success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                     </div>
                 @endif
@@ -46,7 +46,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table-striped table" id="users-table">
+                                    <table class="table-striped table" id="jasa-table">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -80,7 +80,7 @@
 
     <script>
         $(function() {
-            $('#users-table').DataTable({
+            $('#jasa-table').DataTable({
                 processing: true,
                 serverSide: true,
                 paging: true,
@@ -130,13 +130,7 @@
                 rowCallback: function(row, data, index) {
                     $('td:eq(0)', row).html(index + 1);
                 },
-                select: {
-                    style: 'single',
-                    search: {
 
-                        search: true
-                    }
-                }
             });
         });
     </script>
