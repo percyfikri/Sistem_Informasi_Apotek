@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ResepObat;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class ResepObatController extends Controller
 {
@@ -12,9 +13,13 @@ class ResepObatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            return DataTables::of(ResepObat::query()->with('customer')->get())->toJson();
+          }
+          return view('pages.resep-obat.index');
+
     }
 
     /**
@@ -24,7 +29,7 @@ class ResepObatController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.resep-obat.create');
     }
 
     /**

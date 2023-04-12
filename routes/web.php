@@ -8,7 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PenjualanController;
-use App\Http\Controllers\StokObatController;
+use App\Http\Controllers\ResepObatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,6 +46,7 @@ Route::resource('kasir', KasirController::class)->only(['index', 'store']);
 // Pengguna
 Route::resource('pengguna', PenggunaController::class);
 
+
 // Jasa
 Route::resource('jasa', JasaController::class);
 Route::prefix('autocomplete')->controller(AutocompleteController::class)->group(function () {
@@ -68,8 +69,10 @@ Route::resource('obat', ObatController::class);
 
 Route::get('show', [ObatController::class, 'show']);
 
-// Stok Obat
-Route::resource('stok_obat', StokObatController::class);
+
+//Resep Obat
+Route::resource('resep-obat', ResepObatController::class);
+
 
 // Layout
 Route::get('/layout-default-layout', function () {
