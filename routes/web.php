@@ -9,6 +9,7 @@ use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ResepObatController;
+use App\Http\Controllers\StokObatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,6 +70,8 @@ Route::resource('obat', ObatController::class);
 
 Route::get('show', [ObatController::class, 'show']);
 
+// Stok Obat
+Route::resource('stok_obat', StokObatController::class);
 
 //Resep Obat
 Route::resource('resep-obat', ResepObatController::class);
