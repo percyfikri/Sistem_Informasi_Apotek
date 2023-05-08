@@ -7,17 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Penjualan extends Model
 {
-  use HasFactory;
+    use HasFactory;
 
-  protected $table = 'penjualan';
-  protected $primaryKey = 'id_penjualan';
+    // protected $attributes = [
+    //     'email' => 'default_email',
+    //     'active' => 1,
+    //     'count' => 0
+    // ];
 
-  protected $fillable = [
-    'id_customer',
-    'id_apoteker',
-    'id_jasa',
-    'tanggal'
-  ];
+    // protected static $rules = [
+    //     'id' => 'required|numeric|integer',
+    //     'image' => 'nullable|string|max:255',
+    //     'active' => 'nullable|boolean',
+    //     'count' => 'nullable|numeric|integer',
+    //     'email' => 'required|string|max:100|email'
+    // ];
 
   protected $casts = [
     'tanggal' => 'datetime:d-m-Y H:i:s'

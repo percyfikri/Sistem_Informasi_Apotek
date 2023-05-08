@@ -49,6 +49,14 @@ Route::group(['middleware' => ['auth']], function () {
 Route::resource('pengguna', PenggunaController::class);
 
 
+// Penjualan
+Route::resource('penjualan', PenjualanController::class);
+
+
+// Laporan Penjualan
+Route::resource('laporan-penjualan', LaporanPenjualanController::class);
+
+
 // Jasa
 Route::resource('jasa', JasaController::class);
 Route::get('/jasa/autocomplete/apoteker', [JasaController::class, 'autocompleteApoteker']);
@@ -60,7 +68,6 @@ Route::get('/dashboard-general-dashboard', function () {
 Route::get('/dashboard-ecommerce-dashboard', function () {
   return view('pages.dashboard-ecommerce-dashboard', ['type_menu' => 'dashboard']);
 });
-Route::resource('penjualan', PenjualanController::class);
 
 
 // Obat

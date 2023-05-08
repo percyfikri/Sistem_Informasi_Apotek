@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Penjualan;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class PenjualanController extends Controller
 {
@@ -12,9 +13,12 @@ class PenjualanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            return DataTables::of(Penjualan::query())->toJson();
+        }
+        return view('pages.penjualan.index');
     }
 
     /**
