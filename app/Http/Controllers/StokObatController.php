@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\StokObat;
+use App\Models\Obat;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class StokObatController extends Controller
 {
@@ -12,9 +15,12 @@ class StokObatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            return DataTables::of(Obat::query())->toJson();
+          }
+          return view('pages.obat.index');
     }
 
     /**
@@ -22,9 +28,10 @@ class StokObatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create() : View
     {
-        //
+        $obat = Obat::all(); //mendapatkan data dari tabel obat
+        return view('pages.stok_obat.create' , ['obat' => $obat]);
     }
 
     /**
@@ -35,7 +42,32 @@ class StokObatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //melakukan validasi data
+        $request->validate([
+            'id_obat' => 'required',
+            'satuan' => 'required',
+            'kuantitas' => 'required',
+            'harga' => 'required',
+        ],
+        [
+            'id_obat.required' => 'Nama Obat wajib diisi',
+            'satuan.required' => 'Satuan Obat wajib diisi',
+            'kuantitas.required' => 'Kuantitas Obat wajib diisi',
+            'harga.required' => 'Harga Obat wajib diisi',
+        ]);
+        $stok = new StokObat;
+        $stok->satuan = $request->get('satuan');
+        $stok->kuantitas = $request->get('kuantitas');
+        $stok->harga = $request->get('harga');
+
+        $obat = new Obat;
+        $obat->id_obat = $request->get('id_obat');
+
+        //fungsi eloquent untuk menambah data dengan relasi belongsTo
+        $stok->obat()->associate($obat);
+        $stok->save();
+        //jika data berhasil ditambahkan, akan kembali ke halaman utama
+        return redirect()->route('stok_obat.index')->with('msg-success', 'Berhasil menambahkan data');
     }
 
     /**
@@ -44,10 +76,13 @@ class StokObatController extends Controller
      * @param  \App\Models\StokObat  $stokObat
      * @return \Illuminate\Http\Response
      */
-    public function show(StokObat $stokObat)
-    {
-        //
-    }
+    public function show($id_obat)
+  {
+    //menampilkan detail data dengan menemukan berdasarkan Id Obat
+    //code sebelum dibuat relasi --> $mahasiswa = Mahasiswa::find($Nim);
+    $stokObat = StokObat::with('obat')->where('id_obat', $id_obat)->first();
+    return view('pages.stok_obat.show', ['stokObat' => $stokObat]);
+  }
 
     /**
      * Show the form for editing the specified resource.
@@ -55,9 +90,13 @@ class StokObatController extends Controller
      * @param  \App\Models\StokObat  $stokObat
      * @return \Illuminate\Http\Response
      */
-    public function edit(StokObat $stokObat)
+    public function edit($stokObat)
     {
-        //
+        //menampilkan detail data dengan menemukan berdasarkan Id 
+        //Obat untuk diedit
+        $stokObat = StokObat::with('obat')->where('id_obat', $stokObat)->first();
+        $obat = Obat::all(); //mendapatkan data dari tabel obat
+        return view('pages.stok_obat.edit', compact('stokObat','obat'));
     }
 
     /**
@@ -67,9 +106,34 @@ class StokObatController extends Controller
      * @param  \App\Models\StokObat  $stokObat
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, StokObat $stokObat)
+    public function update(Request $request, $id_obat)
     {
-        //
+        //melakukan validasi data
+        $request->validate([
+            'id_obat' => 'required',
+            'satuan' => 'required',
+            'kuantitas' => 'required',
+            'harga' => 'required',
+        ],
+        [
+            'id_obat.required' => 'Nama Obat wajib diisi',
+            'satuan.required' => 'Satuan Obat wajib diisi',
+            'kuantitas.required' => 'Kuantitas Obat wajib diisi',
+            'harga.required' => 'Harga Obat wajib diisi',
+        ]);
+        $stok = StokObat::with('obat')->where('id_obat', $id_obat)->first();
+        $stok->satuan = $request->get('satuan');
+        $stok->kuantitas = $request->get('kuantitas');
+        $stok->harga = $request->get('harga');
+
+        $obat = new Obat;
+        $obat->id_obat = $request->get('id_obat');
+
+        //fungsi eloquent untuk menambah data dengan relasi belongsTo
+        $stok->obat()->associate($obat);
+        $stok->save();
+        //jika data berhasil ditambahkan, akan kembali ke halaman utama
+        return redirect()->route('obat.index')->with('msg-success', 'Berhasil merubah data');
     }
 
     /**
@@ -80,6 +144,7 @@ class StokObatController extends Controller
      */
     public function destroy(StokObat $stokObat)
     {
-        //
+        $stokObat->delete();
+        return redirect()->route('obat.index')->with('msg-success', 'Berhasil menghapus data stok obat ' . $stokObat->id_obat);
     }
 }

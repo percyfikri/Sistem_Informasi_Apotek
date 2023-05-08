@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\AutocompleteController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JasaController;
+use App\Http\Controllers\KasirController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\ResepObatController;
+use App\Http\Controllers\StokObatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,14 +42,9 @@ Route::group(['middleware' => ['auth']], function () {
   });
 });
 
-
+// Kasir
+Route::resource('kasir', KasirController::class)->only(['index', 'store']);
 // Pengguna
-// Route::controller(PenggunaController::class)->group(function () {
-//     Route::get('pengguna', 'index')->name('pengguna');
-//     Route::get('pengguna/tambah-pengguna', 'create')->name('tambah-pengguna');
-//     Route::post('pengguna/simpan-pengguna', 'save');
-//     Route::delete('pengguna/hapus-pengguna/{id}', 'delete');
-// });
 Route::resource('pengguna', PenggunaController::class);
 
 
@@ -59,7 +58,10 @@ Route::resource('laporan-penjualan', LaporanPenjualanController::class);
 
 // Jasa
 Route::resource('jasa', JasaController::class);
-Route::get('/jasa/autocomplete/apoteker', [JasaController::class, 'autocompleteApoteker']);
+Route::prefix('autocomplete')->controller(AutocompleteController::class)->group(function () {
+  Route::get('apoteker', 'getApoteker')->name('autocomplete.apoteker');
+  Route::get('obat', 'getObat')->name('autocomplete.obat');
+})->name('autocomplete');
 
 // Dashboard
 Route::get('/dashboard-general-dashboard', function () {
@@ -72,9 +74,15 @@ Route::get('/dashboard-ecommerce-dashboard', function () {
 
 // Obat
 Route::resource('obat', ObatController::class);
-Route::get('/obat/autocomplete/apoteker', [ObatController::class, 'autocompleteApoteker']);
 
 Route::get('show', [ObatController::class, 'show']);
+
+// Stok Obat
+Route::resource('stok_obat', StokObatController::class);
+
+//Resep Obat
+Route::resource('resep-obat', ResepObatController::class);
+
 
 // Layout
 Route::get('/layout-default-layout', function () {
