@@ -114,13 +114,11 @@ class StokObatController extends Controller
     {
         //melakukan validasi data
         $request->validate([
-            'id_obat' => 'required',
             'satuan' => 'required',
             'kuantitas' => 'required',
             'harga' => 'required',
         ],
         [
-            'id_obat.required' => 'Nama Obat wajib diisi',
             'satuan.required' => 'Satuan Obat wajib diisi',
             'kuantitas.required' => 'Kuantitas Obat wajib diisi',
             'harga.required' => 'Harga Obat wajib diisi',
@@ -137,7 +135,7 @@ class StokObatController extends Controller
         $stok->obat()->associate($obat);
         $stok->save();
         //jika data berhasil ditambahkan, akan kembali ke halaman utama
-        return redirect()->route('obat.index')->with('msg-success', 'Berhasil merubah data');
+        return redirect()->route('stok_obat.index')->with('msg-success', 'Berhasil merubah data');
     }
 
     /**
@@ -146,9 +144,11 @@ class StokObatController extends Controller
      * @param  \App\Models\StokObat  $stokObat
      * @return \Illuminate\Http\Response
      */
-    public function destroy(StokObat $stokObat)
+    public function destroy($id_obat)
     {
-        $stokObat->delete();
-        return redirect()->route('obat.index')->with('msg-success', 'Berhasil menghapus data stok obat ' . $stokObat->id_obat);
+        //fungsi eloquent untuk menghapus data
+        StokObat::find($id_obat)->delete();
+        return redirect()->route('stok_obat.index')
+        -> with('msg-success', 'Data Berhasil Dihapus');
     }
 }
