@@ -9,6 +9,8 @@ class Penjualan extends Model
 {
     use HasFactory;
 
+    protected $table = 'penjualan';
+
     // protected $attributes = [
     //     'email' => 'default_email',
     //     'active' => 1,
@@ -23,19 +25,22 @@ class Penjualan extends Model
     //     'email' => 'required|string|max:100|email'
     // ];
 
-  protected $casts = [
-    'tanggal' => 'datetime:d-m-Y H:i:s'
-  ];
+    protected $casts = [
+        'tanggal' => 'datetime:d-m-Y H:i:s'
+    ];
+
     public function customer()
-  {
-    return $this->belongsTo(Pengguna::class, 'id_customer', 'id_pengguna');
-  }
-  public function apoteker()
-  {
-    return $this->belongsTo(Pengguna::class, 'id_apoteker', 'id_pengguna');
-  }
-  public function jasa()
-  {
-    return $this->belongsTo(Jasa::class, 'id_jasa');
-  }
+    {
+        return $this->belongsTo(Pengguna::class, 'id_customer', 'id_pengguna');
+    }
+
+    public function apoteker()
+    {
+        return $this->belongsTo(Pengguna::class, 'id_apoteker', 'id_pengguna');
+    }
+
+    public function jasa()
+    {
+        return $this->belongsTo(Jasa::class, 'id_jasa');
+    }
 }
