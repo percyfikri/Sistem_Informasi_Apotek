@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jasa;
+use App\Models\Pengguna;
 use App\Models\Penjualan;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -16,30 +18,11 @@ class PenjualanController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            return DataTables::of(Penjualan::query())->toJson();
+            return DataTables::of(Penjualan::with('customer','apoteker','jasa')->get())->toJson();
+            // return DataTables::of(Pengguna::with('customer','apoteker')->get())->toJson();
+            // return DataTables::of(Jasa::query())->toJson();
         }
         return view('pages.penjualan.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -48,9 +31,10 @@ class PenjualanController extends Controller
      * @param  \App\Models\Penjualan  $penjualan
      * @return \Illuminate\Http\Response
      */
-    public function show(Penjualan $penjualan)
+    public function show($id_penjualan)
     {
-        //
+        $penjualan = Penjualan::with('customer','apoteker','jasa')->where('id_penjualan', $id_penjualan)->first();
+        return view('pages.penjualan.show', ['penjualan' => $penjualan]);
     }
 
     /**
@@ -59,21 +43,10 @@ class PenjualanController extends Controller
      * @param  \App\Models\Penjualan  $penjualan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Penjualan $penjualan)
+    public function edit($id_penjualan)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Penjualan  $penjualan
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Penjualan $penjualan)
-    {
-        //
+        $penjualan = Penjualan::with('customer','apoteker','jasa')->where('id_penjualan', $id_penjualan)->first();
+        return view('pages.penjualan.edit', compact('penjualan'));
     }
 
     /**
@@ -84,6 +57,7 @@ class PenjualanController extends Controller
      */
     public function destroy(Penjualan $penjualan)
     {
-        //
+        $penjualan->delete();
+        return redirect()->route('penjualan.index')->with('msg-success', 'Berhasil menghapus data penjualan ' . $penjualan->id_penjualan);
     }
 }

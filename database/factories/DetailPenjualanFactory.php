@@ -24,7 +24,7 @@ class DetailPenjualanFactory extends Factory
             'id_obat' => Obat::inRandomOrder()->first()->id_obat,
             'kuantitas' => fake()->randomNumber(),
             'satuan' => fake()->randomNumber(),
-            'harga' => fake()->randomNumber(),
+            'subtotal' => fake()->randomNumber(),
         ];
     }
 }

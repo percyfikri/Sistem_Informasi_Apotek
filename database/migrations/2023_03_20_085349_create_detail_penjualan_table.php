@@ -22,7 +22,7 @@ return new class extends Migration
       $table->foreign('id_obat')->references('id_obat')->on('obat')->onDelete('cascade');
       $table->integer('kuantitas');
       $table->integer('satuan');
-      $table->decimal('harga', 12, 2);
+      $table->decimal('subtotal', 12, 2);
       $table->timestamps();
     });
   }

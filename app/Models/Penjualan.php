@@ -11,20 +11,6 @@ class Penjualan extends Model
 
     protected $table = 'penjualan';
 
-    // protected $attributes = [
-    //     'email' => 'default_email',
-    //     'active' => 1,
-    //     'count' => 0
-    // ];
-
-    // protected static $rules = [
-    //     'id' => 'required|numeric|integer',
-    //     'image' => 'nullable|string|max:255',
-    //     'active' => 'nullable|boolean',
-    //     'count' => 'nullable|numeric|integer',
-    //     'email' => 'required|string|max:100|email'
-    // ];
-
     protected $casts = [
         'tanggal' => 'datetime:d-m-Y H:i:s'
     ];
