@@ -59,7 +59,7 @@
                         </div>
                         <div class="card-footer text-right">
                             <button type="submit" class="btn btn-primary">Submit</button>
-                            <button type="reset" class="btn btn-warning">Reset</button>
+                            <button action="{{ route('obat.index') }}" class="btn btn-warning">Back</button>
                         </div>
                     </form>
                 </div>

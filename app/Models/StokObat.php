@@ -11,7 +11,7 @@ class StokObat extends Model
   use HasFactory;
 
   protected $table = 'stok_obat';
-
+  protected $primaryKey = 'id_obat';
   protected $fillable = [
     'id_obat',
     'satuan',

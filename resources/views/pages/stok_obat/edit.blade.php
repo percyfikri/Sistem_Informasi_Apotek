@@ -44,12 +44,8 @@
                             @method('PUT')
                             <div class="form-group">
                                 <label for="id_obat">Nama Obat</label>
-                                {{-- <input readonly type="text" class="form-control" value="{{ $stokObat->id_obat->nama_obat }}"> --}}
-                                <select readonly class="form-control" name="id_obat" id="id_obat">
-                                    @foreach ($obat as $obt)
-                                        <option value="{{$obt->id_obat}}" {{$obt->id_obat == $obt->id_obat ? 'selected' : ''}}>{{$obt->nama_obat}}</option>
-                                    @endforeach
-                                </select>
+                                <input readonly hidden type="text" name="id_obat" class="form-control" value="{{ $stokObat->id_obat }}">
+                                <input readonly type="text" name="nama obat" class="form-control" value="{{ $stokObat->obat->nama_obat }}">
                             </div>
                             <div class="form-group">
                                 <label>Satuan</label>
@@ -88,7 +84,7 @@
                         </div>
                         <div class="card-footer text-right">
                             <button type="submit" class="btn btn-primary">Submit</button>
-                            <button type="reset" class="btn btn-warning">Reset</button>
+                            <button action="{{ route('stok_obat.index') }}" class="btn btn-warning">Back</button>
                         </div>
                     </form>
                 </div>

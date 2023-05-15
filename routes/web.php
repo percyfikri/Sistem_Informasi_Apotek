@@ -79,8 +79,8 @@ Route::resource('obat', ObatController::class);
 Route::get('show', [ObatController::class, 'show']);
 
 // Stok Obat
-Route::resource('stok_obat', StokObatController::class);
-
+Route::resource('stok_obat', StokObatController::class)->except('destroy');
+Route::delete('stok_obat/{id_obat}/{satuan}',[StokObatController::class,'destroy']);
 //Resep Obat
 Route::resource('resep-obat', ResepObatController::class);
 

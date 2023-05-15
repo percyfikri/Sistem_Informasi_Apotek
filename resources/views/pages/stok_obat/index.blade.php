@@ -119,13 +119,10 @@
                         render: function(data, type, row) {
                             return `<div class="buttons text-center">
                                                     <a
-                                                        href="${window.location.href}" class="btn btn-icon icon-left btn-primary"><i
-                                                            class="fas fa-circle-info"></i>Detail</a>
-                                                    <a
                                                         href="${window.location.href}/edit"class="btn btn-icon icon-left btn-warning"><i
                                                             class="fas fa-pencil-alt"></i>Edit</a>
                                                     <button class="btn btn-danger btn-icon icon-left"
-                                data-action="${window.location.href}/${data.id_obat}}}" data-toggle="modal"
+                                data-action="${window.location.href}/${data.satuan}" data-toggle="modal"
                                 data-target="#confirm-delete-modal"> <i class="fas fa-trash"></i>
                                 Delete</button>
                                                 </div>`

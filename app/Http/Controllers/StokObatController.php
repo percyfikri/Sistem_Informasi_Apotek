@@ -110,10 +110,11 @@ class StokObatController extends Controller
      * @param  \App\Models\StokObat  $stokObat
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id_obat)
+    public function update(Request $request, StokObat $stok)
     {
         //melakukan validasi data
         $request->validate([
+            'id_obat'=>'required',
             'satuan' => 'required',
             'kuantitas' => 'required',
             'harga' => 'required',
@@ -123,11 +124,11 @@ class StokObatController extends Controller
             'kuantitas.required' => 'Kuantitas Obat wajib diisi',
             'harga.required' => 'Harga Obat wajib diisi',
         ]);
-        $stok = StokObat::with('obat')->where('id_obat', $id_obat)->first();
+ 
+        $stok = StokObat::with('obat')->where('id_obat', $request->get('id_obat'))->first();
         $stok->satuan = $request->get('satuan');
         $stok->kuantitas = $request->get('kuantitas');
         $stok->harga = $request->get('harga');
-
         $obat = new Obat;
         $obat->id_obat = $request->get('id_obat');
 
@@ -135,7 +136,8 @@ class StokObatController extends Controller
         $stok->obat()->associate($obat);
         $stok->save();
         //jika data berhasil ditambahkan, akan kembali ke halaman utama
-        return redirect()->route('stok_obat.index')->with('msg-success', 'Berhasil merubah data');
+        return redirect()->to('stok_obat')->with('msg-success', 'Berhasil melakukan update data');
+        // return redirect()->route('stok_obat.index',['stok_obat'=>$stok->id_obat])->with('msg-success', 'Berhasil merubah data');
     }
 
     /**
@@ -144,11 +146,11 @@ class StokObatController extends Controller
      * @param  \App\Models\StokObat  $stokObat
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id_obat)
+    public function destroy($id_obat, $satuan)
     {
         //fungsi eloquent untuk menghapus data
         StokObat::find($id_obat)->delete();
         return redirect()->route('stok_obat.index')
-        -> with('msg-success', 'Data Berhasil Dihapus');
+        -> with('msg-success', 'Data Berhasil Dihapus', $satuan);
     }
 }
