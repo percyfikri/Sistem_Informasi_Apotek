@@ -8,6 +8,8 @@ use App\Models\Penjualan;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
+use PDF;
+
 class PenjualanController extends Controller
 {
     /**
@@ -59,5 +61,12 @@ class PenjualanController extends Controller
     {
         $penjualan->delete();
         return redirect()->route('penjualan.index')->with('msg-success', 'Berhasil menghapus data penjualan ' . $penjualan->id_penjualan);
+    }
+
+    public function cetak_pdf()
+    {
+        $penjualan = Penjualan::all();
+        $pdf = PDF::loadview('pages.penjualan.penjualan_pdf',['penjualan'=>$penjualan]);
+        return $pdf->stream();
     }
 }

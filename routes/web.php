@@ -42,6 +42,10 @@ Route::group(['middleware' => ['auth']], function () {
   });
 });
 
+// Route Laporan PDF
+Route::get('/penjualan/cetak_pdf', [PenjualanController::class, 'cetak_pdf']);
+Route::get('/pengguna/cetak_pdf', [PenggunaController::class, 'cetak_pdf']);
+
 // Kasir
 Route::resource('kasir', KasirController::class)->only(['index', 'store']);
 // Pengguna
