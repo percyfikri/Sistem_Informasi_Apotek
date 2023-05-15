@@ -16,10 +16,9 @@ class ResepObatController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            return DataTables::of(ResepObat::query()->with('customer')->get())->toJson();
-          }
-          return view('pages.resep-obat.index');
-
+            return DataTables::of(ResepObat::with('customer', 'dokter')->get())->toJson();
+        }
+        return view('pages.resep-obat.index');
     }
 
     /**
@@ -40,7 +39,22 @@ class ResepObatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_resep' => 'required|unique:obat,nama_obat',
+            'jenis_obat' => 'required',
+      
+          ], 
+          [
+            'nama_obat.required' => 'Nama Obat wajib diisi',
+            'nama_obat.unique' => 'Nama Obat yang diisikan sudah ada dalam database',
+            'jenis_obat.required' => 'Jenis Obat wajib diisi',
+          ]);
+          $data = [
+            'nama_obat' => $request->nama_obat,
+            'jenis_obat' => $request->jenis_obat,
+          ];
+          ResepObat::create($data);
+          return redirect()->to('obat')->with('msg-success', 'Berhasil menambahkan data');
     }
 
     /**
@@ -49,10 +63,12 @@ class ResepObatController extends Controller
      * @param  \App\Models\ResepObat  $resepObat
      * @return \Illuminate\Http\Response
      */
-    public function show(ResepObat $resepObat)
+    public function show($id_resep)
     {
-        //
+        $resepObat = ResepObat::with('customer', 'dokter')->where('id_resep', $id_resep)->first();
+        return view('pages.resep-obat.show', ['resepObat' => $resepObat]);
     }
+
 
     /**
      * Show the form for editing the specified resource.

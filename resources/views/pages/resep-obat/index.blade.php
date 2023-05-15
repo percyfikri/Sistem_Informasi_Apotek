@@ -15,7 +15,7 @@
 
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="{{ url('dashboard-general-dashboard') }}">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="{{ route('obat.index') }}">Obat</a></div>
+                    <div class="breadcrumb-item"><a href="{{ route('obat.index') }}">Resep Obat</a></div>
                 </div>
             </div>
             <div class="section-body">
@@ -35,10 +35,10 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Data Obat</h4>
+                                <h4>Data Resep Obat</h4>
                                 <div class="card-header-action">
 
-                                    <a href="{{ route('obat.create') }}" class="btn btn-icon btn-primary icon-left"><i
+                                    <a href="{{ route('resep-obat.create') }}" class="btn btn-icon btn-primary icon-left"><i
                                             class="fas fa-plus"></i>
                                         Tambah</a>
 
@@ -51,11 +51,11 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Tanggal</th>
-                                                <th>ID Resep</th>
+                                                <th>Nama Resep</th>
                                                 <th>Customer</th>
                                                 <th>Dokter</th>
-                                                <th>Isi</th>
                                                 <th>Status</th>
+                                                <th>Deskripsi</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -102,43 +102,48 @@
                         name: 'tanggal'
                     },
                     {
-                        data: 'id_resep',
-                        name: 'id_resep'
+                        data: 'nama_resep',
+                        name: 'nama_resep'
                     },
                     {
-                        data: 'nama',
-                        name: 'nama'
+                        data: 'customer.nama',
+                        name: 'customer.nama'
                     },
                     {
-                        data: 'id_resep',
-                        name: 'id_resep'
-                    },
-                    {
-                        data: 'id_resep',
-                        name: 'id_resep'
+                        data: 'dokter.nama',
+                        name: 'dokter.nama'
                     },
                     {
                         data: 'status',
                         name: 'status'
                     },
                     {
+                        data: 'deskripsi',
+                        name: 'deskripsi'
+                    },
+                    {
                         data: null,
                         orderable: false,
                         render: function(data, type, row) {
-                            return `<div class="buttons text-center">
-                                                    <a
-                                                        href="${window.location.href}/${data.id_obat}" class="btn btn-icon icon-left btn-primary"><i
-                                                            class="fas fa-circle-info"></i>Detail</a>
-                                                    <a
-                                                        href="${window.location.href}/${data.id_obat}/edit"class="btn btn-icon icon-left btn-warning"><i
-                                                            class="fas fa-pencil-alt"></i>Edit</a>
-                                                    <button class="btn btn-danger btn-icon icon-left"
-                                data-action="${window.location.href}/${data.id_obat}}}" data-toggle="modal"
-                                data-target="#confirm-delete-modal"> <i class="fas fa-trash"></i>
-                                Delete</button>
-                                                </div>`
+                            return `
+                                <div class="buttons text-center">
+                                    <a href="${window.location.href}/${data.id_resep}" class="btn btn-icon btn-primary btn-icon-only btn-flat">
+                                        <i class="fas fa-circle-info"></i>
+                                    </a>
+                                    <a href="${window.location.href}/${data.id_resep}/edit" class="btn btn-icon btn-warning btn-icon-only btn-flat">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                    <button class="btn btn-danger btn-icon btn-icon-only btn-flat"
+                                        data-action="${window.location.href}/${data.id_obat}}"
+                                        data-toggle="modal"
+                                        data-target="#confirm-delete-modal">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            `;
                         }
                     },
+
 
 
                 ],
