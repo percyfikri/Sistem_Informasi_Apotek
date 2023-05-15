@@ -38,7 +38,8 @@
                                 <h4>Data Penjualan</h4>
                                 <div class="card-header-action">
 
-                                    <a href="{{ url('penjualan/cetak_pdf') }}" class="btn btn-icon btn-primary icon-left"><i class="fas fa-print"></i>
+                                    <a href="{{ url('penjualan/cetak_pdf') }}" class="btn btn-icon btn-primary icon-left">
+                                        <i class="fas fa-print"></i>
                                         Print PDF</a>
 
                                 </div>
