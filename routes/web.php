@@ -10,6 +10,7 @@ use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ResepObatController;
 use App\Http\Controllers\StokObatController;
+use App\Http\Controllers\RacikanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -329,3 +330,10 @@ Route::get('/utilities-subscribe', function () {
 Route::get('/credits', function () {
   return view('pages.credits', ['type_menu' => '']);
 });
+
+
+// Racikan
+Route::resource('racikan', RacikanController::class);
+Route::get('/racikan/autocomplete/apoteker', [RacikanController::class, 'autocompleteApoteker']);
+
+Route::get('show', [RacikanController::class, 'show']);

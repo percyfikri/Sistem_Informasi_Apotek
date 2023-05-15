@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Racikan;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class RacikanController extends Controller
 {
@@ -12,9 +13,12 @@ class RacikanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request->ajax()){
+            return DataTables::of(Racikan::query())->toJson();
+        }
+        return view('pages.racikan.index');
     }
 
     /**
@@ -24,7 +28,7 @@ class RacikanController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.racikan.create');
     }
 
     /**
@@ -35,7 +39,35 @@ class RacikanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_racikan' => 'required|unique:obat,nama_obat',
+            'harga' => 'required',
+            'catatan'=> 'required',
+      
+          ], 
+          [
+            'nama_racikan.required' => 'Nama Racikan wajib diisi',
+            'nama_racikan.unique' => 'Nama Racikan yang diisikan sudah ada dalam database',
+            'harga.required' => 'Nominal harga wajib diisi',
+            'catatan.required' => 'Catatan Racikan wajib diisi',
+          ]);
+          $nama_racikan = $request->nama_racikan;
+          $harga = $request->harga;
+          $catatan = $request->catatan;
+
+          try{
+            $racikan = new Racikan();
+            $racikan->nama_racikan = $nama_racikan;
+            $racikan->harga = $harga;
+            $racikan->catatan = $catatan;
+            $racikan->save();
+            return redirect()->to('racikan')->with('msg-success', 'Berhasil menambahkan data racikan');
+
+          }catch (\Throwable $th){
+            echo $th;
+          }
+          Racikan::create($data);
+          return redirect()->to('racikan')->with('msg-success', 'Berhasil menambahkan data');
     }
 
     /**
@@ -46,7 +78,7 @@ class RacikanController extends Controller
      */
     public function show(Racikan $racikan)
     {
-        //
+        return view('pages.racikan.show', compact('racikan'));
     }
 
     /**
@@ -57,9 +89,8 @@ class RacikanController extends Controller
      */
     public function edit(Racikan $racikan)
     {
-        //
+        return view('pages.racikan.edit', compact('racikan'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -67,9 +98,25 @@ class RacikanController extends Controller
      * @param  \App\Models\Racikan  $racikan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Racikan $racikan)
+    public function update(Request $request,$id)
     {
-        //
+        $request->validate([
+            'nama_racikan' => 'required',
+            'harga' => 'required',
+            'catatan' => 'required',
+          ],[
+            'nama_racikan.required' => 'Nama Racikan wajib diisi',
+            'harga.required' => 'Harga Racikan wajib diisi',
+            'catatan.required' => 'catatan Racikan wajib diisi',
+          ]);
+      
+          $data = [
+            'nama_racikan' => $request->nama_racikan,
+            'harga' => $request->harga,
+            'catatan' =>$request->catatan,
+          ];
+          Racikan::where('id_racikan',$id)->update($data);
+          return redirect()->to('racikan')->with('msg-success', 'Berhasil melakukan update data');
     }
 
     /**
@@ -80,6 +127,7 @@ class RacikanController extends Controller
      */
     public function destroy(Racikan $racikan)
     {
-        //
+        $racikan->delete();
+        return redirect()->route('racikan.index')->with('msg-success', 'Berhasil menghapus data racikan ' . $racikan->nama_racikan);
     }
 }
