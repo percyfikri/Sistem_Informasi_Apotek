@@ -38,8 +38,8 @@
                                 <h4>Data Penjualan</h4>
                                 <div class="card-header-action">
 
-                                    {{-- <a href="{{ route('pemeriksaan.create') }}" class="btn btn-icon btn-primary icon-left"><i class="fas fa-plus"></i>
-                                        Tambah</a> --}}
+                                    <a href="{{ url('penjualan/cetak_pdf') }}" class="btn btn-icon btn-primary icon-left"><i class="fas fa-print"></i>
+                                        Print PDF</a>
 
                                 </div>
                             </div>
@@ -118,10 +118,6 @@
                                                     <a
                                                         href="${window.location.href}/${data.id_penjualan}" class="btn btn-icon icon-left btn-primary"><i
                                                             class="fas fa-circle-info"></i>Detail</a>
-                                                    <button class="btn btn-success btn-icon icon-left"
-                                data-action="${window.location.href}/${data.id_penjualan}}}" data-toggle="modal"
-                                data-target="#confirm-delete-modal"> <i class="fas fa-print"></i>
-                                Print</button>
                                                 </div>`
                         }
                     },

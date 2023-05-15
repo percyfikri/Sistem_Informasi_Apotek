@@ -38,6 +38,8 @@
                                 <h4>Data Pengguna</h4>
                                 <div class="card-header-action">
 
+                                    <a href="{{ url('pengguna/cetak_pdf') }}" class="btn btn-icon btn-primary icon-left"><i class="fas fa-print"></i>
+                                        Print PDF</a>
                                     <a href="{{ route('pengguna.create') }}" class="btn btn-icon btn-primary icon-left"><i
                                             class="fas fa-plus"></i>
                                         Tambah</a>

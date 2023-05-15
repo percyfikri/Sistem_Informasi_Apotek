@@ -6,6 +6,8 @@ use App\Models\Pengguna;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
+use PDF;
+
 class PenggunaController extends Controller
 {
     /**
@@ -189,5 +191,12 @@ class PenggunaController extends Controller
     {
         $pengguna->delete();
         return redirect()->route('pengguna.index')->with('msg-success', 'Berhasil menghapus data pengguna ' . $pengguna->nama);
+    }
+
+    public function cetak_pdf()
+    {
+        $pengguna = Pengguna::all();
+        $pdf = PDF::loadview('pages.pengguna.pengguna_pdf',['pengguna'=>$pengguna]);
+        return $pdf->stream();
     }
 }
