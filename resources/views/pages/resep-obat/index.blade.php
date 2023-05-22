@@ -55,7 +55,6 @@
                                                 <th>Customer</th>
                                                 <th>Dokter</th>
                                                 <th>Status</th>
-                                                <th>Deskripsi</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -118,26 +117,25 @@
                         name: 'status'
                     },
                     {
-                        data: 'deskripsi',
-                        name: 'deskripsi'
-                    },
-                    {
                         data: null,
                         orderable: false,
                         render: function(data, type, row) {
                             return `
-                                <div class="buttons text-center">
+                                <div class="buttons text-center d-flex mr-2">
                                     <a href="${window.location.href}/${data.id_resep}" class="btn btn-icon btn-primary btn-icon-only btn-flat">
                                         <i class="fas fa-circle-info"></i>
+                                        <span>Detail</span>
                                     </a>
                                     <a href="${window.location.href}/${data.id_resep}/edit" class="btn btn-icon btn-warning btn-icon-only btn-flat">
                                         <i class="fas fa-pencil-alt"></i>
+                                        <span>Edit</span>
                                     </a>
                                     <button class="btn btn-danger btn-icon btn-icon-only btn-flat"
                                         data-action="${window.location.href}/${data.id_obat}}"
                                         data-toggle="modal"
                                         data-target="#confirm-delete-modal">
                                         <i class="fas fa-trash"></i>
+                                        <span>Delete</span>
                                     </button>
                                 </div>
                             `;

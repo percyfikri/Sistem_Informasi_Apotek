@@ -38,43 +38,55 @@
                         <h4>Tambah Resep Obat</h4>
 
                     </div>
-                    <form action="{{ route('obat.store') }}" method="POST">
+                    <form action="{{ route('resep-obat.store') }}" method="POST">
                         <div class="card-body">
                             @csrf
                             <div class="form-group">
                                 <label>Nama Resep</label>
-                                <input type="text" name="nama_obat"
-                                    class="form-control @if (old('nama_obat')) is-valid @endif
-                                @error('nama_obat') is-invalid @enderror"
-                                    value="{{ old('nama_obat') }}">
+                                <input type="text" name="nama_resep"
+                                    class="form-control @if (old('nama_resep')) is-valid @endif
+                                @error('nama_resep') is-invalid @enderror"
+                                    value="{{ old('nama_resep') }}">
                             </div>
                             <div class="form-group">
-                                <label>Customer</label>
-                                <input type="text" name="nama_obat"
-                                    class="form-control @if (old('nama_obat')) is-valid @endif
-                                @error('nama_obat') is-invalid @enderror"
-                                    value="{{ old('nama_obat') }}">
+                                <label for="id_customer">Nama Customer</label>
+                                <select class="form-control" name="id_customer" id="id_customer">
+                                    @foreach ($customers as $customer)
+                                        <option value="{{$customer->id_pengguna}}">{{$customer->nama}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label>Dokter</label>
-                                <input type="text" name="jenis_obat"
-                                    class="form-control @if (old('jenis_obat')) is-valid @endif
-                                @error('jenis_obat') is-invalid @enderror"
-                                    value="{{ old('jenis_obat') }}">
+                                <label for="id_dokter">Nama Dokter</label>
+                                <select class="form-control" name="id_dokter" id="id_dokter">
+                                    @foreach ($dokters as $dokter)
+                                        <option value="{{$dokter->id_pengguna}}">{{$dokter->nama}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Status</label>
-                                <input type="text" name="jenis_obat"
-                                    class="form-control @if (old('jenis_obat')) is-valid @endif
-                                @error('jenis_obat') is-invalid @enderror"
-                                    value="{{ old('jenis_obat') }}">
-                            </div>
+                                <select class="form-control" name="status">
+                                    <option value="racikan" @if (old('status') == 'racikan') selected @endif>Racikan</option>
+                                    <option value="non racikan" @if (old('status') == 'non racikan') selected @endif>Non-Racikan</option>
+                                </select>
+                            </div>                            
                             <div class="form-group">
                                 <label>Deskripsi</label>
-                                <input type="text" name="jenis_obat"
-                                    class="form-control @if (old('jenis_obat')) is-valid @endif
-                                @error('jenis_obat') is-invalid @enderror"
-                                    value="{{ old('jenis_obat') }}">
+                                <input type="text" name="deskripsi"
+                                    class="form-control @if (old('deskripsi')) is-valid @endif
+                                @error('deskripsi') is-invalid @enderror"
+                                    value="{{ old('deskripsi') }}">
+                            </div>
+                            <div class="form-group">
+                                <label>Tanggal</label>
+                                <div class="input-group date" id="tanggal-picker" data-target-input="nearest">
+                                    <input type="date" name="tanggal" class="form-control datetimepicker-input"
+                                        data-target="#tanggal-picker" value="{{ old('tanggal') }}" />
+                                    <div class="input-group-append" data-target="#tanggal-picker" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="card-footer text-right">

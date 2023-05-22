@@ -19,7 +19,7 @@ return new class extends Migration
       $table->foreign('id_dokter')->references('id_pengguna')->on('pengguna')->onDelete('cascade');
       $table->unsignedInteger('id_customer');
       $table->foreign('id_customer')->references('id_pengguna')->on('pengguna')->onDelete('cascade');
-      $table->string('nama_resep')->index();
+      $table->string('nama_resep');
       $table->string('deskripsi');
       $table->date('tanggal');
       $table->string('status');

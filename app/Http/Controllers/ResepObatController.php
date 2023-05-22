@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pengguna;
 use App\Models\ResepObat;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -28,7 +29,10 @@ class ResepObatController extends Controller
      */
     public function create()
     {
-        return view('pages.resep-obat.create');
+        $resepObat = ResepObat::all();
+        $dokters = Pengguna::where('status', 'dokter')->get();
+        $customers = Pengguna::where('status', 'customer')->get();
+        return view('pages.resep-obat.create', compact(['dokters', 'customers', 'resepObat']));
     }
 
     /**
@@ -39,22 +43,39 @@ class ResepObatController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama_resep' => 'required|unique:obat,nama_obat',
-            'jenis_obat' => 'required',
-      
-          ], 
-          [
-            'nama_obat.required' => 'Nama Obat wajib diisi',
-            'nama_obat.unique' => 'Nama Obat yang diisikan sudah ada dalam database',
-            'jenis_obat.required' => 'Jenis Obat wajib diisi',
-          ]);
-          $data = [
-            'nama_obat' => $request->nama_obat,
-            'jenis_obat' => $request->jenis_obat,
-          ];
-          ResepObat::create($data);
-          return redirect()->to('obat')->with('msg-success', 'Berhasil menambahkan data');
+        $request->validate(
+            [
+                'nama_resep' => 'required|unique:obat,nama_obat',
+                'id_customer' => 'required',
+                'id_dokter' => 'required',
+                'status' => 'required',
+                'deskripsi' => 'required',
+
+            ],
+            [
+                'nama_resep.required' => 'Nama Resep wajib diisi',
+                'id_customer.required' => 'Nama Customer wajib diisi',
+                'id_dokter.required' => 'Nama Dokter wajib diisi',
+                'status.required' => 'Status wajib diisi',
+                'deskripsi.required' => 'Mohon diisi terlebih dahulu pada kolom Deskripsi',
+            ]
+        );
+        $resepObat = new ResepObat;
+        $resepObat->nama_resep = $request->get('nama_resep');
+        $resepObat->deskripsi = $request->get('deskripsi');
+        $resepObat->tanggal = $request->get('tanggal');
+        $resepObat->status = $request->get('status');
+
+        $customer = new Pengguna;
+        $customer->id_pengguna = $request->get('id_customer');
+
+        $dokter = new Pengguna;
+        $dokter->id_pengguna = $request->get('id_dokter');
+
+        $resepObat->customer()->associate($customer);
+        $resepObat->dokter()->associate($dokter);
+        $resepObat->save();
+        return redirect()->route('resep-obat.index')->with('msg-success', 'Berhasil menambahkan data');
     }
 
     /**

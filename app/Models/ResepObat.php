@@ -37,4 +37,8 @@ class ResepObat extends Model
   {
     return $this->belongsTo(Pengguna::class, 'id_customer', 'id_pengguna');
   }
+  public function pengguna()
+  {
+    return $this->belongsTo(Pengguna::class, 'id_pengguna');
+  }
 }
