@@ -117,7 +117,7 @@
                         render: function(data, type, row) {
                             return `<div class="buttons text-center">
                                                     <a
-                                                        href="${window.location.href}/${data.id_penjualan}" class="btn btn-icon icon-left btn-primary"><i
+                                                        href="detail_penjualan/${data.id_penjualan}" class="btn btn-icon icon-left btn-primary"><i
                                                             class="fas fa-circle-info"></i>Detail</a>
                                                 </div>`
                         }
