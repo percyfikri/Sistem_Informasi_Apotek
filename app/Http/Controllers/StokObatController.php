@@ -15,13 +15,12 @@ class StokObatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request,$obat)
+    public function index(Request $request,Obat $obat)
     {
-        dd($obat);
         if ($request->ajax()) {
             return DataTables::of(StokObat::query())->toJson();
           }
-          return view('pages.obat.index');
+          return view('pages.obat.index',compact('obat'));
     }
 
     /**
@@ -29,10 +28,13 @@ class StokObatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() : View
+    public function create($id_obat)
     {
-        $obat = Obat::all(); //mendapatkan data dari tabel obat
-        return view('pages.stok_obat.create' , ['obat' => $obat]);
+        // $obat = Obat::all(); //mendapatkan data dari tabel obat
+        // return view('pages.stok_obat.create' , ['obat' => $obat]);
+        $stokObat = StokObat::with('obat')->where('id_obat',$id_obat)->first();
+        // $obat = Obat::all(); //mendapatkan data dari tabel obat
+        return view('pages.stok_obat.create', compact('stokObat'));
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Obat;
 use App\Models\Pengguna;
+use App\Models\StokObat;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Contracts\View\View;
@@ -22,7 +23,7 @@ class ObatController extends Controller
   public function index(Request $request)
   {
     if ($request->ajax()) {
-      return DataTables::of(Obat::query())->toJson();
+      return DataTables::of(Obat::with('stok_obat')->withSum('stok_obat', 'kuantitas')->get())->toJson();
     }
     return view('pages.obat.index');
   }

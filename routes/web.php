@@ -88,7 +88,6 @@ Route::get('/dashboard-ecommerce-dashboard', function () {
 // Obat
 Route::resource('obat', ObatController::class);
 
-Route::get('show', [ObatController::class, 'show']);
 
 // Stok Obat
 Route::resource('stok_obat', StokObatController::class)->except('destroy');

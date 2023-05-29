@@ -39,8 +39,11 @@
                                 <div class="card-header-action">
 
                                     <a href="{{ route('stok_obat.create') }}" class="btn btn-icon btn-primary icon-left"><i
+                                        class="fas fa-plus"></i>
+                                    Tambah</a>
+                                    <a href="{{ route('stok_obat.create',$obat->id_obat) }}" class="btn btn-icon btn-primary icon-left"><i
                                             class="fas fa-plus"></i>
-                                        Tambah</a>
+                                        Tambah Stok</a>
 
                                 </div>
                             </div>

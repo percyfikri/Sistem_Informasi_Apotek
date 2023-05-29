@@ -43,11 +43,8 @@
                             @csrf
                             <div class="form-group">
                                 <label for="id_obat">Nama Obat</label>
-                                <select class="form-control" name="id_obat" id="id_obat">
-                                    @foreach ($obat as $obt)
-                                        <option value="{{$obt->id_obat}}">{{$obt->nama_obat}}</option>
-                                    @endforeach
-                                </select>
+                                <input readonly type="text" name="id_obat" class="form-control" value="{{ $stokObat->id_obat }}">
+                                <input readonly type="text" name="nama obat" class="form-control" value="{{ $stokObat->obat->nama_obat }}">
                             </div>
                             <div class="form-group">
                                 <label>Satuan</label>

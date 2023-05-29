@@ -19,8 +19,7 @@ class Obat extends Model
     'nama_obat',
     'jenis_obat',
   ];
-
-  public function obat()
+  public function stok_obat()
   {
     return $this->hasMany(StokObat::class, 'id_obat');
   }

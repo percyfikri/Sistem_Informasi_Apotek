@@ -54,6 +54,7 @@
                                                 <th>No</th>
                                                 <th>Nama Obat</th>
                                                 <th>Jenis Obat</th>
+                                                <th>Stok Obat</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -102,6 +103,10 @@
                     {
                         data: 'jenis_obat',
                         name: 'jenis_obat'
+                    },
+                    {
+                        data: 'stok_obat_sum_kuantitas',
+                        name: 'stok_obat.kuantitas'
                     },
                     {
                         data: null,
