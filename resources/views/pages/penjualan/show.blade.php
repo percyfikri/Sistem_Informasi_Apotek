@@ -22,6 +22,13 @@
                 <div class="row mt-sm-4">
                     <div class="col-12 col-md-12">
                         <div class="card">
+                            <div class="card-header">
+                                <div class="card-header-action">
+                                    <a href="{{ route('detail_penjualan.show', $penjualan->id_penjualan) }}" class="btn btn-icon btn-success icon-left"><i
+                                        class="fas fa-pills"></i>
+                                    Detail Penjualan</a>
+                                </div>
+                            </div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="form-group col-12">

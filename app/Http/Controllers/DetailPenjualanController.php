@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\DetailPenjualan;
+use App\Models\Penjualan;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class DetailPenjualanController extends Controller
 {
@@ -12,9 +15,13 @@ class DetailPenjualanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, $id_penjualan)
     {
-        //
+        $penjualan = Penjualan::where('id_penjualan', $id_penjualan)->first();
+        if ($request->ajax()) {
+            return DataTables::of(DetailPenjualan::with('penjualan', 'resep', 'obat')->where('id_penjualan',$id_penjualan)->get())->toJson();
+        }
+        return view('pages.detail_penjualan.index', compact('penjualan'));
     }
 
     /**
@@ -44,9 +51,13 @@ class DetailPenjualanController extends Controller
      * @param  \App\Models\DetailPenjualan  $detailPenjualan
      * @return \Illuminate\Http\Response
      */
-    public function show(DetailPenjualan $detailPenjualan)
+    public function show(Request $request, $id_penjualan)
     {
-        //
+        $penjualan = Penjualan::where('id_penjualan', $id_penjualan)->first();
+        if ($request->ajax()) {
+            return DataTables::of(DetailPenjualan::with('penjualan', 'resep', 'obat')->where('id_penjualan', $id_penjualan)->get())->toJson();
+        }
+        return view('pages.detail_penjualan.index', compact('penjualan'));
     }
 
     /**

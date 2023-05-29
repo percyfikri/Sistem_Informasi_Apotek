@@ -8,6 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\DetailPenjualanController;
 use App\Http\Controllers\ResepObatController;
 use App\Http\Controllers\StokObatController;
 use App\Http\Controllers\RacikanController;
@@ -56,9 +57,13 @@ Route::resource('pengguna', PenggunaController::class);
 // Penjualan
 Route::resource('penjualan', PenjualanController::class);
 
+// Detail Penjualan
+Route::resource('detail_penjualan', DetailPenjualanController::class);
+
+// Route::delete('detail-penjualan/{id_penjualan}/{satuan}',[DetailPenjualanController::class,'destroy']);
 
 // Laporan Penjualan
-Route::resource('laporan-penjualan', LaporanPenjualanController::class);
+// Route::resource('laporan-penjualan', LaporanPenjualanController::class);
 
 
 // Jasa

@@ -17,15 +17,16 @@ class DetailPenjualan extends Model
     'id_obat',
     'kuantitas',
     'satuan',
-    'harga'
+    'subtotal',
   ];
+
   public function penjualan()
   {
     return $this->belongsTo(Penjualan::class, 'id_penjualan');
   }
   public function resep()
   {
-    return $this->belongsTo(Obat::class, 'id_resep');
+    return $this->belongsTo(ResepObat::class, 'id_resep');
   }
   public function obat()
   {
