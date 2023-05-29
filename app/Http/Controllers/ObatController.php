@@ -10,6 +10,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use PDF;
 
 class ObatController extends Controller
 {
@@ -131,4 +132,10 @@ class ObatController extends Controller
     }
     return response()->json($dataApoteker);
   }
+  public function cetak_pdf()
+    {
+        $obat = Obat::all();
+        $pdf = PDF::loadview('pages.obat.obat_pdf',['obat'=>$obat]);
+        return $pdf->stream();
+    }
 }
