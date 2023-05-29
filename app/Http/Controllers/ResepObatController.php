@@ -97,9 +97,17 @@ class ResepObatController extends Controller
      * @param  \App\Models\ResepObat  $resepObat
      * @return \Illuminate\Http\Response
      */
+
+    // public function edit(ResepObat $resepObat)
+    // {
+    //     return view('pages.resep-obat.edit', ['resep' => $resepObat]);
+    // }
+
     public function edit(ResepObat $resepObat)
     {
-        //
+        $dokters = Pengguna::where('status', 'dokter')->get();
+        $customers = Pengguna::where('status', 'customer')->get();
+        return view('pages.resep-obat.edit', compact('resepObat', 'dokters', 'customers'));
     }
 
     /**
@@ -111,7 +119,41 @@ class ResepObatController extends Controller
      */
     public function update(Request $request, ResepObat $resepObat)
     {
-        //
+        $request->validate(
+            [
+                'nama_resep' => 'required',
+                'id_customer' => 'required',
+                'id_dokter' => 'required',
+                'status' => 'required',
+                'deskripsi' => 'required',
+
+            ],
+            [
+                'id_customer.required' => 'Nama Customer wajib diisi',
+                'id_dokter.required' => 'Nama Dokter wajib diisi',
+                'status.required' => 'Status wajib diisi',
+                'deskripsi.required' => 'Mohon diisi terlebih dahulu pada kolom Deskripsi',
+            ]
+        );
+        // $resepObat = ResepObat::with('resep_obat')->where('id_resep',$request->get('id_resep'))->first();
+        $resepObat->nama_resep = $request->get('nama_resep');
+        $resepObat->deskripsi = $request->get('deskripsi');
+        // $resepObat->tanggal = $request->get('tanggal');
+        $resepObat->status = $request->get('status'); 
+
+        $customer = Pengguna::find($request->get('id_customer'));
+        $dokter = Pengguna::find($request->get('id_dokter'));
+
+        // Periksa apakah customer dan dokter ditemukan
+        if (!$customer || !$dokter) 
+        {
+        return redirect()->back()->with('msg-error', 'Customer atau Dokter tidak ditemukan');
+        }
+
+        $resepObat->customer()->associate($customer);
+        $resepObat->dokter()->associate($dokter);
+        $resepObat->save();
+        return redirect()->route('resep-obat.index')->with('msg-success', 'Berhasil Mengupdate data');
     }
 
     /**
@@ -120,8 +162,11 @@ class ResepObatController extends Controller
      * @param  \App\Models\ResepObat  $resepObat
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ResepObat $resepObat)
+    public function destroy($id_resep)
     {
-        //
+        //fungsi eloquent untuk menghapus data
+        ResepObat::find($id_resep)->delete();
+        return redirect()->route('resep-obat.index')
+            ->with('msg-success', 'Data Berhasil Dihapus');
     }
 }

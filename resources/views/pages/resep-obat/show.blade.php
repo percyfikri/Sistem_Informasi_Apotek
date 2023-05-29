@@ -13,8 +13,8 @@
                 <h1>Detail Resep Obat</h1>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="{{ url('dashboard-general-dashboard') }}">Dashboard</a></div>
-                    <div class="breadcrumb-item active"><a href="{{ route('obat.index') }}">Obat</a></div>
-                    <div class="breadcrumb-item">Detail Obat</div>
+                    <div class="breadcrumb-item active"><a href="{{ route('resep-obat.index') }}">Resep Obat</a></div>
+                    <div class="breadcrumb-item">Detail Resep Obat</div>
                 </div>
             </div>
             <div class="section-body">
@@ -26,13 +26,13 @@
                                     {{-- <a href="{{ route('stok_obat.show', $resepObat->id_obat) }}" class="btn btn-icon btn-success icon-left"><i
                                         class="fas fa-pills"></i>
                                     Stok Obat</a>     --}}
-                                    <a href="{{ route('obat.edit', $resepObat->id_resep) }}" class="btn btn-icon btn-warning icon-left"><i
+                                    <a href="{{ route('resep-obat.edit', $resepObat->id_resep) }}" class="btn btn-icon btn-warning icon-left"><i
                                             class="far fa-edit"></i>
                                         Edit</a>
-                                    <button class="btn btn-danger btn-icon icon-left"
-                                        data-action="{{ route('obat.destroy', $resepObat->id_resep) }}" data-toggle="modal"
+                                    {{-- <button class="btn btn-danger btn-icon icon-left"
+                                        data-action="{{ route('resep-obat.destroy', $resepObat->id_resep) }}" data-toggle="modal"
                                         data-target="#confirm-delete-modal"> <i class="fas fa-trash"></i>
-                                        Delete</button>
+                                        Delete</button> --}}
                                 </div>
                             </div>
                                 <div class="card-body">
@@ -68,6 +68,13 @@
                                                 value="{{ $resepObat->status }}">
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="form-group col-12">
+                                            <label>Tanggal</label>
+                                            <input readonly type="text" class="form-control datepicker"
+                                                value="{{ \Carbon\Carbon::parse($resepObat->tanggal)->format('d-m-Y') }}">
+                                        </div>
+                                    </div>                                    
                                     <div class="row">
                                         <div class="form-group col-12">
                                             <label>Deskripsi</label>
