@@ -46,12 +46,11 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>nama resep</th>
-                                                <th>nama obat</th>
+                                                <th>Nama Resep</th>
+                                                <th>Nama Obat</th>
                                                 <th>Kuantitas</th>
                                                 <th>Satuan</th>
                                                 <th>Subtotal</th>
-
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
