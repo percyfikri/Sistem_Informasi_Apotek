@@ -51,6 +51,9 @@ Route::get('/pengguna/cetak_pdf', [PenggunaController::class, 'cetak_pdf']);
 // Route Laporan Data Obat
 Route::get('obat/cetak_pdf', [ObatController::class, 'cetak_pdf']);
 
+// Route Tambah Obat
+Route::get('stok_obat/tambah', [StokObatController::class, 'tambah']);
+
 // Kasir
 Route::resource('kasir', KasirController::class)->only(['index', 'store']);
 // Pengguna
@@ -90,8 +93,10 @@ Route::resource('obat', ObatController::class);
 
 
 // Stok Obat
-Route::resource('stok_obat', StokObatController::class)->except('destroy');
 Route::delete('stok_obat/{id_obat}/{satuan}',[StokObatController::class,'destroy']);
+Route::resource('stok_obat', StokObatController::class)->except(['destroy','create']);
+Route::get('stok_obat/${id_obat}/create', [StokObatController::class,'create'])->name('stok_obat.create');
+
 //Resep Obat
 Route::resource('resep-obat', ResepObatController::class);
 

@@ -38,12 +38,12 @@
                                 <h4>Data Stok Obat</h4>
                                 <div class="card-header-action">
 
-                                    <a href="{{ route('stok_obat.create') }}" class="btn btn-icon btn-primary icon-left"><i
+                                    <a href="{{ url('stok_obat/tambah') }}" class="btn btn-icon btn-primary icon-left"><i
                                         class="fas fa-plus"></i>
                                     Tambah</a>
                                     <a href="{{ route('stok_obat.create',$obat->id_obat) }}" class="btn btn-icon btn-primary icon-left"><i
                                             class="fas fa-plus"></i>
-                                        Tambah Stok</a>
+                                    Tambah Stok</a>
 
                                 </div>
                             </div>

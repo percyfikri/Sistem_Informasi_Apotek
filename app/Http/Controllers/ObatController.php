@@ -69,8 +69,9 @@ class ObatController extends Controller
    * @param  \App\Models\Obat  $obat
    * @return \Illuminate\Http\Response
    */
-  public function show(Obat $obat)
+  public function show($id_obat)
   {
+    $obat = Obat::with('stok_obat')->where('id_obat', $id_obat)->first();
     return view('pages.obat.show', compact('obat'));
   }
 
