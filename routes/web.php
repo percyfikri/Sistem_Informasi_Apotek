@@ -71,8 +71,10 @@ Route::resource('detail_penjualan', DetailPenjualanController::class);
 Route::resource('jasa', JasaController::class);
 Route::prefix('autocomplete')->controller(AutocompleteController::class)->group(function () {
   Route::get('apoteker', 'getApoteker')->name('autocomplete.apoteker');
+  Route::get('customer', 'getCustomer')->name('autocomplete.customer');
   Route::get('obat', 'getObat')->name('autocomplete.obat');
-})->name('autocomplete');
+  Route::get('jasa', 'getJasa')->name('autocomplete.jasa');
+});
 
 // Dashboard
 Route::get('/dashboard-general-dashboard', function () {

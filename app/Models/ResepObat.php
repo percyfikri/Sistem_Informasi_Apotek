@@ -37,9 +37,10 @@ class ResepObat extends Model
   {
     return $this->belongsTo(Pengguna::class, 'id_customer', 'id_pengguna');
   }
-  public function pengguna()
+
+  public function detail_resep()
   {
-    return $this->belongsTo(Pengguna::class, 'id_pengguna');
+    return $this->hasMany(DetailResep::class, 'id_resep');
   }
 
   public function detailResep()

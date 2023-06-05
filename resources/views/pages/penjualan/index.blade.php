@@ -105,6 +105,7 @@
                     },
                     {
                         data: 'jasa.nama_jasa',
+                        defaultContent: '',
                         name: 'jasa.nama_jasa'
                     },
                     {

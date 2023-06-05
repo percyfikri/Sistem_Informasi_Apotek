@@ -20,16 +20,16 @@
             </div>
             <div class="section-body">
                 @if (session('msg-success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
-                    <div class="alert-body">
-                        <div class="alert-title">Sukses</div>
-                        {{ session('msg-success') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
+                        <div class="alert-body">
+                            <div class="alert-title">Sukses</div>
+                            {{ session('msg-success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
                 @endif
                 <div class="row">
                     <div class="col-12">
@@ -143,3 +143,4 @@
         });
     </script>
 @endpush
+@stack('pscripts')

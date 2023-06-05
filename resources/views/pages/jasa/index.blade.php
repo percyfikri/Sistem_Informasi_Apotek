@@ -5,6 +5,7 @@
 @push('style')
     <link rel="stylesheet" href="{{ asset('library/datatables/media/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('library/datatables/media/css/select.bootstrap4.min.css') }}">
+    {{-- <link href="https://cdn.datatables.net/select/1.6.2/css/select.bootstrap4.min.css" rel="stylesheet" /> --}}
 @endpush
 
 @section('main')
@@ -46,10 +47,11 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table-striped table" id="jasa-table">
+                                    <table class="table-striped table display" style="width:100%" id="jasa-table">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
+                                                {{-- <th></th> --}}
+                                                {{-- <th>#</th> --}}
                                                 <th>Nama</th>
                                                 <th>Tingkatan</th>
                                                 <th>Harga</th>
@@ -59,6 +61,13 @@
                                         <tbody>
 
                                         </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Nama</th>
+                                                <th>Tingkatan</th>
+                                                <th>Harga</th>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
@@ -76,24 +85,48 @@
     <script src="{{ asset('library/datatables/media/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('library/datatables/media/js/select.bootstrap4.min.js') }}"></script>
 
+    {{-- <script src="https://cdn.datatables.net/select/1.6.2/js/dataTables.select.min.js"></script> --}}
     <script src="{{ asset('js/page/modules-datatables.js') }}"></script>
 
     <script>
         $(function() {
-            $('#jasa-table').DataTable({
+            $('#jasa-table tfoot th').each(function() {
+                var title = $(this).text();
+                $(this).html('<input type="text" class="form-control" placeholder="Search ' + title +
+                    '" />');
+            });
+
+
+            const table = $('#jasa-table').DataTable({
                 processing: true,
                 serverSide: true,
                 paging: true,
                 orderClasses: false,
                 deferRender: true,
+
+                select: {
+                    style: 'multi',
+                },
                 order: [
-                    [1, 'asc']
+                    [2, 'asc']
                 ],
+
                 ajax: '{!! route('jasa.index') !!}',
-                columns: [{
-                        data: null,
-                        orderable: false
-                    },
+                columns: [
+                    // {
+                    //       data: null,
+                    //       defaultContent: '',
+                    //       orderable: false,
+                    //       className: 'select-checkbox',
+                    //   },
+                    //   {
+                    //       data: 'id_jasa',
+                    //       // name: 'id_jasa'
+
+                    //       orderable: false,
+                    //       // visible: false,
+                    //       searchable: false,
+                    //   },
                     {
                         data: 'nama_jasa',
                         name: 'nama_jasa'
@@ -109,6 +142,7 @@
                     {
                         data: null,
                         orderable: false,
+                        searchable: false,
                         render: function(data, type, row) {
                             return `<div class="buttons text-center">
                                                     <a
@@ -127,10 +161,23 @@
 
 
                 ],
-                rowCallback: function(row, data, index) {
-                    $('td:eq(0)', row).html(index + 1);
-                },
 
+                // rowCallback: function(row, data, index) {
+                //     $('td:eq(0)', row).html(index + 1);
+                // },
+
+            });
+
+            // Apply the search
+            table.columns().every(function() {
+                var that = this;
+                $("input", this.footer()).on("keyup change clear", function() {
+                    if (that.search() !== this.value) {
+                        that
+                            .search(this.value)
+                            .draw();
+                    }
+                });
             });
         });
     </script>

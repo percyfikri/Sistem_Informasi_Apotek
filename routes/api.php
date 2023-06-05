@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ObatController;
+use App\Http\Controllers\PenggunaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,5 +17,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+  return $request->user();
 });
+
+Route::get('/obat/{obat}', [ObatController::class, 'getObat'])->name('obat.get');
+Route::get('/pengguna/customer', [PenggunaController::class, 'getCustomer'])->name('pengguna.get.customer');
+Route::get('/pengguna/dokter', [PenggunaController::class, 'getDokter'])->name('pengguna.get.dokter');
