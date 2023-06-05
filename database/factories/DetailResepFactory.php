@@ -24,6 +24,7 @@ class DetailResepFactory extends Factory
             'id_racikan' => Racikan::inRandomOrder()->first()->id_racikan,
             'kuantitas' => fake()->randomNumber(),
             'satuan' => fake()->randomNumber(),
+            'harga' => fake()->randomNumber(),
         ];
     }
 }

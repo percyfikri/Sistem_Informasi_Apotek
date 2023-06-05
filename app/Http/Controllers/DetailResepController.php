@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\DetailResep;
+use App\Models\ResepObat;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class DetailResepController extends Controller
 {
@@ -14,7 +16,11 @@ class DetailResepController extends Controller
      */
     public function index()
     {
-        //
+        // $resepObat = ResepObat::where('id_resep', $id_resep)->first();
+        // if ($request->ajax()) {
+        //     return DataTables::of(DetailResep::with('resep', 'obat', 'racikan')->where('id_resep',$id_resep)->get())->toJson();
+        // }
+        // return view('pages.detail_resep.index', compact('resepObat'));
     }
 
     /**
@@ -44,9 +50,13 @@ class DetailResepController extends Controller
      * @param  \App\Models\DetailResep  $detailResep
      * @return \Illuminate\Http\Response
      */
-    public function show(DetailResep $detailResep)
+    public function show(Request $request, $id_resep)
     {
-        //
+        $resepObat = ResepObat::where('id_resep', $id_resep)->first();
+        if ($request->ajax()) {
+            return DataTables::of(DetailResep::with('resep', 'obat', 'racikan')->where('id_resep', $id_resep)->get())->toJson();
+        }
+        return view('pages.detail-resep.index', compact('resepObat'));
     }
 
     /**

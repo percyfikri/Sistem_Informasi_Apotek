@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Halaman Data Obat')
+@section('title', 'Halaman Data Detail Resep')
 
 @push('style')
     <link rel="stylesheet" href="{{ asset('library/datatables/media/css/dataTables.bootstrap4.min.css') }}">
@@ -11,11 +11,13 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Resep Obat</h1>
+                <h1>Detail Resep Obat</h1>
 
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="{{ url('dashboard-general-dashboard') }}">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="{{ route('resep-obat.index') }}">Resep Obat</a></div>
+                    <div class="breadcrumb-item active"><a href="{{ route('resep-obat.index') }}">Resep Obat</a></div>
+                    <div class="breadcrumb-item"><a href="{{ route('resep-obat.index') }}">Detail Resep Obat</a></div>
+                    <div class="breadcrumb-item">Detail Resep Obat</div>
                 </div>
             </div>
             <div class="section-body">
@@ -38,24 +40,20 @@
                                 <h4>Data Resep Obat</h4>
                                 <div class="card-header-action">
 
-                                    <a href="{{ route('resep-obat.create') }}" class="btn btn-icon btn-primary icon-left"><i
-                                            class="fas fa-plus"></i>
-                                        Tambah</a>
-
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table-striped table" id="users-table">
+                                    <table class="table-striped table" id="detail-resep-table">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Tanggal</th>
                                                 <th>Nama Resep</th>
-                                                <th>Customer</th>
-                                                <th>Dokter</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
+                                                <th>Nama Obat</th>
+                                                <th>Nama Racikan</th>
+                                                <th>Kuantitas</th>
+                                                <th>Satuan</th>
+                                                <th>Harga</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -69,6 +67,7 @@
                 </div>
             </div>
         </section>
+        {{-- {{dd($penjualan)}} --}}
         <x-modal.confirm-delete />
     </div>
 @endsection
@@ -82,7 +81,7 @@
 
     <script>
         $(function() {
-            $('#users-table').DataTable({
+            $('#detail-resep-table').DataTable({
                 processing: true,
                 serverSide: true,
                 paging: true,
@@ -91,47 +90,42 @@
                 order: [
                     [1, 'asc']
                 ],
-                ajax: '{!! route('resep-obat.index') !!}',
+                ajax: '{!! route('detail-resep.show', ['detail_resep' => $resepObat->id_resep]) !!}',
                 columns: [{
                         data: null,
                         orderable: false
                     },
                     {
-                        data: 'tanggal',
-                        name: 'tanggal'
+                        data: 'resep.nama_resep',
+                        name: 'resep.nama_resep'
                     },
                     {
-                        data: 'nama_resep',
-                        name: 'nama_resep'
+                        data: 'obat.nama_obat',
+                        name: 'obat.nama_obat'
                     },
                     {
-                        data: 'customer.nama',
-                        name: 'customer.nama'
+                        data: 'racikan.nama_racikan',
+                        name: 'racikan.nama_racikan'
                     },
                     {
-                        data: 'dokter.nama',
-                        name: 'dokter.nama'
+                        data: 'kuantitas',
+                        name: 'kuantitas'
                     },
                     {
-                        data: 'status',
-                        name: 'status'
+                        data: 'satuan',
+                        name: 'satuan'
                     },
                     {
-                        data: null,
-                        orderable: false,
-                        render: function(data, type, row) {
-                            return `
-                            <div class="buttons text-center">
-                                <a href="${window.location.href}/${data.id_resep}" class="btn btn-primary d-block mb-2"><i class="fas fa-circle-info"></i> Detail</a>
-
-                                <a href="${window.location.href}/${data.id_resep}/edit" class="btn btn-warning d-block mb-2"><i class="fas fa-pencil-alt"></i> Edit</a>
-                                                            
-                                <button class="btn btn-danger d-block mb-2" data-action="${window.location.href}/${data.id_resep}" data-toggle="modal" data-target="#confirm-delete-modal"><i class="fas fa-trash"></i> Delete</button>
-                            </div>`;
-;
-                        }
+                        data: 'harga',
+                        name: 'harga'
                     },
-
+                    // {
+                    //     data: null,
+                    //     orderable: false,
+                    //     render: function(data, type, row) {
+                    //         return `<div class="buttons text-center"></div>`
+                    //     }
+                    // },
 
 
                 ],

@@ -9,6 +9,7 @@ use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\DetailPenjualanController;
+use App\Http\Controllers\DetailResepController;
 use App\Http\Controllers\ResepObatController;
 use App\Http\Controllers\StokObatController;
 use App\Http\Controllers\RacikanController;
@@ -91,9 +92,12 @@ Route::delete('stok_obat/{id_obat}/{satuan}',[StokObatController::class,'destroy
 Route::resource('stok_obat', StokObatController::class)->except(['destroy','create']);
 Route::get('stok_obat/${id_obat}/create', [StokObatController::class,'create'])->name('stok_obat.create');
 
+
 //Resep Obat
 Route::resource('resep-obat', ResepObatController::class);
 
+// Detail Resep Obat
+Route::resource('detail-resep', DetailResepController::class);
 
 // Layout
 Route::get('/layout-default-layout', function () {

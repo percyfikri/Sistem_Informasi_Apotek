@@ -17,10 +17,11 @@ class DetailResep extends Model
     'id_racikan',
     'kuantitas',
     'satuan',
+    'harga',
   ];
   public function resep()
   {
-    return $this->belongsTo(Obat::class, 'id_resep');
+    return $this->belongsTo(ResepObat::class, 'id_resep');
   }
   public function obat()
   {
@@ -30,5 +31,4 @@ class DetailResep extends Model
   {
     return $this->belongsTo(Racikan::class, 'id_racikan');
   }
-  
 }
