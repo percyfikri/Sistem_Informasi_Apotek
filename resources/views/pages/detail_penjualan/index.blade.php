@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Halaman Data Penjualan')
+@section('title', 'Halaman Data Detail Penjualan')
 
 @push('style')
     <link rel="stylesheet" href="{{ asset('library/datatables/media/css/dataTables.bootstrap4.min.css') }}">
@@ -14,8 +14,9 @@
                 <h1>Detail Penjualan</h1>
 
                 <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="{{ url('dashboard-general-dashboard') }}">Dashboard</a></div>
+                    <div class="breadcrumb-item"><a href="{{ url('dashboard-general-dashboard') }}">Dashboard</a></div>
                     <div class="breadcrumb-item"><a href="{{ route('penjualan.index') }}">Penjualan</a></div>
+                    <div class="breadcrumb-item active"><a href="#">Detail Penjualan</a></div>
                 </div>
             </div>
             <div class="section-body">
@@ -35,7 +36,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Data Penjualan</h4>
+                                <h4>Data Detail Penjualan</h4>
                                 <div class="card-header-action">
 
                                 </div>
@@ -51,13 +52,15 @@
                                                 <th>Kuantitas</th>
                                                 <th>Satuan</th>
                                                 <th>Subtotal</th>
-                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
 
                                         </tbody>
                                     </table>
+                                </div>
+                                <div class="card-footer">
+                                    <a class="btn btn-primary float-left" href="{{ route('penjualan.index') }}">Kembali</a></div>
                                 </div>
                             </div>
                         </div>
@@ -113,13 +116,6 @@
                     {
                         data: 'subtotal',
                         name: 'subtotal'
-                    },
-                    {
-                        data: null,
-                        orderable: false,
-                        render: function(data, type, row) {
-                            return `<div class="buttons text-center"></div>`
-                        }
                     },
 
 

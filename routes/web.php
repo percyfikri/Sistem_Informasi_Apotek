@@ -62,14 +62,8 @@ Route::resource('pengguna', PenggunaController::class);
 
 // Penjualan
 Route::resource('penjualan', PenjualanController::class);
-
 // Detail Penjualan
 Route::resource('detail_penjualan', DetailPenjualanController::class);
-
-// Route::delete('detail-penjualan/{id_penjualan}/{satuan}',[DetailPenjualanController::class,'destroy']);
-
-// Laporan Penjualan
-// Route::resource('laporan-penjualan', LaporanPenjualanController::class);
 
 
 // Jasa

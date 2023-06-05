@@ -17,11 +17,7 @@ class DetailPenjualanController extends Controller
      */
     public function index(Request $request, $id_penjualan)
     {
-        $penjualan = Penjualan::where('id_penjualan', $id_penjualan)->first();
-        if ($request->ajax()) {
-            return DataTables::of(DetailPenjualan::with('penjualan', 'resep', 'obat')->where('id_penjualan',$id_penjualan)->get())->toJson();
-        }
-        return view('pages.detail_penjualan.index', compact('penjualan'));
+        //
     }
 
     /**
@@ -55,7 +51,8 @@ class DetailPenjualanController extends Controller
     {
         $penjualan = Penjualan::where('id_penjualan', $id_penjualan)->first();
         if ($request->ajax()) {
-            return DataTables::of(DetailPenjualan::with('penjualan', 'resep', 'obat')->where('id_penjualan', $id_penjualan)->get())->toJson();
+            return DataTables::of(DetailPenjualan::with('penjualan', 'resep', 'obat')
+            ->where('id_penjualan', $id_penjualan)->get())->toJson();
         }
         return view('pages.detail_penjualan.index', compact('penjualan'));
     }
