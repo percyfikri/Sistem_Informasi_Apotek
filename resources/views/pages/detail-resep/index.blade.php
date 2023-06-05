@@ -126,8 +126,6 @@
                     //         return `<div class="buttons text-center"></div>`
                     //     }
                     // },
-
-
                 ],
                 rowCallback: function(row, data, index) {
                     $('td:eq(0)', row).html(index + 1);
@@ -135,7 +133,6 @@
                 select: {
                     style: 'single',
                     search: {
-
                         search: true
                     }
                 }

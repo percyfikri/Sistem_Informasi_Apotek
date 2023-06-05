@@ -41,7 +41,8 @@
                                     <a href="{{ route('resep-obat.create') }}" class="btn btn-icon btn-primary icon-left"><i
                                             class="fas fa-plus"></i>
                                         Tambah</a>
-
+                                    <a href="{{ url('resep-obat/cetak_pdf') }}" class="btn btn-icon btn-primary icon-left"><i class="fas fa-print"></i>
+                                        Print PDF</a>
                                 </div>
                             </div>
                             <div class="card-body">

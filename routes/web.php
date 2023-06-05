@@ -13,6 +13,7 @@ use App\Http\Controllers\DetailResepController;
 use App\Http\Controllers\ResepObatController;
 use App\Http\Controllers\StokObatController;
 use App\Http\Controllers\RacikanController;
+use App\Models\ResepObat;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +45,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('dashboard', DashboardController::class);
   });
 });
+
+// Route Laporan PDF Resep Obat
+Route::get('/resep-obat/cetak_pdf', [ResepObatController::class, 'cetak_pdf']);
 
 // Route Laporan PDF
 Route::get('/penjualan/cetak_pdf', [PenjualanController::class, 'cetak_pdf']);
