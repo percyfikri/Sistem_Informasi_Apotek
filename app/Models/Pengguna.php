@@ -15,14 +15,14 @@ class Pengguna extends Model
   protected $table = 'pengguna';
   protected $primaryKey = 'id_pengguna';
 
-    protected $fillable = [
-      'nama',
-      'email',
-      'jk',
-      'umur',
-      'status',
-      'alamat',
-    ];
+  protected $fillable = [
+    'nama',
+    'email',
+    'jk',
+    'umur',
+    'status',
+    'alamat',
+  ];
 
   protected $hidden = [
     'password',

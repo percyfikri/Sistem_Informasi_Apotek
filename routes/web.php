@@ -10,9 +10,11 @@ use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\DetailPenjualanController;
+use App\Http\Controllers\DetailResepController;
 use App\Http\Controllers\ResepObatController;
 use App\Http\Controllers\StokObatController;
 use App\Http\Controllers\RacikanController;
+use App\Models\ResepObat;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,12 +51,18 @@ Route::group(['middleware' => ['auth']], function () {
   });
 });
 
+// Route Laporan PDF Resep Obat
+Route::get('/resep-obat/cetak_pdf', [ResepObatController::class, 'cetak_pdf']);
+
 // Route Laporan PDF
 Route::get('/penjualan/cetak_pdf', [PenjualanController::class, 'cetak_pdf']);
 Route::get('/pengguna/cetak_pdf', [PenggunaController::class, 'cetak_pdf']);
 
 // Route Laporan Data Obat
 Route::get('obat/cetak_pdf', [ObatController::class, 'cetak_pdf']);
+
+// Route Tambah Obat
+Route::get('stok_obat/tambah', [StokObatController::class, 'tambah']);
 
 // Kasir
 Route::resource('kasir', KasirController::class)->only(['index', 'store']);
@@ -72,8 +80,10 @@ Route::resource('detail_penjualan', DetailPenjualanController::class);
 Route::resource('jasa', JasaController::class);
 Route::prefix('autocomplete')->controller(AutocompleteController::class)->group(function () {
   Route::get('apoteker', 'getApoteker')->name('autocomplete.apoteker');
+  Route::get('customer', 'getCustomer')->name('autocomplete.customer');
   Route::get('obat', 'getObat')->name('autocomplete.obat');
-})->name('autocomplete');
+  Route::get('jasa', 'getJasa')->name('autocomplete.jasa');
+});
 
 // Dashboard
 Route::get('/dashboard-general-dashboard', function () {
@@ -89,11 +99,16 @@ Route::resource('obat', ObatController::class);
 
 
 // Stok Obat
-Route::resource('stok_obat', StokObatController::class)->except('destroy');
 Route::delete('stok_obat/{id_obat}/{satuan}',[StokObatController::class,'destroy']);
+Route::resource('stok_obat', StokObatController::class)->except(['destroy','create']);
+Route::get('stok_obat/${id_obat}/create', [StokObatController::class,'create'])->name('stok_obat.create');
+
+
 //Resep Obat
 Route::resource('resep-obat', ResepObatController::class);
 
+// Detail Resep Obat
+Route::resource('detail-resep', DetailResepController::class);
 
 // Layout
 Route::get('/layout-default-layout', function () {

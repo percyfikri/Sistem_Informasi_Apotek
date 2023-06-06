@@ -15,8 +15,9 @@ class StokObatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request,Obat $obat)
+    public function index(Request $request,$obat)
     {
+        dd($obat);
         if ($request->ajax()) {
             return DataTables::of(StokObat::query())->toJson();
           }
@@ -154,5 +155,10 @@ class StokObatController extends Controller
         StokObat::find($id_obat)->delete();
         return redirect()->route('stok_obat.index')
         -> with('msg-success', 'Data Berhasil Dihapus', $satuan);
+    }
+    public function tambah()
+    {
+        $obat = Obat::all(); //mendapatkan data dari tabel obat
+        return view('pages.stok_obat.tambah' , ['obat' => $obat]);
     }
 }

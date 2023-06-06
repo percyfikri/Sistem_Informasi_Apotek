@@ -33,6 +33,9 @@
                                         data-action="{{ route('resep-obat.destroy', $resepObat->id_resep) }}" data-toggle="modal"
                                         data-target="#confirm-delete-modal"> <i class="fas fa-trash"></i>
                                         Delete</button> --}}
+                                    <a href="{{ route('detail-resep.show', $resepObat->id_resep) }}" class="btn btn-icon btn-primary icon-left"><i
+                                        class="fas fa-circle-info"></i>
+                                    Detail Resep</a>
                                 </div>
                             </div>
                                 <div class="card-body">

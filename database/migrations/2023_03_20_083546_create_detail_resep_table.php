@@ -22,6 +22,7 @@ return new class extends Migration
       $table->foreign('id_racikan')->references('id_racikan')->on('racikan')->onDelete('cascade');
       $table->integer('kuantitas');
       $table->integer('satuan');
+      $table->decimal('harga', 12, 2);
       $table->timestamps();
     });
   }

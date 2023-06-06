@@ -6,6 +6,7 @@ use App\Models\Pengguna;
 use App\Models\ResepObat;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use PDF;
 
 class ResepObatController extends Controller
 {
@@ -139,15 +140,14 @@ class ResepObatController extends Controller
         $resepObat->nama_resep = $request->get('nama_resep');
         $resepObat->deskripsi = $request->get('deskripsi');
         // $resepObat->tanggal = $request->get('tanggal');
-        $resepObat->status = $request->get('status'); 
+        $resepObat->status = $request->get('status');
 
         $customer = Pengguna::find($request->get('id_customer'));
         $dokter = Pengguna::find($request->get('id_dokter'));
 
         // Periksa apakah customer dan dokter ditemukan
-        if (!$customer || !$dokter) 
-        {
-        return redirect()->back()->with('msg-error', 'Customer atau Dokter tidak ditemukan');
+        if (!$customer || !$dokter) {
+            return redirect()->back()->with('msg-error', 'Customer atau Dokter tidak ditemukan');
         }
 
         $resepObat->customer()->associate($customer);
@@ -168,5 +168,12 @@ class ResepObatController extends Controller
         ResepObat::find($id_resep)->delete();
         return redirect()->route('resep-obat.index')
             ->with('msg-success', 'Data Berhasil Dihapus');
+    }
+
+    public function cetak_pdf()
+    {
+        $resepObat = ResepObat::all();
+        $pdf = PDF::loadview('pages.resep-obat.resepObat_pdf',['resepObat'=>$resepObat]);
+        return $pdf->stream();
     }
 }

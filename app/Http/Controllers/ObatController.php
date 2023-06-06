@@ -33,7 +33,7 @@ class ObatController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function create() : View
+  public function create(): View
   {
     return view('pages.obat.create');
   }
@@ -46,16 +46,18 @@ class ObatController extends Controller
    */
   public function store(Request $request)
   {
-    $request->validate([
-      'nama_obat' => 'required|unique:obat,nama_obat',
-      'jenis_obat' => 'required',
+    $request->validate(
+      [
+        'nama_obat' => 'required|unique:obat,nama_obat',
+        'jenis_obat' => 'required',
 
-    ], 
-    [
-      'nama_obat.required' => 'Nama Obat wajib diisi',
-      'nama_obat.unique' => 'Nama Obat yang diisikan sudah ada dalam database',
-      'jenis_obat.required' => 'Jenis Obat wajib diisi',
-    ]);
+      ],
+      [
+        'nama_obat.required' => 'Nama Obat wajib diisi',
+        'nama_obat.unique' => 'Nama Obat yang diisikan sudah ada dalam database',
+        'jenis_obat.required' => 'Jenis Obat wajib diisi',
+      ]
+    );
     $data = [
       'nama_obat' => $request->nama_obat,
       'jenis_obat' => $request->jenis_obat,
@@ -69,8 +71,9 @@ class ObatController extends Controller
    * @param  \App\Models\Obat  $obat
    * @return \Illuminate\Http\Response
    */
-  public function show(Obat $obat)
+  public function show($id_obat)
   {
+    $obat = Obat::with('stok_obat')->where('id_obat', $id_obat)->first();
     return view('pages.obat.show', compact('obat'));
   }
 
@@ -92,12 +95,12 @@ class ObatController extends Controller
    * @param  \App\Models\Obat  $obat
    * @return \Illuminate\Http\Response
    */
-   public function update(Request $request, $id)
+  public function update(Request $request, $id)
   {
     $request->validate([
       'nama_obat' => 'required|unique:obat,nama_obat',
       'jenis_obat' => 'required',
-    ],[
+    ], [
       'nama_obat.required' => 'Nama Obat wajib diisi',
       'nama_obat.unique' => 'Nama Obat yang diisikan sudah ada dalam database',
       'jenis_obat.required' => 'Jenis Obat wajib diisi',
@@ -107,7 +110,7 @@ class ObatController extends Controller
       'nama_obat' => $request->nama_obat,
       'jenis_obat' => $request->jenis_obat,
     ];
-    Obat::where('id_obat',$id)->update($data);
+    Obat::where('id_obat', $id)->update($data);
     return redirect()->to('obat')->with('msg-success', 'Berhasil melakukan update data');
   }
 
@@ -134,9 +137,15 @@ class ObatController extends Controller
     return response()->json($dataApoteker);
   }
   public function cetak_pdf()
-    {
-        $obat = Obat::all();
-        $pdf = PDF::loadview('pages.obat.obat_pdf',['obat'=>$obat]);
-        return $pdf->stream();
-    }
+  {
+    $obat = Obat::all();
+    $pdf = PDF::loadview('pages.obat.obat_pdf', ['obat' => $obat]);
+    return $pdf->stream();
+  }
+
+  public function getObat($id)
+  {
+    $stoks = Obat::with('stok_obat')->where('id_obat', '=', $id)->get();
+    return response()->json($stoks);
+  }
 }

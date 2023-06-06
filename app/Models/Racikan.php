@@ -21,4 +21,8 @@ class Racikan extends Model
   {
     return $this->hasOne(Racikan::class, 'id_racikan');
   }
+  public function detailResep()
+  {
+    return $this->hasOne(DetailResep::class, 'id_racikan');
+  }
 }

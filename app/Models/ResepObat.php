@@ -27,7 +27,7 @@ class ResepObat extends Model
 
   public function resep()
   {
-    return $this->hasOne(Obat::class, 'id_resep');
+    return $this->hasOne(ResepObat::class, 'id_resep');
   }
   public function dokter()
   {
@@ -37,8 +37,14 @@ class ResepObat extends Model
   {
     return $this->belongsTo(Pengguna::class, 'id_customer', 'id_pengguna');
   }
-  public function pengguna()
+
+  public function detail_resep()
   {
-    return $this->belongsTo(Pengguna::class, 'id_pengguna');
+    return $this->hasMany(DetailResep::class, 'id_resep');
+  }
+
+  public function detailResep()
+  {
+    return $this->hasOne(DetailResep::class, 'id_resep');
   }
 }
