@@ -52,14 +52,14 @@
                             <div class="form-group">
                                 <label>Satuan</label>
                                 <input type="text" name="satuan"
-                                    class="form-control @if (old('satuan')) is-valid @endif 
+                                    class="form-control @if (old('satuan')) is-valid @endif
                                 @error('satuan') is-invalid @enderror"
                                     value="{{ old('satuan') }}">
                             </div>
                             <div class="form-group">
                                 <label>Kuantitas</label>
                                 <input type="number" name="kuantitas"
-                                    class="form-control @if (old('kuantitas')) is-valid @endif 
+                                    class="form-control @if (old('kuantitas')) is-valid @endif
                                 @error('kuantitas') is-invalid @enderror"
                                     value="{{ old('kuantitas') }}">
                             </div>
@@ -72,7 +72,7 @@
                                         </div>
                                     </div>
                                     <input type="number" name="harga"
-                                        class="form-control @if (old('harga')) is-valid @endif 
+                                        class="form-control @if (old('harga')) is-valid @endif
                                     @error('harga') is-invalid @enderror"
                                         value="{{ old('harga') }}">
                                 </div>

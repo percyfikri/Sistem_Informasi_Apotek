@@ -45,7 +45,7 @@
                             <div class="form-group">
                                 <label>Nama Resep</label>
                                 <input type="text" name="nama_resep"
-                                    class="form-control @if (old('nama_resep')) is-valid @endif 
+                                    class="form-control @if (old('nama_resep')) is-valid @endif
                                 @error('nama_resep') is-invalid @enderror"
                                     value="{{ old('nama_resep', $resepObat->nama_resep) }}">
                             </div>
@@ -75,14 +75,14 @@
                                     <option value="racikan" @if (old('status') == 'racikan') selected @endif>Racikan</option>
                                     <option value="non racikan" @if (old('status') == 'non racikan') selected @endif>Non-Racikan</option>
                                 </select>
-                            </div>   
+                            </div>
                             <div class="form-group">
                                 <label>Deskripsi</label>
                                 <textarea name="deskripsi" rows="60" style="resize: none; height: 8rem" class="form-control @error('deskripsi') is-invalid @enderror">{{ old('deskripsi', $resepObat->deskripsi) }}</textarea>
                                 @error('deskripsi')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                            </div>                            
+                            </div>
                             {{-- <div class="form-group">
                                 <label>Tanggal</label>
                                 <div class="input-group date" id="tanggal-picker" data-target-input="nearest">
@@ -100,7 +100,7 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div> --}}
-                        
+
                         </div>
                             <div class="card-footer text-right">
                                 <button type="submit" class="btn btn-success">Submit</button>

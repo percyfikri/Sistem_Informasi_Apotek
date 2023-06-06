@@ -54,7 +54,7 @@
                                                 class="form-control"
                                                 value="{{ $resepObat->customer->nama }}">
                                         </div>
-                                    </div>                                    
+                                    </div>
                                     <div class="row">
                                         <div class="form-group col-12">
                                             <label>Dokter</label>
@@ -77,13 +77,13 @@
                                             <input readonly type="text" class="form-control datepicker"
                                                 value="{{ \Carbon\Carbon::parse($resepObat->tanggal)->format('d-m-Y') }}">
                                         </div>
-                                    </div>                                    
+                                    </div>
                                     <div class="row">
                                         <div class="form-group col-12">
                                             <label>Deskripsi</label>
                                             <textarea readonly class="form-control" style="resize: none; height: auto;">{{ $resepObat->deskripsi }}</textarea>
                                         </div>
-                                    </div>                            
+                                    </div>
                                 </div>
                                 <div class="card-footer text-right">
                                     <a class="btn btn-primary float-left" href="{{ route('resep-obat.index') }}">Kembali</a></div>

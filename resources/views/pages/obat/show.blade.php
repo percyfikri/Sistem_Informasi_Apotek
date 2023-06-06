@@ -25,7 +25,7 @@
                                 <div class="card-header-action">
                                     <a href="{{ route('stok_obat.show', $obat->id_obat) }}" class="btn btn-icon btn-success icon-left"><i
                                         class="fas fa-pills"></i>
-                                    Stok Obat</a>    
+                                    Stok Obat</a>
                                     <a href="{{ route('obat.edit', $obat->id_obat) }}" class="btn btn-icon btn-warning icon-left"><i
                                             class="far fa-edit"></i>
                                         Edit</a>
@@ -33,7 +33,7 @@
                                         data-action="{{ route('obat.destroy', $obat->id_obat) }}" data-toggle="modal"
                                         data-target="#confirm-delete-modal"> <i class="fas fa-trash"></i>
                                         Delete</button>
-        
+
                                 </div>
                             </div>
                                 <div class="card-body">

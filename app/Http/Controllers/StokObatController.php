@@ -99,7 +99,7 @@ class StokObatController extends Controller
      */
     public function edit($stokObat)
     {
-        //menampilkan detail data dengan menemukan berdasarkan Id 
+        //menampilkan detail data dengan menemukan berdasarkan Id
         //Obat untuk diedit
         $stokObat = StokObat::with('obat')->where('id_obat', $stokObat)->first();
         $obat = Obat::all(); //mendapatkan data dari tabel obat
@@ -127,7 +127,7 @@ class StokObatController extends Controller
             'kuantitas.required' => 'Kuantitas Obat wajib diisi',
             'harga.required' => 'Harga Obat wajib diisi',
         ]);
- 
+
         $stok = StokObat::with('obat')->where('id_obat', $request->get('id_obat'))->first();
         $stok->satuan = $request->get('satuan');
         $stok->kuantitas = $request->get('kuantitas');

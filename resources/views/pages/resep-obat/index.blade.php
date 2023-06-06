@@ -126,7 +126,7 @@
                                 <a href="${window.location.href}/${data.id_resep}" class="btn btn-primary d-block mb-2"><i class="fas fa-circle-info"></i> Detail</a>
 
                                 <a href="${window.location.href}/${data.id_resep}/edit" class="btn btn-warning d-block mb-2"><i class="fas fa-pencil-alt"></i> Edit</a>
-                                                            
+
                                 <button class="btn btn-danger d-block mb-2" data-action="${window.location.href}/${data.id_resep}" data-toggle="modal" data-target="#confirm-delete-modal"><i class="fas fa-trash"></i> Delete</button>
                             </div>`;
 ;

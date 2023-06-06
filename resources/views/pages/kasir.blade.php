@@ -37,7 +37,7 @@
                     <div class="row">
                         <div class="col-lg-8 col-md-12 col-12 col-sm-12">
                             <div class="card h-100">
-                                {{-- 
+                                {{--
                                 <div class="form-group p-4">
                                     <div class="input-group">
 
@@ -193,7 +193,7 @@
                                             </div>
 
                                             <input type="text" id="harga-jasa" name="jasa"
-                                                class="form-control currency @if (old('jasa')) is-valid @endif 
+                                                class="form-control currency @if (old('jasa')) is-valid @endif
                                     @error('jasa') is-invalid @enderror"
                                                 value="{{ old('jasa') }}">
                                         </div>
@@ -212,7 +212,7 @@
                                                 </div>
                                             </div>
                                             <input type="text" name="subtotal" id="subtotal-input"
-                                                class="form-control currency @if (old('harga')) is-valid @endif 
+                                                class="form-control currency @if (old('harga')) is-valid @endif
                                     @error('harga') is-invalid @enderror"
                                                 value="{{ old('harga') }}">
                                         </div>
@@ -341,7 +341,7 @@
 
             cell1.innerHTML = `<input type="text" name="ids[]" id="id-${item.id}"
                                     class="form-control" hidden value="${item.id}">
-                                  
+
                                     <input type="text" name="nama[]"
                                     class="form-control" disabled value="${item.nama}">`
 

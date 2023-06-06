@@ -27,11 +27,6 @@ class Penjualan extends Model
     return $this->belongsTo(Pengguna::class, 'id_customer', 'id_pengguna');
   }
 
-  public function customer()
-  {
-    return $this->belongsTo(Pengguna::class, 'id_customer', 'id_pengguna');
-  }
-
   public function apoteker()
   {
     return $this->belongsTo(Pengguna::class, 'id_apoteker', 'id_pengguna');

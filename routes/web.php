@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AutocompleteController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JasaController;
 use App\Http\Controllers\KasirController;
@@ -30,10 +29,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::redirect('/', '/dashboard-general-dashboard');
-
-
-// Homepage
-Route::get('home', [HomeController::class, 'index'])->name('home');
 
 
 // Login & Logout

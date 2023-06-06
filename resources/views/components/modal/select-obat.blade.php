@@ -67,13 +67,13 @@
                     searchable: false,
                     render: function(data, type, row) {
                         return `<div class="text-center"> <button data-dismiss="modal"  type="button" class="btn check-product btn-icon btn-success" data-id="${data.id_obat}" data-type="obat"
-            data-nama="${data.nama_obat}" onclick="addToTable(event)"> 
+            data-nama="${data.nama_obat}" onclick="addToTable(event)">
             <i class="fas fa-check"></i>
         </button></div>`;
                     },
                 },
             ],
         });
-       
+
     </script>
 @endpush
