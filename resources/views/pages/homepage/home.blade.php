@@ -82,9 +82,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="index.html" class="nav-item nav-link active">Home</a>
-                <a href="about.html" class="nav-item nav-link">About</a>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                <a href="{{ url('home') }}" class="nav-item nav-link active">Home</a>
+                <a href="{{ url('about') }}" class="nav-item nav-link">About Us</a>
             </div>
         </div>
     </nav>
@@ -95,24 +94,14 @@
     <div class="container-fluid header bg-primary p-0 mb-5">
         <div class="row g-0 align-items-center flex-column-reverse flex-lg-row">
             <div class="col-lg-6 p-5 wow fadeIn" data-wow-delay="0.1s">
-                <h1 class="display-4 text-white mb-5">Kesehatan Yang Baik Adalah Akar Dari Semua Kebahagiaan</h1>
+                <h1 class="display-4 text-white mb-5">Selamat datang di Apotek Arema!</h1>
                 <div class="row g-4">
-                    <div class="col-sm-4">
+                    <div class="col-sm-12">
                         <div class="border-start border-light ps-4">
-                            <h2 class="text-white mb-1" data-toggle="counter-up">12</h2>
-                            <p class="text-light mb-0">Expert Doctors</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="border-start border-light ps-4">
-                            <h2 class="text-white mb-1" data-toggle="counter-up">123</h2>
-                            <p class="text-light mb-0">Medical Stuff</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="border-start border-light ps-4">
-                            <h2 class="text-white mb-1" data-toggle="counter-up">1234</h2>
-                            <p class="text-light mb-0">Total Customer</p>
+                            {{-- <h2 class="text-white mb-1" data-toggle="counter-up">12</h2> --}}
+                            <p class="text-light mb-0">Kami berkomitmen untuk memberikan layanan kesehatan terbaik bagi Anda
+                                dan keluarga. Dengan pengalaman lebih dari 10 tahun dalam industri farmasi, kami menyediakan
+                                obat-obatan berkualitas dan produk kesehatan terpercaya untuk memenuhi kebutuhan Anda.</p>
                         </div>
                     </div>
                 </div>
@@ -122,19 +111,19 @@
                     <div class="owl-carousel-item position-relative">
                         <img class="img-fluid" src="{{ asset('style/img/carousel-1.jpg') }}" alt="">
                         <div class="owl-carousel-text">
-                            <h1 class="display-1 text-white mb-0">Cardiology</h1>
+                            <h1 class="display-1 text-white mb-0">Penjualan Obat</h1>
                         </div>
                     </div>
                     <div class="owl-carousel-item position-relative">
                         <img class="img-fluid" src="{{ asset('style/img/carousel-2.jpg') }}" alt="">
                         <div class="owl-carousel-text">
-                            <h1 class="display-1 text-white mb-0">Neurology</h1>
+                            <h1 class="display-1 text-white mb-0">Resep Obat</h1>
                         </div>
                     </div>
                     <div class="owl-carousel-item position-relative">
                         <img class="img-fluid" src="{{ asset('style/img/carousel-3.jpg') }}" alt="">
                         <div class="owl-carousel-text">
-                            <h1 class="display-1 text-white mb-0">Pulmonary</h1>
+                            <h1 class="display-1 text-white mb-0">Racikan Obat</h1>
                         </div>
                     </div>
                 </div>
@@ -149,7 +138,7 @@
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                 {{-- <p class="d-inline-block border rounded-pill py-1 px-4">Services</p> --}}
-                <h1>Health Care Solutions</h1>
+                <h1>Solusi Perawatan Kesehatan</h1>
             </div>
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -157,8 +146,8 @@
                         <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
                             <i class="fa fa-heartbeat text-primary fs-4"></i>
                         </div>
-                        <h4 class="mb-3">Cardiology</h4>
-                        <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
+                        <h4 class="mb-3">Kardiologi</h4>
+                        <p class="mb-4">Kardiologi adalah cabang ilmu kedokteran yang berfokus pada penyakit dan gangguan yang terkait dengan jantung dan sistem peredaran darah.</p>
                         {{-- <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Read More</a> --}}
                     </div>
                 </div>
@@ -167,8 +156,8 @@
                         <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
                             <i class="fa fa-x-ray text-primary fs-4"></i>
                         </div>
-                        <h4 class="mb-3">Pulmonary</h4>
-                        <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
+                        <h4 class="mb-3">Paru-paru</h4>
+                        <p class="mb-4">Paru-paru adalah organ vital untuk mengambil oksigen dari udara yang kita hirup dan membuang karbon dioksida dari tubuh melalui proses bernapas.</p>
                         {{-- <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Read More</a> --}}
                     </div>
                 </div>
@@ -177,8 +166,8 @@
                         <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
                             <i class="fa fa-brain text-primary fs-4"></i>
                         </div>
-                        <h4 class="mb-3">Neurology</h4>
-                        <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
+                        <h4 class="mb-3">Neurologi</h4>
+                        <p class="mb-4">Neurologi adalah cabang ilmu kedokteran yang mempelajari sistem saraf dan gangguan yang terkait dengannya.</p>
                         {{-- <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Read More</a> --}}
                     </div>
                 </div>
@@ -187,8 +176,8 @@
                         <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
                             <i class="fa fa-wheelchair text-primary fs-4"></i>
                         </div>
-                        <h4 class="mb-3">Orthopedics</h4>
-                        <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
+                        <h4 class="mb-3">Ortopedi</h4>
+                        <p class="mb-4">Ortopedi adalah cabang ilmu kedokteran yang berfokus pada pencegahan, perawatan, dan rehabilitasi gangguan dan cedera sistem muskuloskeletal.</p>
                         {{-- <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Read More</a> --}}
                     </div>
                 </div>
@@ -197,8 +186,8 @@
                         <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
                             <i class="fa fa-tooth text-primary fs-4"></i>
                         </div>
-                        <h4 class="mb-3">Dental Surgery</h4>
-                        <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
+                        <h4 class="mb-3">Operasi gigi</h4>
+                        <p class="mb-4">Operasi gigi adalah prosedur medis yang melibatkan tindakan bedah pada jaringan mulut, rahang, atau gigi.</p>
                         {{-- <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Read More</a> --}}
                     </div>
                 </div>
@@ -207,8 +196,8 @@
                         <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
                             <i class="fa fa-vials text-primary fs-4"></i>
                         </div>
-                        <h4 class="mb-3">Laboratory</h4>
-                        <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
+                        <h4 class="mb-3">Laboratorium</h4>
+                        <p class="mb-4">Laboratorium adalah tempat di mana berbagai jenis penelitian dilakukan untuk mengumpulkan data dan informasi dalam bidang ilmiah atau medis. </p>
                         {{-- <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Read More</a> --}}
                     </div>
                 </div>
@@ -226,7 +215,10 @@
                     <div class="p-lg-5 ps-lg-0">
                         {{-- <p class="d-inline-block border rounded-pill text-light py-1 px-4">Features</p> --}}
                         <h1 class="text-white mb-4">Kenapa Harus Kami</h1>
-                        <p class="text-white mb-4 pb-2">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo erat amet</p>
+                        <p class="text-white mb-4 pb-2">Kami menyediakan berbagai macam produk kesehatan termasuk obat resep,
+                            obat bebas, vitamin dan suplemen, alat kesehatan, serta produk perawatan pribadi. Dengan kerjasama
+                            yang erat dengan produsen dan distributor terkemuka, kami memastikan bahwa setiap produk yang kami
+                            sediakan berkualitas tinggi dan aman digunakan.</p>
                         <div class="row g-4">
                             <div class="col-6">
                                 <div class="d-flex align-items-center">
@@ -234,8 +226,8 @@
                                         <i class="fa fa-user-md text-primary"></i>
                                     </div>
                                     <div class="ms-4">
-                                        <p class="text-white mb-2">Experience</p>
-                                        <h5 class="text-white mb-0">Doctors</h5>
+                                        <p class="text-white mb-2">Dokter</p>
+                                        <h5 class="text-white mb-0">Berpengalaman</h5>
                                     </div>
                                 </div>
                             </div>
@@ -245,8 +237,8 @@
                                         <i class="fa fa-check text-primary"></i>
                                     </div>
                                     <div class="ms-4">
-                                        <p class="text-white mb-2">Quality</p>
-                                        <h5 class="text-white mb-0">Services</h5>
+                                        <p class="text-white mb-2">Jasa</p>
+                                        <h5 class="text-white mb-0">Berkualitas</h5>
                                     </div>
                                 </div>
                             </div>
@@ -256,8 +248,8 @@
                                         <i class="fa fa-comment-medical text-primary"></i>
                                     </div>
                                     <div class="ms-4">
-                                        <p class="text-white mb-2">Positive</p>
-                                        <h5 class="text-white mb-0">Consultation</h5>
+                                        <p class="text-white mb-2">Tanggapan</p>
+                                        <h5 class="text-white mb-0">Positif</h5>
                                     </div>
                                 </div>
                             </div>
@@ -267,8 +259,8 @@
                                         <i class="fa fa-headphones text-primary"></i>
                                     </div>
                                     <div class="ms-4">
-                                        <p class="text-white mb-2">24 Hours</p>
-                                        <h5 class="text-white mb-0">Support</h5>
+                                        <p class="text-white mb-2">Pelayanan</p>
+                                        <h5 class="text-white mb-0">24 Jam</h5>
                                     </div>
                                 </div>
                             </div>
@@ -290,31 +282,34 @@
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                <h1>Testimoni Dari Customer Kami!</h1>
+                <h1>Testimoni Dari Pelanggan Kami!</h1>
             </div>
             <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
                 <div class="testimonial-item text-center">
                     <img class="img-fluid bg-light rounded-circle p-2 mx-auto mb-4" src="{{ asset('style/img/testimonial-1.jpg') }}" style="width: 100px; height: 100px;">
                     <div class="testimonial-text rounded text-center p-4">
-                        <p>Clita clita tempor justo dolor ipsum amet kasd amet duo justo duo duo labore sed sed. Magna ut diam sit et amet stet eos sed clita erat magna elitr erat sit sit erat at rebum justo sea clita.</p>
-                        <h5 class="mb-1">Customer Name</h5>
-                        <span class="fst-italic">Profession</span>
+                        <p>"Apotek ini adalah tempat yang luar biasa untuk mendapatkan semua kebutuhan kesehatan saya. Staf di sini sangat
+                            ramah dan selalu siap membantu saya dengan pertanyaan dan permintaan saya."</p>
+                        <h5 class="mb-1">Sarah Wijaya</h5>
+                        <span class="fst-italic">Penulis</span>
                     </div>
                 </div>
                 <div class="testimonial-item text-center">
                     <img class="img-fluid bg-light rounded-circle p-2 mx-auto mb-4" src="{{ asset('style/img/testimonial-2.jpg') }}" style="width: 100px; height: 100px;">
                     <div class="testimonial-text rounded text-center p-4">
-                        <p>Clita clita tempor justo dolor ipsum amet kasd amet duo justo duo duo labore sed sed. Magna ut diam sit et amet stet eos sed clita erat magna elitr erat sit sit erat at rebum justo sea clita.</p>
-                        <h5 class="mb-1">Customer Name</h5>
-                        <span class="fst-italic">Profession</span>
+                        <p>"Saya sangat terkesan dengan pelayanan yang diberikan oleh apotek ini. Saya seringkali mendapatkan resep yang
+                            harus dibuat dengan cepat, dan apotek ini selalu membantu saya dengan efisiensi."</p>
+                        <h5 class="mb-1">Ahmad Rahman</h5>
+                        <span class="fst-italic">Dosen</span>
                     </div>
                 </div>
                 <div class="testimonial-item text-center">
                     <img class="img-fluid bg-light rounded-circle p-2 mx-auto mb-4" src="{{ asset('style/img/testimonial-3.jpg') }}" style="width: 100px; height: 100px;">
                     <div class="testimonial-text rounded text-center p-4">
-                        <p>Clita clita tempor justo dolor ipsum amet kasd amet duo justo duo duo labore sed sed. Magna ut diam sit et amet stet eos sed clita erat magna elitr erat sit sit erat at rebum justo sea clita.</p>
-                        <h5 class="mb-1">Customer Name</h5>
-                        <span class="fst-italic">Profession</span>
+                        <p>"Apotek ini adalah tempat untuk semua kebutuhan farmasi saya. Mereka selalu memberikan saran yang berharga dan
+                            memberi tahu saya tentang promosi atau penawaran khusus yang mungkin berguna bagi saya."</p>
+                        <h5 class="mb-1">Budi Setiawan</h5>
+                        <span class="fst-italic">Mahasiswa</span>
                     </div>
                 </div>
             </div>
@@ -341,13 +336,12 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <h5 class="text-light mb-4">Quick Links</h5>
-                    <a class="btn btn-link" href="">About Us</a>
-                    <a class="btn btn-link" href="">Contact Us</a>
-
+                    <a class="btn btn-link" href="{{ url('home') }}">Home</a>
+                    <a class="btn btn-link" href="{{ url('about') }}">About Us</a>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <h5 class="text-light mb-4">Newsletter</h5>
-                    <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                    <p>Terima kasih atas minat Anda terhadap Newsletter Kami. Dapatkan berita terbaru, penawaran eksklusif, dan pembaruan terkait melalui Newsletter Kami.</p>
 
                 </div>
             </div>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AutocompleteController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JasaController;
 use App\Http\Controllers\KasirController;
@@ -34,6 +35,7 @@ Route::redirect('/', '/dashboard-general-dashboard');
 
 // Homepage
 Route::get('home', [HomeController::class, 'index'])->name('home');
+Route::get('about', [AboutController::class, 'index'])->name('about');
 
 
 // Login & Logout
