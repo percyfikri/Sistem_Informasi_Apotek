@@ -86,6 +86,7 @@
                 <a href="{{ url('about') }}" class="nav-item nav-link">About Us</a>
             </div>
         </div>
+        <a href="{{ url('login') }}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">LOGIN<i class="fa fa-arrow-right ms-3"></i></a>
     </nav>
     <!-- Navbar End -->
 
