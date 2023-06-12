@@ -29,8 +29,6 @@
                 <button type="" class="btn btn-icon btn-primary icon-left" data-dismiss="modal"
                     data-toggle="modal" data-target="#create-customer"> <i class="fas fa-plus">Tambah</i>
                 </button>
-
-
             </div>
         </div>
     </div>
@@ -69,7 +67,8 @@
                     },
                 },
             ],
-        });
+        })
+
         const addCustomer = (e) => {
             let target = event.target
             if (target.tagName != 'BUTTON') {

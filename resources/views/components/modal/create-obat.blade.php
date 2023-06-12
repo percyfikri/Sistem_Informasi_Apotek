@@ -11,35 +11,27 @@
             </div>
             <div class="modal-body">
                 <form action="{{ route('obat.store') }}" id="create-obat-form" method="POST">
-                    <div class="card-body">
-                        @csrf
-                        <div class="form-group">
-                            <label>Nama obat</label>
-                            <input type="text" name="nama_obat"
-                                class="form-control @if (old('nama_obat')) is-valid @endif
+                    @csrf
+                    <div class="form-group">
+                        <label>Nama obat</label>
+                        <input type="text" name="nama_obat"
+                            class="form-control @if (old('nama_obat')) is-valid @endif
                                 @error('nama_obat') is-invalid @enderror"
-                                value="{{ old('nama_obat') }}">
-                        </div>
-                        <div class="form-group">
-                            <label>Jenis obat</label>
-                            <input type="text" name="jenis_obat"
-                                class="form-control @if (old('jenis_obat')) is-valid @endif
+                            value="{{ old('nama_obat') }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Jenis obat</label>
+                        <input type="text" name="jenis_obat"
+                            class="form-control @if (old('jenis_obat')) is-valid @endif
                                 @error('jenis_obat') is-invalid @enderror"
-                                value="{{ old('jenis_obat') }}">
-                        </div>
+                            value="{{ old('jenis_obat') }}">
                     </div>
-                    <div class="card-footer text-right">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <button type="reset" class="btn btn-warning">Reset</button>
-                    </div>
+
                 </form>
             </div>
             <div class="modal-footer bg-whitesmoke br">
-                <button type="" class="btn btn-icon btn-primary icon-left" data-dismiss="modal"
-                    data-toggle="modal" data-target="#select-obat"> <i class="fas fa-plus">Tambah</i>
-                </button>
-
-
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-warning">Reset</button>
             </div>
         </div>
     </div>

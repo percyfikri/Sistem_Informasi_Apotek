@@ -16,6 +16,7 @@
                             <tr>
                                 <th>Nama Resep</th>
                                 <th>Status</th>
+                                <th>Harga</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -25,23 +26,16 @@
                     </table>
                 </div>
             </div>
-            <div class="modal-footer bg-whitesmoke br">
-                <button type="button" class="btn btn-icon btn-primary icon-left" data-toggle="modal"
-                    data-target="#create-resep"> <i class="fas fa-plus">Tambah</i>
+            {{-- <div class="modal-footer bg-whitesmoke br">
+                <button type="" class="btn btn-icon btn-primary icon-left" data-dismiss="modal"
+                    data-toggle="modal" data-target="#create-resep"> <i class="fas fa-plus">Tambah</i>
                 </button>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
 @push('kasir-scripts')
     <script>
-        // $('#choose-product').on('show.bs.modal', function(event) {
-        // const button = $(event.relatedTarget)
-        // const action = button.data('action')
-        // const form = $(this).find('#confirm-delete-form')
-        // form.attr('action', `${action}`);
-        // console.log(form)
-        // })
         $("#resep-table").DataTable({
             processing: true,
             serverSide: true,
@@ -56,7 +50,7 @@
                 [1, "asc"]
             ],
 
-            ajax: "/resep-obat",
+            ajax: "/api/resep-obat",
             columns: [{
                     data: "nama_resep",
                     name: "nama_resep",
@@ -66,12 +60,16 @@
                     name: "status",
                 },
                 {
+                    data: "total",
+                    name: "harga",
+                },
+                {
                     data: null,
                     orderable: false,
                     searchable: false,
                     render: function(data, type, row) {
                         return `<div class="text-center"> <button data-dismiss="modal"  type="button" class="btn check-product btn-icon btn-success" data-id="${data.id_resep}" data-type="resep"
-            data-nama="${data.nama_resep}" data-type="resep" data-harga="10000" onclick="addToTable(event)">
+            data-nama="${data.nama_resep}" data-type="resep" data-harga="${data.detail_resep_sum_harga}" onclick="addToTable(event)"> 
             <i class="fas fa-check"></i>
         </button></div>`;
                     },

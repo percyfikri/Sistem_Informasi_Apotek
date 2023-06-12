@@ -15,6 +15,7 @@ class DetailPenjualan extends Model
     'id_penjualan',
     'id_resep',
     'id_obat',
+    'id_jasa',
     'kuantitas',
     'satuan',
     'subtotal',
@@ -31,5 +32,9 @@ class DetailPenjualan extends Model
   public function obat()
   {
     return $this->belongsTo(Obat::class, 'id_obat');
+  }
+  public function jasa()
+  {
+    return $this->belongsTo(Jasa::class, 'id_jasa');
   }
 }

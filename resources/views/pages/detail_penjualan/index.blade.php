@@ -21,16 +21,16 @@
             </div>
             <div class="section-body">
                 @if (session('msg-success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
-                    <div class="alert-body">
-                        <div class="alert-title">Sukses</div>
-                        {{ session('msg-success') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
+                        <div class="alert-body">
+                            <div class="alert-title">Sukses</div>
+                            {{ session('msg-success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
                 @endif
                 <div class="row">
                     <div class="col-12">
@@ -47,8 +47,9 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Nama Resep</th>
-                                                <th>Nama Obat</th>
+
+                                                <th>Nama Item</th>
+                                                <th>Jenis</th>
                                                 <th>Kuantitas</th>
                                                 <th>Satuan</th>
                                                 <th>Subtotal</th>
@@ -60,16 +61,17 @@
                                     </table>
                                 </div>
                                 <div class="card-footer">
-                                    <a class="btn btn-primary float-left" href="{{ route('penjualan.index') }}">Kembali</a></div>
+                                    <a class="btn btn-primary float-left" href="{{ route('penjualan.index') }}">Kembali</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        {{-- {{dd($penjualan)}} --}}
-        <x-modal.confirm-delete />
+    </div>
+    </section>
+    {{-- {{dd($penjualan)}} --}}
+    <x-modal.confirm-delete />
     </div>
 @endsection
 
@@ -97,13 +99,14 @@
                         data: null,
                         orderable: false
                     },
+
                     {
-                        data: 'resep.nama_resep',
-                        name: 'resep.nama_resep'
+                        data: 'nama_item',
+                        name: 'nama_item'
                     },
                     {
-                        data: 'obat.nama_obat',
-                        name: 'obat.nama_obat'
+                        data: 'jenis',
+                        name: 'jenis'
                     },
                     {
                         data: 'kuantitas',

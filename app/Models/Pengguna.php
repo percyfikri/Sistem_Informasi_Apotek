@@ -32,4 +32,25 @@ class Pengguna extends Model
   {
     return $this->hasMany(Jasa::class, 'id_apoteker', 'id_pengguna');
   }
+
+  public function apoteker_penjualan()
+  {
+    return $this->hasMany(Penjualan::class, 'id_apoteker', 'id_pengguna');
+  }
+  public function dokter_penjualan()
+  {
+    return $this->hasMany(Penjualan::class, 'id_dokter', 'id_pengguna');
+  }
+  public function customer_penjualan()
+  {
+    return $this->hasMany(Penjualan::class, 'id_customer', 'id_pengguna');
+  }
+  public function dokter_resep()
+  {
+    return $this->hasMany(ResepObat::class, 'id_dokter', 'id_pengguna');
+  }
+  public function customer_resep()
+  {
+    return $this->hasMany(ResepObat::class, 'id_customer', 'id_pengguna');
+  }
 }

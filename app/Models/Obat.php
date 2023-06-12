@@ -23,8 +23,16 @@ class Obat extends Model
   {
     return $this->hasMany(StokObat::class, 'id_obat');
   }
-  public function detailResep()
+  public function detail_resep()
   {
     return $this->hasMany(DetailResep::class, 'id_obat');
+  }
+  public function detail_penjualan()
+  {
+    return $this->hasMany(DetailPenjualan::class, 'id_obat');
+  }
+  public function detail_racikan()
+  {
+    return $this->hasMany(DetailRacikan::class, 'id_obat');
   }
 }

@@ -16,11 +16,12 @@ class KasirController extends Controller
 
   public function store(Request $request)
   {
+    // dd($request->all());
     $apotekerId = Auth::id();
     $penjualan = new Penjualan();
-    $penjualan->id_customer = $request->get('id_customer');
-    $penjualan->id_apoteker = $apotekerId;
-    $penjualan->id_jasa = $request->get('id_jasa');
+    $penjualan->id_customer = $request->get('customer');
+    $penjualan->id_dokter = $request->get('dokter');
+    $penjualan->id_apoteker = 1;
     $penjualan->tanggal = date('Y-m-d H:i:s');
     $penjualan->save();
     $listDetail = [];
@@ -30,13 +31,19 @@ class KasirController extends Controller
         'id_obat' => $request->get('ids')[$i],
         'satuan' => $request->get('satuan')[$i],
         'kuantitas' => $request->get('kuantitas')[$i],
-        'harga' => $request->get('harga')[$i]
+        'subtotal' => $request->get('harga')[$i]
       ];
-
+      if ($request->get('type') === 'obat') {
+        array_merge($detail_penjualan, ['id_obat' => $request->get('ids')]);
+      } else if ($request->get('type') === 'resep') {
+        array_merge($detail_penjualan, ['id_resep' => $request->get('ids')]);
+      } else if ($request->get('type') === 'jasa') {
+        array_merge($detail_penjualan, ['id_jasa' => $request->get('ids')]);
+      }
       $listDetail[] = $detail_penjualan;
     }
     $penjualan->detail_penjualan()->createMany($listDetail);
 
-    return redirect()->route('penjualan.index');
+    return redirect()->route('kasir.index')->with('msg-success', 'Transaksi berhasil! Klik link berikut untuk melihat transaksi <u><a class=""href="penjualan/' . $penjualan->id_penjualan . '">Laman Detail Penjualan</a></u>');
   }
 }

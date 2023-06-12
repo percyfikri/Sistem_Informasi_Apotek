@@ -19,6 +19,7 @@ class ResepObat extends Model
     'deskripsi',
     'tanggal',
     'status',
+
   ];
 
   protected $casts = [
@@ -38,12 +39,12 @@ class ResepObat extends Model
     return $this->belongsTo(Pengguna::class, 'id_customer', 'id_pengguna');
   }
 
-  public function detail_resep()
+  public function detail_penjualan()
   {
-    return $this->hasMany(DetailResep::class, 'id_resep');
+    return $this->hasMany(Penjualan::class, 'id_resep');
   }
 
-  public function detailResep()
+  public function detail_resep()
   {
     return $this->hasOne(DetailResep::class, 'id_resep');
   }

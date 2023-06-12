@@ -3,6 +3,7 @@
 use App\Http\Controllers\AutocompleteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JasaController;
 use App\Http\Controllers\KasirController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\DetailPenjualanController;
 use App\Http\Controllers\DetailResepController;
+use App\Http\Controllers\DokterController;
 use App\Http\Controllers\ResepObatController;
 use App\Http\Controllers\StokObatController;
 use App\Http\Controllers\RacikanController;
@@ -49,9 +51,9 @@ Route::controller(LoginController::class)->group(function () {
 // Middleware Login
 Route::group(['middleware' => ['auth']], function () {
   Route::group(['middleware' => ['CekUserLogin:apoteker']], function () {
-    Route::resource('dashboard', DashboardController::class);
   });
 });
+Route::resource('dashboard', DashboardController::class);
 
 // Route Laporan PDF Resep Obat
 Route::get('/resep-obat/cetak_pdf', [ResepObatController::class, 'cetak_pdf']);
@@ -101,13 +103,17 @@ Route::resource('obat', ObatController::class);
 
 
 // Stok Obat
-Route::delete('stok_obat/{id_obat}/{satuan}',[StokObatController::class,'destroy']);
-Route::resource('stok_obat', StokObatController::class)->except(['destroy','create']);
-Route::get('stok_obat/${id_obat}/create', [StokObatController::class,'create'])->name('stok_obat.create');
+Route::delete('stok_obat/{id_obat}/{satuan}', [StokObatController::class, 'destroy']);
+Route::resource('stok_obat', StokObatController::class)->except(['destroy', 'create']);
+Route::get('stok_obat/${id_obat}/create', [StokObatController::class, 'create'])->name('stok_obat.create');
 
 
 //Resep Obat
 Route::resource('resep-obat', ResepObatController::class);
+Route::resource('customer', CustomerController::class);
+Route::resource('dokter', DokterController::class);
+
+
 
 // Detail Resep Obat
 Route::resource('detail-resep', DetailResepController::class);

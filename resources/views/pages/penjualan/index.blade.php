@@ -52,7 +52,6 @@
                                                 <th>No</th>
                                                 <th>Nama Customer</th>
                                                 <th>Nama Apoteker</th>
-                                                <th>Nama Jasa</th>
                                                 <th>Tanggal</th>
                                                 <th>Action</th>
                                             </tr>
@@ -103,11 +102,7 @@
                         data: 'apoteker.nama',
                         name: 'apoteker.nama'
                     },
-                    {
-                        data: 'jasa.nama_jasa',
-                        defaultContent: '',
-                        name: 'jasa.nama_jasa'
-                    },
+                  
                     {
                         data: 'tanggal',
                         name: 'tanggal'

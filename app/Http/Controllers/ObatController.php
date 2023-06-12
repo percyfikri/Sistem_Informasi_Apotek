@@ -148,4 +148,8 @@ class ObatController extends Controller
     $stoks = Obat::with('stok_obat')->where('id_obat', '=', $id)->get();
     return response()->json($stoks);
   }
+  public function getAllObat()
+  {
+    return DataTables::of(Obat::with('stok_obat', 'stok_obat.obat')->withCount('stok_obat as stok_obat_count')->having('stok_obat_count', '>', 0)->get())->toJson();
+  }
 }

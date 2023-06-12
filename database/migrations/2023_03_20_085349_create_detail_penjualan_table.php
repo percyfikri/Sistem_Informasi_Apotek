@@ -20,6 +20,8 @@ return new class extends Migration
       $table->foreign('id_resep')->references('id_resep')->on('resep_obat')->onDelete('cascade');
       $table->unsignedInteger('id_obat')->nullable();
       $table->foreign('id_obat')->references('id_obat')->on('obat')->onDelete('cascade');
+      $table->unsignedInteger('id_jasa')->nullable();
+      $table->foreign('id_jasa')->references('id_jasa')->on('jasa')->onDelete('cascade');
       $table->integer('kuantitas');
       $table->string('satuan', 20);
       $table->decimal('subtotal', 12, 2);

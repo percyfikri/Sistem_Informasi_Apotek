@@ -21,7 +21,8 @@ return new class extends Migration
       $table->unsignedInteger('id_racikan')->nullable();
       $table->foreign('id_racikan')->references('id_racikan')->on('racikan')->onDelete('cascade');
       $table->integer('kuantitas');
-      $table->integer('satuan');
+      $table->string('satuan', 20);
+
       $table->decimal('harga', 12, 2);
       $table->timestamps();
     });

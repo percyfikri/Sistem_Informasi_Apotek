@@ -20,18 +20,18 @@
 
             <div class="section-body">
                 @if ($errors->any())
-                <div class="pt-3">
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <ul>
-                        @foreach ($errors->all() as $item)
-                            <li>{{ $item }}</li>
-                        @endforeach
-                        </ul>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="pt-3">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
                 @endif
                 <div class="card">
                     <div class="card-header">
@@ -55,13 +55,7 @@
                                 @error('umur') is-invalid @enderror"
                                     value="{{ old('umur') }}">
                             </div>
-                            {{-- <div class="form-group">
-                                <label>Alamat</label>
-                                <input type="text" name="alamat"
-                                    class="form-control @if (old('alamat')) is-valid @endif
-                                @error('alamat') is-invalid @enderror"
-                                    value="{{ old('alamat') }}">
-                            </div> --}}
+
                             <div class="form-group">
                                 <label>Alamat</label>
                                 <textarea name="alamat"
@@ -112,34 +106,5 @@
     <script src="{{ asset('library/cleave.js/dist/cleave.min.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
-    <script type="text/javascript">
-        // $('#id-apoteker').select2({
-        //     placeholder: 'Pilih Apoteker',
-        //     ajax: {
-        //         url: '/obat/autocomplete/apoteker',
-        //         dataType: 'json',
-        //         delay: 250,
-        //         processResults: function(data) {
-        //             return {
-        //                 results: $.map(data, function(item) {
-        //                     return {
-        //                         text: item.nama,
-        //                         id: item.id_pengguna
-        //                     }
-        //                 })
-        //             };
-        //         },
-        //         cache: true
-        //     }
-        // });
-        // $('#id-apoteker').on('change', function(e) {
-        //     var title = $(this).select2('data')[0].text;
-        //     $('#nama-apoteker').val(title);
-        // });
-
-        // new Cleave('.currency', {
-        //     numeral: true,
-        //     numeralThousandsGroupStyle: 'thousand'
-        // });
-    </script>
+    <script type="text/javascript"></script>
 @endpush

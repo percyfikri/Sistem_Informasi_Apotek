@@ -25,11 +25,11 @@
                     </table>
                 </div>
             </div>
-            <div class="modal-footer bg-whitesmoke br">
-                <button type="" class="btn btn-icon btn-primary icon-left" data-toggle="modal"
-                    data-target="#create-jasa"> <i class="fas fa-plus">Tambah</i>
+            {{-- <div class="modal-footer bg-whitesmoke br">
+                <button type="" class="btn btn-icon btn-primary icon-left" data-dismiss="modal"
+                    data-toggle="modal" data-target="#create-jasa"> <i class="fas fa-plus">Tambah</i>
                 </button>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

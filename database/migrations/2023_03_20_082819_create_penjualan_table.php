@@ -19,8 +19,8 @@ return new class extends Migration
       $table->foreign('id_customer')->references('id_pengguna')->on('pengguna')->onDelete('cascade');
       $table->unsignedInteger('id_apoteker');
       $table->foreign('id_apoteker')->references('id_pengguna')->on('pengguna')->onDelete('cascade');
-      $table->unsignedInteger('id_jasa')->nullable();
-      $table->foreign('id_jasa')->references('id_jasa')->on('jasa')->onDelete('cascade');
+      $table->unsignedInteger('id_dokter');
+      $table->foreign('id_dokter')->references('id_pengguna')->on('pengguna')->onDelete('cascade')->nullable();
       $table->datetime('tanggal');
       $table->timestamps();
     });

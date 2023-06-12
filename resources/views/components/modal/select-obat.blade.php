@@ -26,13 +26,13 @@
                     </table>
                 </div>
             </div>
-            <div class="modal-footer bg-whitesmoke br">
+            {{-- <div class="modal-footer bg-whitesmoke br">
                 <button type="" class="btn btn-icon btn-primary icon-left" data-dismiss="modal"
                     data-toggle="modal" data-target="#create-obat"> <i class="fas fa-plus">Tambah</i>
                 </button>
 
 
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
@@ -52,7 +52,7 @@
                 [1, "asc"]
             ],
 
-            ajax: "/obat",
+            ajax: "/api/obat",
             columns: [{
                     data: "nama_obat",
                     name: "nama_obat",

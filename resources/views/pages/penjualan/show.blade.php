@@ -24,54 +24,45 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-header-action">
-                                    <a href="{{ route('detail_penjualan.show', $penjualan->id_penjualan) }}" class="btn btn-icon btn-success icon-left"><i
-                                        class="fas fa-pills"></i>
-                                    Detail Penjualan</a>
+                                    <a href="{{ route('detail_penjualan.show', $penjualan->id_penjualan) }}"
+                                        class="btn btn-icon btn-success icon-left"><i class="fas fa-pills"></i>
+                                        Detail Penjualan</a>
                                 </div>
                             </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="form-group col-12">
-                                            <label>Nama Customer</label>
-                                            <input readonly type="text"
-                                                class="form-control"
-                                                value="{{ $penjualan->customer->nama }}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-12">
-                                            <label>Nama Apoteker</label>
-                                            <input readonly type="text"
-                                                class="form-control"
-                                                value="{{ $penjualan->apoteker->nama }}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-12">
-                                            <label>Nama Jasa</label>
-                                            <input readonly type="text"
-                                                class="form-control"
-                                                value="{{ $penjualan->jasa->nama_jasa }}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-12">
-                                            <label>Tanggal</label>
-                                            <input readonly type="datetime"
-                                                class="form-control"
-                                                value="{{ $penjualan->tanggal }}">
-                                        </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Nama Customer</label>
+                                        <input readonly type="text" class="form-control"
+                                            value="{{ $penjualan->customer->nama }}">
                                     </div>
                                 </div>
-                                <div class="card-footer text-right">
-                                    <a class="btn btn-primary float-left" href="{{ route('penjualan.index') }}">Kembali</a></div>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Nama Apoteker</label>
+                                        <input readonly type="text" class="form-control"
+                                            value="{{ $penjualan->apoteker->nama }}">
+                                    </div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Tanggal</label>
+                                        <input readonly type="datetime" class="form-control"
+                                            value="{{ $penjualan->tanggal }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-right">
+                                <a class="btn btn-primary float-left" href="{{ route('penjualan.index') }}">Kembali</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <x-modal.confirm-delete />
+    </div>
+    </section>
+    <x-modal.confirm-delete />
 
     </div>
 @endsection

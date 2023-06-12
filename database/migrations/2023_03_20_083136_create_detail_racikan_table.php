@@ -19,7 +19,7 @@ return new class extends Migration
       $table->unsignedInteger('id_obat')->nullable();
       $table->foreign('id_obat')->references('id_obat')->on('obat')->onDelete('cascade');
       $table->integer('kuantitas');
-      $table->integer('satuan');
+      $table->string('satuan', 20);
       $table->timestamps();
     });
   }
