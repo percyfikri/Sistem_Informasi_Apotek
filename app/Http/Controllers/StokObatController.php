@@ -71,7 +71,7 @@ class StokObatController extends Controller
         $stok->obat()->associate($obat);
         $stok->save();
         //jika data berhasil ditambahkan, akan kembali ke halaman utama
-        return redirect()->route('stok_obat.index')->with('msg-success', 'Berhasil menambahkan data');
+        return redirect()->route('stok_obat.show',$obat)->with('msg-success', 'Berhasil menambahkan data');
     }
 
     /**
@@ -139,7 +139,7 @@ class StokObatController extends Controller
         $stok->obat()->associate($obat);
         $stok->save();
         //jika data berhasil ditambahkan, akan kembali ke halaman utama
-        return redirect()->to('stok_obat')->with('msg-success', 'Berhasil melakukan update data');
+        return redirect()->route('stok_obat.show',$stok->id_obat)->with('msg-success', 'Berhasil melakukan update data');
         // return redirect()->route('stok_obat.index',['stok_obat'=>$stok->id_obat])->with('msg-success', 'Berhasil merubah data');
     }
 
@@ -153,7 +153,7 @@ class StokObatController extends Controller
     {
         //fungsi eloquent untuk menghapus data
         StokObat::find($id_obat)->delete();
-        return redirect()->route('stok_obat.index')
+        return redirect()->route('stok_obat.show',$id_obat)
         -> with('msg-success', 'Data Berhasil Dihapus', $satuan);
     }
     public function tambah()
