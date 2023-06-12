@@ -45,33 +45,34 @@ class StokObatController extends Controller
    * @return \Illuminate\Http\Response
    */
   public function store(Request $request)
-  {
-    //melakukan validasi data
-    $request->validate(
-      [
-        'id_obat' => 'required',
-        'satuan' => 'required',
-        'kuantitas' => 'required',
-        'harga' => 'required',
-      ],
-      [
-        'id_obat.required' => 'Nama Obat wajib diisi',
-        'satuan.required' => 'Satuan Obat wajib diisi',
-        'kuantitas.required' => 'Kuantitas Obat wajib diisi',
-        'harga.required' => 'Harga Obat wajib diisi',
-      ]
-    );
-    $stok = new StokObat;
-    $stok->satuan = $request->get('satuan');
-    $stok->kuantitas = $request->get('kuantitas');
-    $stok->harga = $request->get('harga');
+    {
+        //melakukan validasi data
+        $request->validate([
+            'id_obat' => 'required',
+            'satuan' => 'required',
+            'kuantitas' => 'required',
+            'harga' => 'required',
+        ],
+        [
+            'id_obat.required' => 'Nama Obat wajib diisi',
+            'satuan.required' => 'Satuan Obat wajib diisi',
+            'kuantitas.required' => 'Kuantitas Obat wajib diisi',
+            'harga.required' => 'Harga Obat wajib diisi',
+        ]);
+        $stok = new StokObat;
+        $stok->satuan = $request->get('satuan');
+        $stok->kuantitas = $request->get('kuantitas');
+        $stok->harga = $request->get('harga');
 
-    //fungsi eloquent untuk menambah data dengan relasi belongsTo
-    $stok->obat()->associate($obat);
-    $stok->save();
-    //jika data berhasil ditambahkan, akan kembali ke halaman utama
-    return redirect()->route('stok_obat.show', $obat)->with('msg-success', 'Berhasil menambahkan data');
-  }
+        $obat = new Obat;
+        $obat->id_obat = $request->get('id_obat');
+
+        //fungsi eloquent untuk menambah data dengan relasi belongsTo
+        $stok->obat()->associate($obat);
+        $stok->save();
+        //jika data berhasil ditambahkan, akan kembali ke halaman utama
+        return redirect()->route('stok_obat.show',$obat)->with('msg-success', 'Berhasil menambahkan data');
+    }
 
 
 
