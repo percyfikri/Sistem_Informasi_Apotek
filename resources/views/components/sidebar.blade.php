@@ -8,22 +8,18 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
-            <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
-                <ul class="dropdown-menu">
-                    <li class='{{ Request::is('dashboard-general-dashboard') ? 'active' : '' }}'>
-                        <a class="nav-link" href="{{ url('dashboard') }}">General Dashboard</a>
-                    </li>
-                    <li class="{{ Request::is('dashboard-ecommerce-dashboard') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('dashboard-ecommerce-dashboard') }}">Ecommerce Dashboard</a>
-                    </li>
-                </ul>
+            <li class="{{ Request::is('dashboard') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('dashboard') }}"><i class="fas fa-fire"></i>
+                    <span>Dashboard</span></a>
             </li>
             <li class="menu-header">Apoteker</li>
-            <li class="{{ Request::is('pengguna') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('pengguna') }}"><i class="fas fa-user"></i>
-                    <span>Pengguna</span></a>
-            </li>
+            @if (Auth::user()->status == 'admin')
+                <li class="{{ Request::is('pengguna') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ url('pengguna') }}"><i class="fas fa-user"></i>
+                        <span>Pengguna</span></a>
+                </li>
+            @endif
+
             <li class="{{ Request::is('kasir') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('kasir') }}"><i class="fas fa-cash-register"></i>
                     <span>Kasir</span></a>

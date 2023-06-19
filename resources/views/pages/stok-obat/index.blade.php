@@ -20,16 +20,16 @@
             </div>
             <div class="section-body">
                 @if (session('msg-success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
-                    <div class="alert-body">
-                        <div class="alert-title">Sukses</div>
-                        {{ session('msg-success') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
+                        <div class="alert-body">
+                            <div class="alert-title">Sukses</div>
+                            {{ session('msg-success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
                 @endif
                 <div class="row">
                     <div class="col-12">
@@ -38,12 +38,12 @@
                                 <h4>Data Stok Obat</h4>
                                 <div class="card-header-action">
 
-                                    <a href="{{ url('stok_obat/tambah') }}" class="btn btn-icon btn-primary icon-left"><i
-                                        class="fas fa-plus"></i>
-                                    Tambah</a>
-                                    <a href="{{ route('stok_obat.create',$obat->id_obat) }}" class="btn btn-icon btn-primary icon-left"><i
+                                    <a href="{{ url('stok-obat/tambah') }}" class="btn btn-icon btn-primary icon-left"><i
                                             class="fas fa-plus"></i>
-                                    Tambah Stok</a>
+                                        Tambah</a>
+                                    <a href="{{ route('stok-obat.create', $obat->id_obat) }}"
+                                        class="btn btn-icon btn-primary icon-left"><i class="fas fa-plus"></i>
+                                        Tambah Stok</a>
 
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                 order: [
                     [1, 'asc']
                 ],
-                ajax: '{!! route('stok_obat.show',$obat) !!}',
+                ajax: '{!! route('stok-obat.show', $obat) !!}',
                 columns: [{
                         data: null,
                         orderable: false

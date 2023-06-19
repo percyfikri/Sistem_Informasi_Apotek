@@ -29,13 +29,8 @@ class LoginController extends Controller
 
     if (Auth::attempt($kredensial)) {
       $request->session()->regenerate();
-      $user = Auth::user();
 
-      if ($user->status == 'apoteker') {
-        return redirect()->route('dashboard');
-      }
-
-      return redirect()->intended('/');
+      return redirect()->route('dashboard');
     }
 
     return back()->withErrors([

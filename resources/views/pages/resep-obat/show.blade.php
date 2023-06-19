@@ -23,77 +23,74 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-header-action">
-                                    {{-- <a href="{{ route('stok_obat.show', $resepObat->id_obat) }}" class="btn btn-icon btn-success icon-left"><i
+                                    {{-- <a href="{{ route('stok-obat.show', $resepObat->id_obat) }}" class="btn btn-icon btn-success icon-left"><i
                                         class="fas fa-pills"></i>
                                     Stok Obat</a>     --}}
-                                    <a href="{{ route('resep-obat.edit', $resepObat->id_resep) }}" class="btn btn-icon btn-warning icon-left"><i
-                                            class="far fa-edit"></i>
+                                    <a href="{{ route('resep-obat.edit', $resepObat->id_resep) }}"
+                                        class="btn btn-icon btn-warning icon-left"><i class="far fa-edit"></i>
                                         Edit</a>
                                     {{-- <button class="btn btn-danger btn-icon icon-left"
                                         data-action="{{ route('resep-obat.destroy', $resepObat->id_resep) }}" data-toggle="modal"
                                         data-target="#confirm-delete-modal"> <i class="fas fa-trash"></i>
                                         Delete</button> --}}
-                                    <a href="{{ route('detail-resep.show', $resepObat->id_resep) }}" class="btn btn-icon btn-primary icon-left"><i
-                                        class="fas fa-circle-info"></i>
-                                    Detail Resep</a>
+                                    <a href="{{ route('detail-resep.show', $resepObat->id_resep) }}"
+                                        class="btn btn-icon btn-primary icon-left"><i class="fas fa-circle-info"></i>
+                                        Detail Resep</a>
                                 </div>
                             </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="form-group col-12">
-                                            <label>Nama Resep</label>
-                                            <input readonly type="text"
-                                                class="form-control"
-                                                value="{{ $resepObat->nama_resep }}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-12">
-                                            <label>Customer</label>
-                                            <input readonly type="text"
-                                                class="form-control"
-                                                value="{{ $resepObat->customer->nama }}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-12">
-                                            <label>Dokter</label>
-                                            <input readonly type="text"
-                                                class="form-control"
-                                                value="{{ $resepObat->dokter->nama }}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-12">
-                                            <label>Status</label>
-                                            <input readonly type="text"
-                                                class="form-control"
-                                                value="{{ $resepObat->status }}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-12">
-                                            <label>Tanggal</label>
-                                            <input readonly type="text" class="form-control datepicker"
-                                                value="{{ \Carbon\Carbon::parse($resepObat->tanggal)->format('d-m-Y') }}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-12">
-                                            <label>Deskripsi</label>
-                                            <textarea readonly class="form-control" style="resize: none; height: auto;">{{ $resepObat->deskripsi }}</textarea>
-                                        </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Nama Resep</label>
+                                        <input readonly type="text" class="form-control"
+                                            value="{{ $resepObat->nama_resep }}">
                                     </div>
                                 </div>
-                                <div class="card-footer text-right">
-                                    <a class="btn btn-primary float-left" href="{{ route('resep-obat.index') }}">Kembali</a></div>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Customer</label>
+                                        <input readonly type="text" class="form-control"
+                                            value="{{ $resepObat->customer->nama }}">
+                                    </div>
                                 </div>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Dokter</label>
+                                        <input readonly type="text" class="form-control"
+                                            value="{{ $resepObat->dokter->nama }}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Status</label>
+                                        <input readonly type="text" class="form-control"
+                                            value="{{ $resepObat->status }}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Tanggal</label>
+                                        <input readonly type="text" class="form-control datepicker"
+                                            value="{{ \Carbon\Carbon::parse($resepObat->tanggal)->format('d-m-Y') }}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Deskripsi</label>
+                                        <textarea readonly class="form-control" style="resize: none; height: auto;">{{ $resepObat->deskripsi }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-right">
+                                <a class="btn btn-primary float-left" href="{{ route('resep-obat.index') }}">Kembali</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <x-modal.confirm-delete />
+    </div>
+    </section>
+    <x-modal.confirm-delete />
 
     </div>
 @endsection

@@ -20,31 +20,34 @@
 
             <div class="section-body">
                 @if ($errors->any())
-                <div class="pt-3">
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <ul>
-                        @foreach ($errors->all() as $item)
-                            <li>{{ $item }}</li>
-                        @endforeach
-                        </ul>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="pt-3">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
                 @endif
                 <div class="card">
                     <div class="card-header">
                         <h4>Tambah Stok Obat</h4>
 
                     </div>
-                    <form action="{{ route('stok_obat.store') }}" method="POST">
+                    <form action="{{ route('stok-obat.store') }}" method="POST">
                         <div class="card-body">
                             @csrf
                             <div class="form-group">
                                 <label for="id_obat">Nama Obat</label>
-                                <input hidden readonly type="text" name="id_obat" class="form-control" value="{{ $stokObat->id_obat }}">
-                                <input readonly type="text" name="nama obat" class="form-control" value="{{ $stokObat->obat->nama_obat }}">
+                                <select class="form-control" name="id_obat" id="id_obat">
+                                    @foreach ($obat as $obt)
+                                        <option value="{{ $obt->id_obat }}">{{ $obt->nama_obat }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Satuan</label>

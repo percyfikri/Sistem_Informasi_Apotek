@@ -43,7 +43,6 @@ Route::middleware(['auth.role:admin'])->group(function () {
 });
 Route::middleware(['auth.role:apoteker'])->group(function () {
   Route::get('dashboard', [PageController::class, 'dashboard'])->name('dashboard');
-  // Route::redirect('/', '/dashboard');
   Route::prefix('autocomplete')->as('autocomplete.')->controller(AutocompleteController::class)->group(function () {
     Route::get('apoteker', 'getApoteker')->name('apoteker');
     Route::get('customer', 'getCustomer')->name('customer');
@@ -60,7 +59,7 @@ Route::middleware(['auth.role:apoteker'])->group(function () {
       Route::get('racikan', [RacikanController::class, 'cetak_pdf'])->name('racikan');
     });
   });
-  Route::get('stok_obat/tambah', [StokObatController::class, 'tambah']);
+  Route::get('stok-obat/tambah', [StokObatController::class, 'tambah']);
   Route::resource('kasir', KasirController::class)->only(['index', 'store']);
   Route::resource('penjualan', PenjualanController::class);
   Route::resource('detail-penjualan', DetailPenjualanController::class);
@@ -68,7 +67,7 @@ Route::middleware(['auth.role:apoteker'])->group(function () {
   Route::resource('obat', ObatController::class);
   Route::delete('stok-obat/{id_obat}/{satuan}', [StokObatController::class, 'destroy']);
   Route::resource('stok-obat', StokObatController::class)->except(['destroy', 'create']);
-  Route::get('stok-obat/${id_obat}/create', [StokObatController::class, 'create'])->name('stok_obat.create');
+  Route::get('stok-obat/${id_obat}/create', [StokObatController::class, 'create'])->name('stok-obat.create');
   Route::resource('resep-obat', ResepObatController::class);
   Route::resource('customer', CustomerController::class);
   Route::resource('dokter', DokterController::class);

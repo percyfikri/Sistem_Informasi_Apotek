@@ -181,7 +181,7 @@ class ResepObatController extends Controller
 
   public function getAllResep()
   {
-    return DataTables::of(ResepObat::with('detail_resep', 'detail_resep.obat.stok_obat')->withSum('detail_resep as total', 'harga')->whereHas('detail_resep.obat.stok_obat', function ($query) {
+    return DataTables::of(ResepObat::with('detail_resep', 'detail_resep.obat.stok-obat')->withSum('detail_resep as total', 'harga')->whereHas('detail_resep.obat.stok-obat', function ($query) {
       $query->where('kuantitas', '>', 0);
     })
       ->get())->toJson();

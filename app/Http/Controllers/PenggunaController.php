@@ -193,6 +193,9 @@ class PenggunaController extends Controller
    */
   public function destroy(Pengguna $pengguna)
   {
+    if (Pengguna::count() == 1 && $pengguna->status == 'admin') {
+      return back()->with('msg-error', 'Gagal menghapus data pengguna. Pengguna merupakan admin master' . $pengguna->nama);
+    }
     $pengguna->delete();
     return redirect()->route('pengguna.index')->with('msg-success', 'Berhasil menghapus data pengguna ' . $pengguna->nama);
   }
