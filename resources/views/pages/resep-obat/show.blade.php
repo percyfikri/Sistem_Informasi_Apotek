@@ -10,11 +10,11 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Detail Resep Obat</h1>
+                <h1>Informasi Resep Obat</h1>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="{{ url('dashboard-general-dashboard') }}">Dashboard</a></div>
                     <div class="breadcrumb-item active"><a href="{{ route('resep-obat.index') }}">Resep Obat</a></div>
-                    <div class="breadcrumb-item">Detail Resep Obat</div>
+                    <div class="breadcrumb-item">Informasi Resep Obat</div>
                 </div>
             </div>
             <div class="section-body">

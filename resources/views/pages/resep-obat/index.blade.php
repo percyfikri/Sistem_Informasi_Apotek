@@ -41,7 +41,7 @@
                                     <a href="{{ route('resep-obat.create') }}" class="btn btn-icon btn-primary icon-left"><i
                                             class="fas fa-plus"></i>
                                         Tambah</a>
-                                    <a href="{{ url('resep-obat/cetak_pdf') }}" class="btn btn-icon btn-primary icon-left"><i class="fas fa-print"></i>
+                                    <a href="{{ url('resep-obat/cetak_pdf') }}" target="_blank" class="btn btn-icon btn-primary icon-left"><i class="fas fa-print"></i>
                                         Print PDF</a>
                                 </div>
                             </div>
@@ -123,13 +123,12 @@
                         render: function(data, type, row) {
                             return `
                             <div class="buttons text-center">
-                                <a href="${window.location.href}/${data.id_resep}" class="btn btn-primary d-block mb-2"><i class="fas fa-circle-info"></i> Detail</a>
+                                <a href="${window.location.href}/${data.id_resep}" class="btn btn-primary btn-block mb-2"><i class="fas fa-circle-info"></i> Detail</a>
 
-                                <a href="${window.location.href}/${data.id_resep}/edit" class="btn btn-warning d-block mb-2"><i class="fas fa-pencil-alt"></i> Edit</a>
-
-                                <button class="btn btn-danger d-block mb-2" data-action="${window.location.href}/${data.id_resep}" data-toggle="modal" data-target="#confirm-delete-modal"><i class="fas fa-trash"></i> Delete</button>
+                                <a href="${window.location.href}/${data.id_resep}/edit" class="btn btn-warning btn-block mb-2"><i class="fas fa-pencil-alt"></i> Edit</a>
+                                                            
+                                <button class="btn btn-danger btn-block mb-2" data-action="${window.location.href}/${data.id_resep}" data-toggle="modal" data-target="#confirm-delete-modal"><i class="fas fa-trash"></i> Delete</button>
                             </div>`;
-;
                         }
                     },
 
