@@ -16,7 +16,7 @@
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="{{ url('dashboard-general-dashboard') }}">Dashboard</a></div>
                     <div class="breadcrumb-item active"><a href="{{ route('resep-obat.index') }}">Resep Obat</a></div>
-                    <div class="breadcrumb-item"><a href="{{ route('resep-obat.index') }}">Detail Resep Obat</a></div>
+                    <div class="breadcrumb-item"><a href="{{ route('resep-obat.index') }}">Informasi Resep Obat</a></div>
                     <div class="breadcrumb-item">Detail Resep Obat</div>
                 </div>
             </div>
@@ -39,12 +39,14 @@
                             <div class="card-header">
                                 <h4>Data Resep Obat</h4>
                                 <div class="card-header-action">
-
+                                    <a href="{{ route('detail-resep.create',$resepObat->id_resep) }}" class="btn btn-icon btn-primary icon-left"><i
+                                        class="fas fa-plus"></i>
+                                    Tambah</a>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table-striped table" id="detail-resep-table">
+                                    <table class="table-striped table table-bordered w-100" id="detail-resep-table" >
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -54,6 +56,7 @@
                                                 <th>Kuantitas</th>
                                                 <th>Satuan</th>
                                                 <th>Harga</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -67,7 +70,6 @@
                 </div>
             </div>
         </section>
-        {{-- {{dd($penjualan)}} --}}
         <x-modal.confirm-delete />
     </div>
 @endsection
@@ -90,7 +92,7 @@
                 order: [
                     [1, 'asc']
                 ],
-                ajax: '{!! route('detail-resep.show', ['detail_resep' => $resepObat->id_resep]) !!}',
+                ajax: '{!! route('detail-resep.show', ['id_resep' => $resepObat->id_resep]) !!}',
                 columns: [{
                         data: null,
                         orderable: false
@@ -119,13 +121,19 @@
                         data: 'harga',
                         name: 'harga'
                     },
-                    // {
-                    //     data: null,
-                    //     orderable: false,
-                    //     render: function(data, type, row) {
-                    //         return `<div class="buttons text-center"></div>`
-                    //     }
-                    // },
+                    {
+                        data: null,
+                        orderable: false,
+                        render: function(data, type, row) {
+                            return `
+                            <div class="buttons text-center">
+                                <a href="${window.location.href}/${data.id_resep}/edit" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
+                                                            
+                                <button class="btn btn-danger" data-action="${window.location.href}/${data.id_resep}" data-toggle="modal" data-target="#confirm-delete-modal"><i class="fas fa-trash"></i></button>
+                            </div>`;
+                        }
+                    },
+                   
                 ],
                 rowCallback: function(row, data, index) {
                     $('td:eq(0)', row).html(index + 1);

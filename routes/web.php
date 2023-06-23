@@ -67,10 +67,14 @@ Route::middleware(['auth.role:apoteker'])->group(function () {
   Route::resource('obat', ObatController::class);
   Route::delete('stok-obat/{id_obat}/{satuan}', [StokObatController::class, 'destroy']);
   Route::resource('stok-obat', StokObatController::class)->except(['destroy', 'create']);
-  Route::get('stok-obat/${id_obat}/create', [StokObatController::class, 'create'])->name('stok-obat.create');
+  Route::get('stok-obat/{id_obat}/create', [StokObatController::class, 'create'])->name('stok-obat.create');
   Route::resource('resep-obat', ResepObatController::class);
   Route::resource('customer', CustomerController::class);
   Route::resource('dokter', DokterController::class);
-  Route::resource('detail-resep', DetailResepController::class);
+  Route::resource('detail-resep', DetailResepController::class)->except(['create', 'store']);
   Route::resource('racikan', RacikanController::class);
 });
+
+Route::get('detail-resep/{id_resep}/create', [DetailResepController::class, 'create'])->name('detail-resep.create');
+Route::get('detail-resep/{id_resep}', [DetailResepController::class, 'show'])->name('detail-resep.show');
+Route::post('/store/{id_resep}', [DetailResepController::class, 'store'])->name('detail-resep.store');
