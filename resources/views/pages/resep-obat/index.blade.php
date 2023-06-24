@@ -123,7 +123,7 @@
                         render: function(data, type, row) {
                             return `
                             <div class="buttons text-center">
-                                <a href="${window.location.href}/${data.id_resep}" class="btn btn-primary btn-block mb-2"><i class="fas fa-circle-info"></i> Detail</a>
+                                <a href="${window.location.href}/${data.id_resep}" class="btn btn-primary btn-block mb-2"><i class="fas fa-circle-info"></i> More</a>
 
                                 <a href="${window.location.href}/${data.id_resep}/edit" class="btn btn-warning btn-block mb-2"><i class="fas fa-pencil-alt"></i> Edit</a>
                                                             

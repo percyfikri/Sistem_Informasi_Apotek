@@ -127,9 +127,9 @@
                         render: function(data, type, row) {
                             return `
                             <div class="buttons text-center">
-                                <a href="${window.location.href}/${data.id_resep}/edit" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
+                                <a href="${window.location.href}/${data.id_detail}/edit" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
                                                             
-                                <button class="btn btn-danger" data-action="${window.location.href}/${data.id_resep}" data-toggle="modal" data-target="#confirm-delete-modal"><i class="fas fa-trash"></i></button>
+                                <button class="btn btn-danger" data-action="${window.location.href}/${data.id_detail}" data-toggle="modal" data-target="#confirm-delete-modal"><i class="fas fa-trash"></i></button>
                             </div>`;
                         }
                     },

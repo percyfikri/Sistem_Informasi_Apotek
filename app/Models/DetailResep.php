@@ -10,6 +10,7 @@ class DetailResep extends Model
   use HasFactory;
 
   protected $table = 'detail_resep';
+  protected $primaryKey = 'id_detail';
 
   protected $fillable = [
     'id_resep',

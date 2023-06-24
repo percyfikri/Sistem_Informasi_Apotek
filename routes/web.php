@@ -77,6 +77,7 @@ Route::middleware(['auth.role:apoteker'])->group(function () {
   Route::resource('detail_racikan', DetailRacikanController::class);
 });
 
-Route::get('detail-resep/{id_resep}/create', [DetailResepController::class, 'create'])->name('detail-resep.create');
 Route::get('detail-resep/{id_resep}', [DetailResepController::class, 'show'])->name('detail-resep.show');
+Route::get('detail-resep/{id_resep}/create', [DetailResepController::class, 'create'])->name('detail-resep.create');
 Route::post('/store/{id_resep}', [DetailResepController::class, 'store'])->name('detail-resep.store');
+Route::delete('detail-resep/{id_resep}/{id_detail}', [DetailResepController::class, 'destroy']);

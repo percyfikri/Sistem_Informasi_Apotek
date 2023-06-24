@@ -16,7 +16,7 @@ class DetailResepController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $id_resep)
+    public function index()
     {
         //
     }
@@ -109,8 +109,10 @@ class DetailResepController extends Controller
      * @param  \App\Models\DetailResep  $detailResep
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DetailResep $detailResep)
+    public function destroy($id_resep, $id_detail)
     {
-        //
+        DetailResep::find($id_detail)->delete();
+        return redirect()->route('detail-resep.show', $id_resep)
+            ->with('msg-success', 'Data Berhasil Dihapus');
     }
 }

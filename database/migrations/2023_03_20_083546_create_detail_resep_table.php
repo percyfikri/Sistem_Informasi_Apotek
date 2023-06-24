@@ -14,6 +14,7 @@ return new class extends Migration
   public function up()
   {
     Schema::create('detail_resep', function (Blueprint $table) {
+      $table->increments('id_detail');
       $table->unsignedInteger('id_resep');
       $table->foreign('id_resep')->references('id_resep')->on('resep_obat')->onDelete('cascade');
       $table->unsignedInteger('id_obat')->nullable();
