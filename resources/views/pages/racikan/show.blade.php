@@ -18,14 +18,23 @@
                 </div>
             </div>
             <div class="section-body">
-                <h2 class="section-title">Detail Racikan Obat, {{ $racikan->nama_racikan }}</h2>
-                <p class="section-lead">
-                    Halaman Detail Racikan Obat {{ $racikan->nama_racikan }}
-                </p>
-
                 <div class="row mt-sm-4">
                     <div class="col-12 col-md-12">
                         <div class="card">
+                                <div class="card-header">
+                                    <div class="card-header-action">
+                                        <a href="{{route('detail_racikan.show', $racikan->id_racikan) }}" class="btn btn-icon btn-success icon-left"><i
+                                        class="fas fa-pills"></i>
+                                        Detail Racikan</a>
+                                        <a href="{{ route('racikan.edit', $racikan->id_racikan) }}" class="btn btn-icon btn-warning icon-left"><i
+                                            class="far fa-edit"></i>
+                                        Edit</a>
+                                        <button class="btn btn-danger btn-icon icon-left"
+                                        data-action="{{ route('racikan.destroy', $racikan->id_racikan) }}" data-toggle="modal"
+                                        data-target="#confirm-delete-modal"> <i class="fas fa-trash"></i>
+                                        Delete</button>
+                                    </div>
+                                </div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="form-group col-12">

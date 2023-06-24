@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Halaman Data Racikan')
+@section('title', 'Halaman Data Obat Racikan')
 
 @push('style')
     <link rel="stylesheet" href="{{ asset('library/datatables/media/css/dataTables.bootstrap4.min.css') }}">
@@ -11,11 +11,12 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Racikan</h1>
+                <h1>Detail Obat Racikan</h1>
 
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="{{ url('dashboard-general-dashboard') }}">Dashboard</a></div>
-                    <div class="breadcrumb-item">Racikan</a></div>
+                    <div class="breadcrumb-item"><a href="{{ route('racikan.index') }}">Racikan</a></div>
+                    
                 </div>
             </div>
             <div class="section-body">
@@ -35,12 +36,10 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Data Racikan</h4>
+                                <h4>Data Obat Racikan</h4>
+
                                 <div class="card-header-action">
-                                <a href="{{ url('racikan/cetak_pdf') }}" class="btn btn-icon btn-primary icon-left">
-                                        <i class="fas fa-print"></i>
-                                        Print PDF</a>
-                                    <a href="{{ route('racikan.create') }}" class="btn btn-icon btn-primary icon-left"><i
+                                    <a href="{{ route('detail_racikan.create') }}" class="btn btn-icon btn-primary icon-left"><i
                                             class="fas fa-plus"></i>
                                         Tambah</a>
 
@@ -48,15 +47,15 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table-striped table" id="racikan-table">
+                                    <table class="table-striped table" id="users-table">
                                         <thead>
                                             <tr>
-                                                <th>No</th>
                                                 <th>Nama Racikan</th>
-                                                <th>Harga</th>
-                                                <th>Catatan</th>
+                                                <th>Nama Obat</th>
+                                                <th>Kuantitas</th>
+                                                <th>Satuan</th>
+                                               
                                                 <th>Action</th>
-                                                
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -82,8 +81,9 @@
     <script src="{{ asset('js/page/modules-datatables.js') }}"></script>
 
     <script>
+        
         $(function() {
-            $('#racikan-table').DataTable({
+            $('#users-table').DataTable({
                 processing: true,
                 serverSide: true,
                 paging: true,
@@ -92,44 +92,40 @@
                 order: [
                     [1, 'asc']
                 ],
-                ajax: '{!! route('racikan.index') !!}',
-                columns: [{
-                        data: null,
-                        orderable: false
+                ajax: '{!! route('detail_racikan.show',$racikan->id_racikan) !!}',
+                columns: [
+                    {
+                        data: 'racikan.nama_racikan',
+                        name: 'racikan.nama_racikan'
                     },
                     {
-                        data: 'nama_racikan',
-                        name: 'nama_racikan'
+                        data: 'obat.nama_obat',
+                        name: 'obat.nama_obat'
                     },
                     {
-                        data: 'harga', 
-                        name: 'harga'
+                        data: 'kuantitas',
+                        name: 'kuantitas'
                     },
                     {
-                        data: 'catatan',
-                        name: 'catatan'
+                        data: 'satuan',
+                        name: 'satuan'
                     },
                     {
                         data: null,
                         orderable: false,
                         render: function(data, type, row) {
                             return `<div class="buttons text-center">
-                                                    <a
-                                                        href="${window.location.href}/${data.id_racikan}" class="btn btn-icon btn-icon-only btn-flat btn-primary"><i
-                                                            class="fas fa-circle-info"></i> Detail</a>
-                                                    <a
-                                                        href="${window.location.href}/${data.id_racikan}/edit"class="btn btn-icon btn-icon-only btn-flat btn-warning"><i
-                                                            class="fas fa-pencil-alt"></i> Edit</a>
-                                                    <button class="btn btn-danger btn-icon btn-icon-only btn-flat"
-                                data-action="${window.location.href}/${data.id_racikan}}}" data-toggle="modal"
-                                data-target="#confirm-delete-modal"> <i class="fas fa-trash"></i> Hapus</button>
+                                                    <button class="btn btn-danger btn-icon icon-left"
+                                data-action="${window.location.href}/${data.id_obat}/${data.satuan}" data-toggle="modal"
+                                data-target="#confirm-delete-modal"> <i class="fas fa-trash"></i>
+                                Delete</button>
                                                 </div>`
                         }
                     },
+
+
                 ],
-                rowCallback: function(row, data, index) {
-                    $('td:eq(0)', row).html(index + 1);
-                }
+              
             });
         });
     </script>

@@ -10,6 +10,7 @@ use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\DetailPenjualanController;
 use App\Http\Controllers\DetailResepController;
+use App\Http\Controllers\DetailRacikanController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ResepObatController;
@@ -73,6 +74,7 @@ Route::middleware(['auth.role:apoteker'])->group(function () {
   Route::resource('dokter', DokterController::class);
   Route::resource('detail-resep', DetailResepController::class)->except(['create', 'store']);
   Route::resource('racikan', RacikanController::class);
+  Route::resource('detail_racikan', DetailRacikanController::class);
 });
 
 Route::get('detail-resep/{id_resep}/create', [DetailResepController::class, 'create'])->name('detail-resep.create');

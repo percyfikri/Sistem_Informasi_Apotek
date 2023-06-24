@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Racikan;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
-
+use PDF;
 class RacikanController extends Controller
 {
     /**
@@ -129,5 +129,11 @@ class RacikanController extends Controller
     {
         $racikan->delete();
         return redirect()->route('racikan.index')->with('msg-success', 'Berhasil menghapus data racikan ' . $racikan->nama_racikan);
+    }
+    public function cetak_pdf()
+    {
+      $racikan = Racikan::all();
+      $pdf = PDF::loadview('pages.racikan.racikan_pdf',['racikan'=>$racikan]);
+      return $pdf->stream();
     }
 }
