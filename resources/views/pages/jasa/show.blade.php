@@ -35,14 +35,33 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <p>{{ $jasa->id_apoteker }}</p>
-                        <p>{{ $jasa->nama_jasa }}</p>
-                        <p>{{ $jasa->tingkatan }}</p>
-                        <p>{{ $jasa->harga }}</p>
-
+                        <div class="row">
+                            <div class="form-group col-12">
+                                <label>Id Apoteker</label>
+                                <input readonly type="text" class="form-control" value="{{ $jasa->id_apoteker }}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-12">
+                                <label>Nama Jasa</label>
+                                <input readonly type="text" class="form-control" value="{{ $jasa->nama_jasa }}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-12">
+                                <label>Tingkatan</label>
+                                <input readonly type="text" class="form-control" value="{{ $jasa->tingkatan }}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-12">
+                                <label>Harga</label>
+                                <input readonly type="text" class="form-control" value="{{ $jasa->harga }}">
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-footer bg-whitesmoke">
-                        This is card footer
+                    <div class="card-footer text-right">
+                        <a class="btn btn-primary float-left" href="{{ route('jasa.index') }}">Kembali</a>
                     </div>
                 </div>
             </div>
