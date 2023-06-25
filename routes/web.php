@@ -81,3 +81,6 @@ Route::get('detail-resep/{id_resep}', [DetailResepController::class, 'show'])->n
 Route::get('detail-resep/{id_resep}/create', [DetailResepController::class, 'create'])->name('detail-resep.create');
 Route::post('/store/{id_resep}', [DetailResepController::class, 'store'])->name('detail-resep.store');
 Route::delete('detail-resep/{id_resep}/{id_detail}', [DetailResepController::class, 'destroy']);
+
+Route::get('/detail-resep/{id_resep}/{id_detail}/edit', [DetailResepController::class, 'edit'])->name('detail-resep.edit');
+Route::post('/detail-resep/{id_resep}/{id_detail}', [DetailResepController::class, 'update'])->name('detail-resep.update');

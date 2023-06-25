@@ -23,16 +23,11 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-header-action">
-                                    {{-- <a href="{{ route('stok-obat.show', $resepObat->id_obat) }}" class="btn btn-icon btn-success icon-left"><i
-                                        class="fas fa-pills"></i>
-                                    Stok Obat</a>     --}}
+                                    
                                     <a href="{{ route('resep-obat.edit', $resepObat->id_resep) }}"
                                         class="btn btn-icon btn-warning icon-left"><i class="far fa-edit"></i>
                                         Edit</a>
-                                    {{-- <button class="btn btn-danger btn-icon icon-left"
-                                        data-action="{{ route('resep-obat.destroy', $resepObat->id_resep) }}" data-toggle="modal"
-                                        data-target="#confirm-delete-modal"> <i class="fas fa-trash"></i>
-                                        Delete</button> --}}
+                                    
                                     <a href="{{ route('detail-resep.show', $resepObat->id_resep) }}"
                                         class="btn btn-icon btn-primary icon-left"><i class="fas fa-circle-info"></i>
                                         Detail Resep</a>

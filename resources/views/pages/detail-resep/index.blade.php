@@ -16,7 +16,8 @@
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="{{ url('dashboard-general-dashboard') }}">Dashboard</a></div>
                     <div class="breadcrumb-item active"><a href="{{ route('resep-obat.index') }}">Resep Obat</a></div>
-                    <div class="breadcrumb-item"><a href="{{ route('resep-obat.index') }}">Informasi Resep Obat</a></div>
+                    {{-- <div class="breadcrumb-item"><a href="{{ route('resep-obat.index') }}">Informasi Resep Obat</a></div> --}}
+                    <div class="breadcrumb-item" style="color: #6777ef" >Informasi Resep Obat</div>
                     <div class="breadcrumb-item">Detail Resep Obat</div>
                 </div>
             </div>

@@ -86,9 +86,12 @@ class DetailResepController extends Controller
      * @param  \App\Models\DetailResep  $detailResep
      * @return \Illuminate\Http\Response
      */
-    public function edit(DetailResep $detailResep)
+    public function edit($id_resep, $id_detail)
     {
-        //
+        $obat = Obat::all();
+        $racikan = Racikan::all();
+        $detailResep = DetailResep::find($id_detail);
+        return view('pages.detail-resep.edit', compact('detailResep', 'obat', 'racikan',));
     }
 
     /**
@@ -98,9 +101,31 @@ class DetailResepController extends Controller
      * @param  \App\Models\DetailResep  $detailResep
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DetailResep $detailResep)
+    public function update(Request $request, $id_resep, $id_detail)
     {
-        //
+                // Validasi input data
+        $validatedData = $request->validate([
+            'id_obat' => 'required',
+            'id_racikan' => 'required',
+            'kuantitas' => 'required',
+            'satuan' => 'required',
+            'harga' => 'required',
+        ]);
+
+        // Simpan data resep obat ke database
+        $detailResep = DetailResep::find($id_detail);
+        // $detailResep = new DetailResep();
+
+        // $detailResep->id_resep = $id_resep;
+        $detailResep->id_obat = $request->id_obat;
+        $detailResep->id_racikan = $request->id_racikan;
+        $detailResep->kuantitas = $request->kuantitas;
+        $detailResep->satuan = $request->satuan;
+        $detailResep->harga = $request->harga;
+        $detailResep->save();
+        
+        // Redirect ke halaman yang diinginkan
+        return redirect()->route('detail-resep.show', $detailResep->id_resep)->with('success', 'Detail Resep Obat berhasil ditambahkan');
     }
 
     /**
