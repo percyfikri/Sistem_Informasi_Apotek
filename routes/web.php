@@ -63,7 +63,7 @@ Route::middleware(['auth.role:apoteker'])->group(function () {
   Route::get('stok-obat/tambah', [StokObatController::class, 'tambah']);
   Route::resource('kasir', KasirController::class)->only(['index', 'store']);
   Route::resource('penjualan', PenjualanController::class);
-  Route::resource('detail-penjualan', DetailPenjualanController::class);
+  Route::resource('detail_penjualan', DetailPenjualanController::class);
   Route::resource('jasa', JasaController::class);
   Route::resource('obat', ObatController::class);
   Route::delete('stok-obat/{id_obat}/{satuan}', [StokObatController::class, 'destroy']);
