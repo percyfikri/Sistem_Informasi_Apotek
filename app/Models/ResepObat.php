@@ -46,6 +46,6 @@ class ResepObat extends Model
 
   public function detail_resep()
   {
-    return $this->hasOne(DetailResep::class, 'id_resep');
+    return $this->hasMany(DetailResep::class, 'id_resep');
   }
 }

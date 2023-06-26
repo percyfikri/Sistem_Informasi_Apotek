@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailResep;
 use App\Models\Pengguna;
 use App\Models\ResepObat;
+use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use PDF;
@@ -164,12 +166,12 @@ class ResepObatController extends Controller
    * @return \Illuminate\Http\Response
    */
 
-  public function cetak_pdf()
-  {
-    $resepObat = ResepObat::all();
-    $pdf = PDF::loadview('pages.resep-obat.resepObat_pdf', ['resepObat' => $resepObat]);
-    return $pdf->stream();
-  }
+  // public function cetak_pdf()
+  // {
+  //   $resepObat = ResepObat::all();
+  //   $pdf = PDF::loadview('pages.resep-obat.resepObat_pdf', ['resepObat' => $resepObat]);
+  //   return $pdf->stream();
+  // }
 
   public function destroy($id_resep)
   {
@@ -185,5 +187,87 @@ class ResepObatController extends Controller
       $query->where('kuantitas', '>', 0);
     })
       ->get())->toJson();
+  }
+
+  public function cetak_pdf()
+  {
+    // Mengambil data dari database atau sumber data lainnya
+    $data = ResepObat::all();
+
+    // Inisialisasi objek Dompdf
+    $dompdf = new Dompdf();
+
+    // Menyiapkan markup HTML yang akan dicetak ke PDF
+    $html = '<html><body>';
+
+    $html .= '<h1 style="text-align: center">Laporan Resep Obat Apotek</h1>'; // Menambahkan judul
+    $html .= '<br>';
+
+    $count = 1; // Variabel hitungan untuk nomor tabel
+
+    foreach ($data as $item) {
+      $subdata = DetailResep::where('id_resep', $item->id_resep)->get();
+
+      // Memeriksa apakah ada data pada id kosong
+      if ($subdata->isEmpty()) {
+        continue; // Lewati iterasi ini jika tidak ada data
+      }
+
+      $html .= '<h3>Data Resep Obat ke-' . $count . '</h3>'; // Menambahkan nomor tabel
+      $count++;
+
+      $html .= '<p><strong>1. Resep     :</strong> ' . ($item->resep ? $item->resep->nama_resep : '-') . '</p>';
+      $html .= '<p><strong>2. Customer  :</strong> ' . ($item->customer ? $item->customer->nama : '-') . '</p>';
+      $html .= '<p><strong>3. Dokter    :</strong> ' . ($item->dokter ? $item->dokter->nama : '-') . '</p>';
+      $html .= '<p><strong>4. Status    :</strong> ' . $item->status . '</p>';
+      $html .= '<p><strong>5. Tanggal   :</strong> ' . date('d-m-Y', strtotime($item->tanggal )). '</p>';
+      $html .= '<p><strong>6. Deskripsi :</strong> ' . $item->deskripsi . '</p>';
+
+      $html .= '<h3>Data Detail Resep Obat</h3>'; // Menambahkan nomor tabel
+
+      $html .= '<table style="border-collapse: collapse; width: 100%; border: 1px solid black;">';
+      $html .= '<tr><th style="border: 1px solid black;">No</th><th style="border: 1px solid black;">Item</th><th style="border: 1px solid black;">Jenis</th><th style="border: 1px solid black;">Kuantitas</th><th style="border: 1px solid black;">Satuan</th><th style="border: 1px solid black;">Harga</th></th><th style="border: 1px solid black;">Subtotal</th></tr>';
+
+      $num = 1; // Variabel hitungan untuk nomor dalam tabel
+
+      if ($item->detail_resep) {
+        foreach ($item->detail_resep as $detailResep) {
+          $html .= '<tr>';
+          $html .= '<td style="border: 1px solid black;">' . $num . '</td>'; // Menambahkan nomor dalam tabel
+          if ($detailResep->resep) {
+            $html .= '<td style="border: 1px solid black;">' . $detailResep->resep?->nama_resep ?? '-' . '</td>';
+            $html .= '<td style="border: 1px solid black;">Resep</td>';
+          } else if ($detailResep->obat) {
+            $html .= '<td style="border: 1px solid black;">' . $detailResep->obat?->nama_obat ?? '-' . '</td>';
+            $html .= '<td style="border: 1px solid black;">Obat</td>';
+          } else if ($detailResep->jasa) {
+            $html .= '<td style="border: 1px solid black;">' . $detailResep->jasa?->nama_jasa ?? '-' . '</td>';
+            $html .= '<td style="border: 1px solid black;">Jasa</td>';
+          }
+          $html .= '<td style="border: 1px solid black;">' . $detailResep->kuantitas . '</td>';
+
+          $html .= '<td style="border: 1px solid black;">' . $detailResep->satuan . '</td>';
+          $html .= '<td style="border: 1px solid black;">' . $detailResep->harga . '</td>';
+          $html .= '<td style="border: 1px solid black;">' . $subTotalHarga = $detailResep->kuantitas * $detailResep->harga . '</td>';
+          $html .= '</tr>';
+
+          $num++; // Menambahkan nomor dalam tabel
+        }
+      }
+
+      $html .= '</table>';
+      $html .= '<br>';
+    }
+
+    $html .= '</body></html>';
+
+    // Memasukkan markup HTML ke objek Dompdf
+    $dompdf->loadHtml($html);
+
+    // Render HTML menjadi PDF
+    $dompdf->render();
+
+    // Mengirimkan hasil PDF ke browser untuk diunduh
+    $dompdf->stream('Cetak-Laporan-Resep Obat.pdf');
   }
 }
