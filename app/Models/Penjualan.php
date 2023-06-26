@@ -18,7 +18,7 @@ class Penjualan extends Model
     'id_penjualan',
     'id_customer',
     'id_apoteker',
-
+    'id_dokter',
     'tanggal',
   ];
 
@@ -30,6 +30,11 @@ class Penjualan extends Model
   public function apoteker()
   {
     return $this->belongsTo(Pengguna::class, 'id_apoteker', 'id_pengguna');
+  }
+
+  public function dokter()
+  {
+    return $this->belongsTo(Pengguna::class, 'id_dokter', 'id_pengguna');
   }
 
   public function detail_penjualan()

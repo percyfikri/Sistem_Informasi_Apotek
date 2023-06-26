@@ -20,16 +20,16 @@
             </div>
             <div class="section-body">
                 @if (session('msg-success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
-                    <div class="alert-body">
-                        <div class="alert-title">Sukses</div>
-                        {{ session('msg-success') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
+                        <div class="alert-body">
+                            <div class="alert-title">Sukses</div>
+                            {{ session('msg-success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
                 @endif
                 <div class="row">
                     <div class="col-12">
@@ -37,12 +37,13 @@
                             <div class="card-header">
                                 <h4>Data Resep Obat</h4>
                                 <div class="card-header-action">
-
+                                    <a href="{{ route('cetak.pdf.resep-obat') }}" target="_blank"
+                                        class="btn btn-icon btn-primary icon-left"><i class="fas fa-print"></i>
+                                        Print PDF</a>
                                     <a href="{{ route('resep-obat.create') }}" class="btn btn-icon btn-primary icon-left"><i
                                             class="fas fa-plus"></i>
                                         Tambah</a>
-                                    <a href="{{ url('resep-obat/cetak_pdf') }}" target="_blank" class="btn btn-icon btn-primary icon-left"><i class="fas fa-print"></i>
-                                        Print PDF</a>
+
                                 </div>
                             </div>
                             <div class="card-body">
