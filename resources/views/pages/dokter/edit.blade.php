@@ -14,7 +14,7 @@
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="{{ url('dashboard-general-dashboard') }}">Dashboard</a></div>
                     <div class="breadcrumb-item active"><a href="{{ route('dokter.index') }}">Dokter</a></div>
-                    <div class="breadcrumb-item"><a href="{{ route('dokter.edit') }}">Edit Dokter</a></div>
+                    <div class="breadcrumb-item">Edit Dokter</div>
                 </div>
             </div>
 

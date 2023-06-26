@@ -53,6 +53,8 @@ Route::middleware(['auth.role:apoteker'])->group(function () {
   Route::prefix('cetak')->as('cetak.')->group(function () {
     Route::prefix('pdf')->as('pdf.')->group(function () {
       Route::get('pengguna', [PenggunaController::class, 'cetak_pdf'])->name('pengguna');
+      Route::get('customer', [CustomerController::class, 'cetak_pdf'])->name('customer');
+      Route::get('dokter', [DokterController::class, 'cetak_pdf'])->name('dokter');
       Route::get('obat', [ObatController::class, 'cetak_pdf'])->name('obat');
       Route::get('penjualan', [PenjualanController::class, 'cetak_pdf'])->name('penjualan');
       Route::get('jasa', [JasaController::class, 'cetak_pdf'])->name('jasa');
@@ -70,6 +72,7 @@ Route::middleware(['auth.role:apoteker'])->group(function () {
   Route::resource('stok-obat', StokObatController::class)->except(['destroy', 'create']);
   Route::get('stok-obat/{id_obat}/create', [StokObatController::class, 'create'])->name('stok-obat.create');
   Route::resource('resep-obat', ResepObatController::class);
+  Route::resource('pengguna', PenggunaController::class);
   Route::resource('customer', CustomerController::class);
   Route::resource('dokter', DokterController::class);
   Route::resource('detail-resep', DetailResepController::class)->except(['create', 'store']);

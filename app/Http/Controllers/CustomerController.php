@@ -114,36 +114,35 @@ class CustomerController extends Controller
    */
   public function update(Request $request, $id)
   {
-    $request->validate(
-      [
-        'nama' => 'required',
-        'umur' => 'required',
-        'alamat' => 'required',
-        'status' => 'required',
-        'email' => 'required|unique:customer,email',
-      ],
-      [
-        'nama.required' => 'Nama Customer wajib diisi',
-        'umur.required' => 'Umur Customer wajib diisi',
-        'alamat.required' => 'Alamat Customer wajib diisi',
-        'status.required' => 'Status Customer wajib diisi',
-        'email.required' => 'Email Customer wajib diisi',
-        'email.unique' => 'Email Customer yang diisikan sudah ada dalam database',
-      ]
-    );
-
-    $data = [
-      'nama' => $request->nama,
-      'umur' => $request->umur,
-      'alamat' => $request->alamat,
-      'status' => $request->status,
-      'email' => $request->email,
-      'password' => null,
-    ];
-    Pengguna::where('id_pengguna', $id)->update($data);
-    return redirect()->to('customer')->with('msg-success', 'Berhasil melakukan update data');
+      $request->validate([
+          'nama' => 'required',
+          'umur' => 'required',
+          'alamat' => 'required',
+          'status' => 'required',
+          'email' => 'required',
+      ], [
+          'nama.required' => 'Nama Pengguna wajib diisi',
+          'umur.required' => 'Umur Pengguna wajib diisi',
+          'alamat.required' => 'Alamat Pengguna wajib diisi',
+          'status.required' => 'Status Pengguna wajib diisi',
+          'email.required' => 'Email Pengguna wajib diisi',
+      ]);
+  
+      try {
+          $customer = Pengguna::findOrFail($id);
+          $customer->nama = $request->nama;
+          $customer->umur = $request->umur;
+          $customer->alamat = $request->alamat;
+          $customer->status = $request->status;
+          $customer->email = $request->email;
+          $customer->save();
+  
+          return redirect()->route('customer.index')->with('msg-success', 'Berhasil mengubah data');
+      } catch (\Throwable $th) {
+          echo $th;
+      }
   }
-
+  
   /**
    * Remove the specified resource from storage.
    *

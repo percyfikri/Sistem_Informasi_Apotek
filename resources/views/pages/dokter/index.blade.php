@@ -50,7 +50,7 @@
                                 <h4>Data Dokter</h4>
                                 <div class="card-header-action">
 
-                                    <a href="{{ url('dokter/cetak_pdf') }}" class="btn btn-icon btn-primary icon-left">
+                                    <a href="{{ route('cetak.pdf.dokter') }}" class="btn btn-icon btn-primary icon-left">
                                         <i class="fas fa-print"></i>
                                         Print PDF</a>
                                     <a href="{{ route('dokter.create') }}" class="btn btn-icon btn-primary icon-left">

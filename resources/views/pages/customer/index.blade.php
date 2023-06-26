@@ -50,7 +50,7 @@
                                 <h4>Data Customer</h4>
                                 <div class="card-header-action">
 
-                                    <a href="{{ url('customer/cetak_pdf') }}" class="btn btn-icon btn-primary icon-left">
+                                    <a href="{{ route('cetak.pdf.customer') }}" class="btn btn-icon btn-primary icon-left">
                                         <i class="fas fa-print"></i>
                                         Print PDF</a>
                                     <a href="{{ route('customer.create') }}" class="btn btn-icon btn-primary icon-left">

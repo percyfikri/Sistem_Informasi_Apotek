@@ -14,24 +14,24 @@
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="{{ url('dashboard-general-dashboard') }}">Dashboard</a></div>
                     <div class="breadcrumb-item active"><a href="{{ route('customer.index') }}">Customer</a></div>
-                    <div class="breadcrumb-item"><a href="{{ route('customer.edit') }}">Edit Customer</a></div>
+                    <div class="breadcrumb-item">Edit Customer</div>
                 </div>
             </div>
 
             <div class="section-body">
                 @if ($errors->any())
-                    <div class="pt-3">
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <ul>
-                                @foreach ($errors->all() as $item)
-                                    <li>{{ $item }}</li>
-                                @endforeach
-                            </ul>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
+                <div class="pt-3">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <ul>
+                        @foreach ($errors->all() as $item)
+                            <li>{{ $item }}</li>
+                        @endforeach
+                        </ul>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
+                </div>
                 @endif
                 <div class="card">
                     <div class="card-header">
@@ -67,8 +67,8 @@
                                 <label>Status</label>
                                 <input type="hidden" name="status" value="customer">
                                 <input readonly type="text" class="form-control @if (old('status')) is-valid @endif @error('status') is-invalid @enderror"
-                                  value="{{ old('status', 'Customer', $customer->status) }}">
-                            </div>                                                     
+                                  value="{{ old('status', 'Costumer', $dokter->status) }}">
+                            </div>
                             <div class="form-group">
                                 <label>Email</label>
                                 <input type="email" name="email"
@@ -88,10 +88,3 @@
 
     </div>
 @endsection
-
-@push('scripts')
-    <script src="{{ asset('library/cleave.js/dist/cleave.min.js') }}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
-    <script type="text/javascript"></script>
-@endpush
