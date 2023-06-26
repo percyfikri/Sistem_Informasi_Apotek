@@ -65,15 +65,10 @@
                             </div>
                             <div class="form-group">
                                 <label>Status</label>
-                                <select class="form-control @error('status') is-invalid @enderror" name="status">
-                                    <option selected>Pilih Status</option>
-                                    <option value="apoteker" {{ old('status', $pengguna->status) == 'apoteker' ? 'selected' : '' }}>Apoteker</option>
-                                    <option value="admiin" {{ old('status', $pengguna->status) == 'admin' ? 'selected' : '' }}>Admin</option>
-                                </select>
-                                @error('status')
-                                    <span class="invalid-feedback">{{ $message }}</span>
-                                @enderror
-                            </div>                            
+                                <input type="hidden" name="status" value="apoteker">
+                                <input readonly type="text" class="form-control @if (old('status')) is-valid @endif @error('status') is-invalid @enderror"
+                                  value="{{ old('status', 'Apoteker', $pengguna->status) }}">
+                            </div>                     
                             <div class="form-group">
                                 <label>Email</label>
                                 <input type="email" name="email"

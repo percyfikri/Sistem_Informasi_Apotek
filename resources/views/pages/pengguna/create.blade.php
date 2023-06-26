@@ -56,22 +56,17 @@
                                     value="{{ old('umur') }}">
                             </div>
                             <div class="form-group">
+                                <label>Status</label>
+                                <input type="hidden" name="status" value="apoteker">
+                                <input readonly type="text" class="form-control @if (old('status')) is-valid @endif @error('status') is-invalid @enderror"
+                                  value="{{ old('status', 'Apoteker') }}">
+                            </div>
+                            <div class="form-group">
                                 <label>Alamat</label>
                                 <textarea name="alamat"
                                     class="form-control @if (old('alamat')) is-valid @endif
                                 @error('alamat') is-invalid @enderror"
                                     data-height="150">{{ old('alamat') }}</textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Status</label>
-                                <select class="form-control" name="status"
-                                    class="form-control @if (old('status')) is-valid @endif
-                                @error('status') is-invalid @enderror"
-                                    value="{{ old('status') }}">
-                                    <option selected>Pilih Status</option>
-                                    <option value="admin">Admin</option>
-                                    <option value="apoteker">Apoteker</option>
-                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Email</label>

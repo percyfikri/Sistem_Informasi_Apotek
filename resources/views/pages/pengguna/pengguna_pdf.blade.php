@@ -40,7 +40,7 @@
             </thead>
             <tbody>
                 @foreach ($pengguna as $pg)
-                    @if ($pg->status == 'apoteker' || $pg->status == 'admin')
+                    @if ($pg->status == 'apoteker')
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $pg->nama }}</td>

@@ -18,7 +18,7 @@ class PenggunaController extends Controller
   public function index(Request $request)
   {
       if ($request->ajax()) {
-          return DataTables::of(Pengguna::whereIn('status', ['apoteker', 'admin'])->get())->toJson();
+          return DataTables::of(Pengguna::whereIn('status', ['apoteker'])->get())->toJson();
       }
       return view('pages.pengguna.index');
   }
@@ -153,8 +153,8 @@ class PenggunaController extends Controller
    */
   public function destroy(Pengguna $pengguna)
   {
-    if (Pengguna::count() == 1 && $pengguna->status == 'admin') {
-      return back()->with('msg-error', 'Gagal menghapus data pengguna. Pengguna merupakan admin master' . $pengguna->nama);
+    if (Pengguna::count() == 1 && $pengguna->status == 'apoteker') {
+      return back()->with('msg-error', 'Gagal menghapus data pengguna. Pengguna merupakan apoteker master' . $pengguna->nama);
     }
     $pengguna->delete();
     return redirect()->route('pengguna.index')->with('msg-success', 'Berhasil menghapus data pengguna ' . $pengguna->nama);
