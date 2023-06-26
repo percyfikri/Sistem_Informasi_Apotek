@@ -114,7 +114,7 @@
                         data: null,
                         orderable: false,
                         render: function(data, type, row) {
-                            return `<div class="buttons text-center">
+                            return `<div class="buttons">
                                                     <button class="btn btn-danger btn-icon icon-left"
                                 data-action="${window.location.href}/${data.id_obat}/${data.satuan}" data-toggle="modal"
                                 data-target="#confirm-delete-modal"> <i class="fas fa-trash"></i>

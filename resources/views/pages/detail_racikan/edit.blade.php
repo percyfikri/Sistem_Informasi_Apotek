@@ -45,19 +45,13 @@
                             @method('PUT')
                             <div class="form-group">
                                 <label for="id_racikan">Nama Racikan</label>
-                                <select class="form-control" name="id_racikan" id="id_racikan">
-                                    @foreach ($racikan as $prk)
-                                        <option value="{{$prk->id_racikan}}" {{$prk->id_racikan == $prk->id_racikan ? 'selected' : ''}}>{{$prk->nama_racikan}}</option>
-                                    @endforeach
-                                </select>
+                                <input hidden readonly type="text" name="id_racikan" class="form-control" value="{{ $detailRacikan->id_racikan }}">
+                                <input readonly type="text" name="nama_racikan" class="form-control" value="{{ $detailRacikan->racikan->nama_racikan }}">
                             </div>
                             <div class="form-group">
                                 <label for="id_obat">Nama Obat</label>
-                                <select class="form-control" name="id_obat" id="id_obat">
-                                    @foreach ($obat as $obt)
-                                        <option value="{{$obt->id_obat}}" {{$obt->id_obat == $obt->id_obat ? 'selected' : ''}}>{{$obt->nama_obat}}</option>
-                                    @endforeach
-                                </select>
+                                <input hidden readonly type="text" name="id_obat" class="form-control" value="{{ $detailRacikan->id_obat }}">
+                                <input readonly type="text" name="nama_obat" class="form-control" value="{{ $detailRacikan->racikan->nama_obat }}">
                             </div>
                             <div class="form-group">
                                 <label>Kuantitas</label>
