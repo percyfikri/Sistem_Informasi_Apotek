@@ -16,6 +16,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\ResepObatController;
 use App\Http\Controllers\StokObatController;
 use App\Http\Controllers\RacikanController;
+use App\Models\DetailResep;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -63,6 +64,7 @@ Route::middleware(['auth.role:apoteker'])->group(function () {
     });
   });
   Route::get('stok-obat/tambah', [StokObatController::class, 'tambah']);
+  Route::get('detail-resep/tambah', [DetailResepController::class, 'tambah']);
   Route::resource('kasir', KasirController::class)->only(['index', 'store']);
   Route::resource('penjualan', PenjualanController::class);
   Route::resource('detail_penjualan', DetailPenjualanController::class);
@@ -85,6 +87,7 @@ Route::middleware(['auth.role:apoteker'])->group(function () {
   Route::get('detail-resep/{id_resep}', [DetailResepController::class, 'show'])->name('detail-resep.show');
   Route::get('detail-resep/{id_resep}/create', [DetailResepController::class, 'create'])->name('detail-resep.create');
   Route::post('/store/{id_resep}', [DetailResepController::class, 'store'])->name('detail-resep.store');
+  Route::post('/store/{id_resep?}', [DetailResepController::class, 'store1'])->name('detail-resep.store');
   Route::delete('detail-resep/{id_resep}/{id_detail}', [DetailResepController::class, 'destroy']);
 
   Route::get('/detail-resep/{id_resep}/{id_detail}/edit', [DetailResepController::class, 'edit'])->name('detail-resep.edit');

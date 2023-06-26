@@ -40,9 +40,22 @@
                             <div class="card-header">
                                 <h4>Data Resep Obat</h4>
                                 <div class="card-header-action">
-                                    <a href="{{ route('detail-resep.create',$resepObat->id_resep) }}" class="btn btn-icon btn-primary icon-left"><i
+                                    
+                                    <a href="{{ route('detail-resep.create',$resepObat->id_resep) }}" class="btn btn-icon btn-primary icon-left mb-3"><i
                                         class="fas fa-plus"></i>
-                                    Tambah</a>
+                                    Tambah 1
+                                    </a>
+                                    <span class="tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="right" title="Gunakan Button Ini untuk menambahkan data yang sudah ada sebelumnya">
+                                        <i class="fas fa-question-circle"></i>
+                                    </span>
+                                    <br>
+                                    <a href="{{ url('detail-resep/tambah') }}" class="btn btn-icon btn-success icon-left">
+                                        <i class="fas fa-plus"></i>
+                                        Tambah 2
+                                    </a>
+                                    <span class="tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="right" title="Gunakan Button Ini untuk menambahkan data pertama kali">
+                                        <i class="fas fa-question-circle"></i>
+                                    </span>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -84,6 +97,8 @@
 
     <script>
         $(function() {
+            $('[data-bs-toggle="tooltip"]').tooltip();
+
             $('#detail-resep-table').DataTable({
                 processing: true,
                 serverSide: true,
