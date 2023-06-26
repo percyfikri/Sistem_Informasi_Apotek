@@ -2,18 +2,30 @@
 <html>
 
     <head>
-        <title>Laporan PDF Pengguna Apotek Arema</title>
+        <title>Laporan Pengguna Apotek Arema</title>
     </head>
 
     <body>
-        <style type="text/css">
-            table tr td,
-            table tr th {
-                font-size: 9pt;
+        <style>
+            .table-bordered {
+                border-collapse: collapse;
+                width: 100%;
+            }
+    
+            .table-bordered th,
+            .table-bordered td {
+                border: 1px solid #000000;
+                text-align: left;
+                padding: 8px;
+            }
+    
+            .table .tanggal {
+                text-align: left;
+                white-space: nowrap;
             }
         </style>
         <center>
-            <h5>Laporan Pengguna Apotek Arema</h4>
+            <h2>Laporan Pengguna Apotek Arema</h2>
         </center>
         <table class='table table-bordered'>
             <thead>
@@ -28,14 +40,16 @@
             </thead>
             <tbody>
                 @foreach ($pengguna as $pg)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $pg->nama }}</td>
-                        <td>{{ $pg->umur }}</td>
-                        <td>{{ $pg->status }}</td>
-                        <td>{{ $pg->alamat }}</td>
-                        <td>{{ $pg->email }}</td>
-                    </tr>
+                    @if ($pg->status == 'apoteker' || $pg->status == 'admin')
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $pg->nama }}</td>
+                            <td>{{ $pg->umur }}</td>
+                            <td>{{ $pg->status }}</td>
+                            <td>{{ $pg->alamat }}</td>
+                            <td>{{ $pg->email }}</td>
+                        </tr>
+                    @endif
                 @endforeach
             </tbody>
         </table>

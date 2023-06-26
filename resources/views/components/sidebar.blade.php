@@ -20,6 +20,10 @@
                 </li>
             @endif
 
+            <li class="{{ Request::is('pengguna') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('pengguna') }}"><i class="fas fa-user"></i>
+                    <span>Pengguna</span></a>
+            </li>
             <li class="{{ Request::is('kasir') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('kasir') }}"><i class="fas fa-cash-register"></i>
                     <span>Kasir</span></a>

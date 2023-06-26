@@ -67,7 +67,7 @@
                                 <label>Status</label>
                                 <input type="hidden" name="status" value="customer">
                                 <input readonly type="text" class="form-control @if (old('status')) is-valid @endif @error('status') is-invalid @enderror"
-                                  value="{{ old('status', 'Costumer', $dokter->status) }}">
+                                  value="{{ old('status', 'Costumer', $customer->status) }}">
                             </div>
                             <div class="form-group">
                                 <label>Email</label>

@@ -50,11 +50,11 @@ class CustomerController extends Controller
         'email' => 'required',
       ],
       [
-        'nama.required' => 'Nama Pengguna wajib diisi',
-        'umur.required' => 'Umur Pengguna wajib diisi',
-        'alamat.required' => 'Alamat Pengguna wajib diisi',
-        'status.required' => 'Status Pengguna wajib diisi',
-        'email.required' => 'Email Pengguna wajib diisi',
+        'nama.required' => 'Nama Customer wajib diisi',
+        'umur.required' => 'Umur Customer wajib diisi',
+        'alamat.required' => 'Alamat Customer wajib diisi',
+        'status.required' => 'Status Customer wajib diisi',
+        'email.required' => 'Email Customer wajib diisi',
       ]
     );
 
@@ -121,11 +121,11 @@ class CustomerController extends Controller
           'status' => 'required',
           'email' => 'required',
       ], [
-          'nama.required' => 'Nama Pengguna wajib diisi',
-          'umur.required' => 'Umur Pengguna wajib diisi',
-          'alamat.required' => 'Alamat Pengguna wajib diisi',
-          'status.required' => 'Status Pengguna wajib diisi',
-          'email.required' => 'Email Pengguna wajib diisi',
+          'nama.required' => 'Nama Customer wajib diisi',
+          'umur.required' => 'Umur Customer wajib diisi',
+          'alamat.required' => 'Alamat Customer wajib diisi',
+          'status.required' => 'Status Customer wajib diisi',
+          'email.required' => 'Email Customer wajib diisi',
       ]);
   
       try {

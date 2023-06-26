@@ -50,11 +50,11 @@ if ($request->ajax()) {
         'email' => 'required',
       ],
       [
-        'nama.required' => 'Nama Pengguna wajib diisi',
-        'umur.required' => 'Umur Pengguna wajib diisi',
-        'alamat.required' => 'Alamat Pengguna wajib diisi',
-        'status.required' => 'Status Pengguna wajib diisi',
-        'email.required' => 'Email Pengguna wajib diisi',
+        'nama.required' => 'Nama Dokter wajib diisi',
+        'umur.required' => 'Umur Dokter wajib diisi',
+        'alamat.required' => 'Alamat Dokter wajib diisi',
+        'status.required' => 'Status Dokter wajib diisi',
+        'email.required' => 'Email Dokter wajib diisi',
       ]
     );
 
@@ -121,11 +121,11 @@ if ($request->ajax()) {
           'status' => 'required',
           'email' => 'required',
       ], [
-          'nama.required' => 'Nama Pengguna wajib diisi',
-          'umur.required' => 'Umur Pengguna wajib diisi',
-          'alamat.required' => 'Alamat Pengguna wajib diisi',
-          'status.required' => 'Status Pengguna wajib diisi',
-          'email.required' => 'Email Pengguna wajib diisi',
+          'nama.required' => 'Nama Dokter wajib diisi',
+          'umur.required' => 'Umur Dokter wajib diisi',
+          'alamat.required' => 'Alamat Dokter wajib diisi',
+          'status.required' => 'Status Dokter wajib diisi',
+          'email.required' => 'Email Dokter wajib diisi',
       ]);
   
       try {

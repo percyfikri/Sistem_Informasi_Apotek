@@ -55,7 +55,6 @@
                                 @error('umur') is-invalid @enderror"
                                     value="{{ old('umur') }}">
                             </div>
-
                             <div class="form-group">
                                 <label>Alamat</label>
                                 <textarea name="alamat"
@@ -69,10 +68,9 @@
                                     class="form-control @if (old('status')) is-valid @endif
                                 @error('status') is-invalid @enderror"
                                     value="{{ old('status') }}">
-                                    <option selected>Pilih status</option>
+                                    <option selected>Pilih Status</option>
+                                    <option value="admin">Admin</option>
                                     <option value="apoteker">Apoteker</option>
-                                    <option value="dokter">Dokter</option>
-                                    <option value="customer">Customer</option>
                                 </select>
                             </div>
                             <div class="form-group">

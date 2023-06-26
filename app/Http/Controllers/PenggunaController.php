@@ -17,18 +17,12 @@ class PenggunaController extends Controller
    */
   public function index(Request $request)
   {
-    // $data=[
-    //     'dataPengguna' => Pengguna::all()
-    // ];
-
-    // return view('pages.pengguna.tampil-pengguna', $data);
-
-    if ($request->ajax()) {
-      return DataTables::of(Pengguna::query())->toJson();
-    }
-    return view('pages.pengguna.index');
+      if ($request->ajax()) {
+          return DataTables::of(Pengguna::whereIn('status', ['apoteker', 'admin'])->get())->toJson();
+      }
+      return view('pages.pengguna.index');
   }
-
+  
   /**
    * Show the form for creating a new resource.
    *
@@ -89,17 +83,6 @@ class PenggunaController extends Controller
     } catch (\Throwable $th) {
       echo $th;
     }
-
-    // $data = [
-    //     'nama' => $request->nama,
-    //     'umur' => $request->umur,
-    //     'alamat' => $request->alamat,
-    //     'status' => $request->status,
-    //     'email' => $request->email,
-    //     'password' => $request->password,
-    // ];
-    // Pengguna::create($data);
-    // return redirect()->to('obat')->with('msg-success', 'Berhasil menambahkan data');
   }
 
   /**
@@ -133,57 +116,34 @@ class PenggunaController extends Controller
    */
   public function update(Request $request, $id)
   {
-    $request->validate(
-      [
-        'nama' => 'required',
-        'umur' => 'required',
-        'alamat' => 'required',
-        'status' => 'required',
-        'email' => 'required|unique:pengguna,email',
-        'password' => 'required',
-      ],
-      [
-        'nama.required' => 'Nama Pengguna wajib diisi',
-        'umur.required' => 'Umur Pengguna wajib diisi',
-        'alamat.required' => 'Alamat Pengguna wajib diisi',
-        'status.required' => 'Status Pengguna wajib diisi',
-        'email.required' => 'Email Pengguna wajib diisi',
-        'email.unique' => 'Email Pengguna yang diisikan sudah ada dalam database',
-        'password.required' => 'Password Pengguna wajib diisi',
-      ]
-    );
-
-    $nama = $request->nama;
-    $umur = $request->umur;
-    $alamat = $request->alamat;
-    $status = $request->status;
-    $email = $request->email;
-    $password = $request->password;
-
-    try {
-      $pengguna = new Pengguna();
-      $pengguna->nama = $nama;
-      $pengguna->umur = $umur;
-      $pengguna->alamat = $alamat;
-      $pengguna->status = $status;
-      $pengguna->email = $email;
-      $pengguna->password = bcrypt($password);
-      $pengguna->save();
-
-      // $request->session()->flash('msg', "Data dengan nama $nama berhasil ditambahkan!");
-      // return redirect('pengguna')->with('msg', "Data dengan nama $nama berhasil ditambahkan!");
-      return redirect()->to('pengguna')->with('msg-success', 'Berhasil melakukan update data');
-    } catch (\Throwable $th) {
-      echo $th;
-    }
-
-    // $data = [
-    //     'nama_obat' => $request->nama_obat,
-    //     'jenis_obat' => $request->jenis_obat,
-    // ];
-    // Pengguna::where('id_obat',$id)->update($data);
-    // return redirect()->to('obat')->with('msg-success', 'Berhasil melakukan update data');
-  }
+      $request->validate([
+          'nama' => 'required',
+          'umur' => 'required',
+          'alamat' => 'required',
+          'status' => 'required',
+          'email' => 'required',
+      ], [
+          'nama.required' => 'Nama Pengguna wajib diisi',
+          'umur.required' => 'Umur Pengguna wajib diisi',
+          'alamat.required' => 'Alamat Pengguna wajib diisi',
+          'status.required' => 'Status Pengguna wajib diisi',
+          'email.required' => 'Email Pengguna wajib diisi',
+      ]);
+  
+      try {
+          $pengguna = Pengguna::findOrFail($id);
+          $pengguna->nama = $request->nama;
+          $pengguna->umur = $request->umur;
+          $pengguna->alamat = $request->alamat;
+          $pengguna->status = $request->status;
+          $pengguna->email = $request->email;
+          $pengguna->save();
+  
+          return redirect()->route('pengguna.index')->with('msg-success', 'Berhasil mengubah data');
+      } catch (\Throwable $th) {
+          echo $th;
+      }
+  }  
 
   /**
    * Remove the specified resource from storage.
