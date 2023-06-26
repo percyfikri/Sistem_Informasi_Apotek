@@ -65,7 +65,35 @@ class DetailResepController extends Controller
     // Redirect ke halaman yang diinginkan
     return redirect()->route('detail-resep.show', $detailResep->id_resep)->with('success', 'Detail Resep Obat berhasil ditambahkan');
   }
+  public function store1(Request $request)
+  {
+      // Validasi input data
+      $validatedData = $request->validate([
+          'id_obat' => 'required',
+          'id_racikan' => 'required',
+          'kuantitas' => 'required',
+          'satuan' => 'required',
+          'harga' => 'required',
+      ]);
 
+      // Simpan data resep obat ke database
+      $detailResep = new DetailResep();
+      // $detailResep->id_resep = $id_resep;
+      $detailResep->id_obat = $request->input('id_obat');
+      $detailResep->id_racikan = $request->input('id_racikan');
+      $detailResep->kuantitas = $request->input('kuantitas');
+      $detailResep->satuan = $request->input('satuan');
+      $detailResep->harga = $request->input('harga');
+
+      $resep = new ResepObat();
+      $resep->id_resep = $request->get('id_resep');
+      $detailResep->resep()->associate($resep);
+
+      $detailResep->save();
+
+      // Redirect ke halaman yang diinginkan
+      return redirect()->route('detail-resep.show', $detailResep->id_resep)->with('success', 'Detail Resep Obat berhasil ditambahkan');
+  }
   /**
    * Display the specified resource.
    *
