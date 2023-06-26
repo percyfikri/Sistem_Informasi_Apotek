@@ -17,16 +17,10 @@ class DokterController extends Controller
    */
   public function index(Request $request)
   {
-    // $data=[
-    //     'dataPengguna' => Pengguna::all()
-    // ];
-
-    // return view('pages.pengguna.tampil-pengguna', $data);
-
-    if ($request->ajax()) {
+if ($request->ajax()) {
       return DataTables::of(Pengguna::where('status', 'dokter')->get())->toJson();
     }
-    return view('pages.pengguna.index');
+    return view('pages.dokter.index');
   }
 
   /**
@@ -36,7 +30,7 @@ class DokterController extends Controller
    */
   public function create()
   {
-    return view('pages.pengguna.create');
+    return view('pages.dokter.create');
   }
 
   /**
@@ -69,19 +63,21 @@ class DokterController extends Controller
     $alamat = $request->alamat;
     $status = $request->status;
     $email = $request->email;
-
+    $password = null;
 
     try {
-      $pengguna = new Pengguna();
-      $pengguna->nama = $nama;
-      $pengguna->umur = $umur;
-      $pengguna->alamat = $alamat;
-      $pengguna->status = $status;
-      $pengguna->email = $email;
-      $pengguna->save();
+      $dokter = new Pengguna();
+      $dokter->nama = $nama;
+      $dokter->umur = $umur;
+      $dokter->alamat = $alamat;
+      $dokter->status = $status;
+      $dokter->email = $email;
+      $dokter->password = bcrypt($password);
+      $dokter->save();
 
-
-      return response()->json(['msg' => 'success']);
+      // $request->session()->flash('msg', "Data dengan nama $nama berhasil ditambahkan!");
+      // return redirect('pengguna')->with('msg', "Data dengan nama $nama berhasil ditambahkan!");
+      return redirect()->to('dokter')->with('msg-success', 'Berhasil menambahkan data');
     } catch (\Throwable $th) {
       echo $th;
     }
@@ -93,9 +89,9 @@ class DokterController extends Controller
    * @param  \App\Models\Pengguna  $pengguna
    * @return \Illuminate\Http\Response
    */
-  public function show(Pengguna $pengguna)
+  public function show(Pengguna $dokter)
   {
-    return view('pages.pengguna.show', compact('pengguna'));
+    return view('pages.dokter.show', compact('dokter'));
   }
 
   /**
@@ -104,9 +100,9 @@ class DokterController extends Controller
    * @param  \App\Models\Pengguna  $pengguna
    * @return \Illuminate\Http\Response
    */
-  public function edit(Pengguna $pengguna)
+  public function edit(Pengguna $dokter)
   {
-    return view('pages.pengguna.edit', compact('pengguna'));
+    return view('pages.dokter.edit', compact('dokter'));
   }
 
   /**
@@ -124,17 +120,15 @@ class DokterController extends Controller
         'umur' => 'required',
         'alamat' => 'required',
         'status' => 'required',
-        'email' => 'required|unique:pengguna,email',
-        'password' => 'required',
+        'email' => 'required|unique:dokter,email',
       ],
       [
-        'nama.required' => 'Nama Pengguna wajib diisi',
-        'umur.required' => 'Umur Pengguna wajib diisi',
-        'alamat.required' => 'Alamat Pengguna wajib diisi',
-        'status.required' => 'Status Pengguna wajib diisi',
-        'email.required' => 'Email Pengguna wajib diisi',
-        'email.unique' => 'Email Pengguna yang diisikan sudah ada dalam database',
-        'password.required' => 'Password Pengguna wajib diisi',
+        'nama.required' => 'Nama Dokter wajib diisi',
+        'umur.required' => 'Umur Dokter wajib diisi',
+        'alamat.required' => 'Alamat Dokter wajib diisi',
+        'status.required' => 'Status Dokter wajib diisi',
+        'email.required' => 'Email Dokter wajib diisi',
+        'email.unique' => 'Email Dokter yang diisikan sudah ada dalam database',
       ]
     );
 
@@ -143,21 +137,21 @@ class DokterController extends Controller
     $alamat = $request->alamat;
     $status = $request->status;
     $email = $request->email;
-    $password = $request->password;
+    $password = null;
 
     try {
-      $pengguna = new Pengguna();
-      $pengguna->nama = $nama;
-      $pengguna->umur = $umur;
-      $pengguna->alamat = $alamat;
-      $pengguna->status = $status;
-      $pengguna->email = $email;
-      $pengguna->password = bcrypt($password);
-      $pengguna->save();
+      $dokter = new Pengguna();
+      $dokter->nama = $nama;
+      $dokter->umur = $umur;
+      $dokter->alamat = $alamat;
+      $dokter->status = $status;
+      $dokter->email = $email;
+      $dokter->password = bcrypt($password);
+      $dokter->save();
 
       // $request->session()->flash('msg', "Data dengan nama $nama berhasil ditambahkan!");
       // return redirect('pengguna')->with('msg', "Data dengan nama $nama berhasil ditambahkan!");
-      return redirect()->to('pengguna')->with('msg-success', 'Berhasil melakukan update data');
+      return redirect()->to('dokter')->with('msg-success', 'Berhasil melakukan update data');
     } catch (\Throwable $th) {
       echo $th;
     }
@@ -176,16 +170,16 @@ class DokterController extends Controller
    * @param  \App\Models\Pengguna  $pengguna
    * @return \Illuminate\Http\Response
    */
-  public function destroy(Pengguna $pengguna)
+  public function destroy(Pengguna $dokter)
   {
-    $pengguna->delete();
-    return redirect()->route('pengguna.index')->with('msg-success', 'Berhasil menghapus data pengguna ' . $pengguna->nama);
+    $dokter->delete();
+    return redirect()->route('dokter.index')->with('msg-success', 'Berhasil menghapus data dokter ' . $dokter->nama);
   }
 
   public function cetak_pdf()
   {
-    $pengguna = Pengguna::all();
-    $pdf = PDF::loadview('pages.pengguna.pengguna_pdf', ['pengguna' => $pengguna]);
+    $customer = Pengguna::all();
+    $pdf = PDF::loadview('pages.dokter.dokter_pdf', ['customer' => $customer]);
     return $pdf->stream();
   }
 

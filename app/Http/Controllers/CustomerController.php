@@ -17,16 +17,10 @@ class CustomerController extends Controller
    */
   public function index(Request $request)
   {
-    // $data=[
-    //     'dataPengguna' => Pengguna::all()
-    // ];
-
-    // return view('pages.pengguna.tampil-pengguna', $data);
-
     if ($request->ajax()) {
       return DataTables::of(Pengguna::where('status', 'customer')->get())->toJson();
     }
-    return view('pages.pengguna.index');
+    return view('pages.customer.index');
   }
 
   /**
@@ -36,7 +30,7 @@ class CustomerController extends Controller
    */
   public function create()
   {
-    return view('pages.pengguna.create');
+    return view('pages.customer.create');
   }
 
   /**
@@ -69,19 +63,21 @@ class CustomerController extends Controller
     $alamat = $request->alamat;
     $status = $request->status;
     $email = $request->email;
-
+    $password = null;
 
     try {
-      $pengguna = new Pengguna();
-      $pengguna->nama = $nama;
-      $pengguna->umur = $umur;
-      $pengguna->alamat = $alamat;
-      $pengguna->status = $status;
-      $pengguna->email = $email;
-      $pengguna->save();
+      $customer = new Pengguna();
+      $customer->nama = $nama;
+      $customer->umur = $umur;
+      $customer->alamat = $alamat;
+      $customer->status = $status;
+      $customer->email = $email;
+      $customer->password = bcrypt($password);
+      $customer->save();
 
-
-      return response()->json(['msg' => 'success']);
+      // $request->session()->flash('msg', "Data dengan nama $nama berhasil ditambahkan!");
+      // return redirect('pengguna')->with('msg', "Data dengan nama $nama berhasil ditambahkan!");
+      return redirect()->to('customer')->with('msg-success', 'Berhasil menambahkan data');
     } catch (\Throwable $th) {
       echo $th;
     }
@@ -93,9 +89,9 @@ class CustomerController extends Controller
    * @param  \App\Models\Pengguna  $pengguna
    * @return \Illuminate\Http\Response
    */
-  public function show(Pengguna $pengguna)
+  public function show(Pengguna $customer)
   {
-    return view('pages.pengguna.show', compact('pengguna'));
+    return view('pages.customer.show', compact('customer'));
   }
 
   /**
@@ -104,9 +100,9 @@ class CustomerController extends Controller
    * @param  \App\Models\Pengguna  $pengguna
    * @return \Illuminate\Http\Response
    */
-  public function edit(Pengguna $pengguna)
+  public function edit(Pengguna $customer)
   {
-    return view('pages.pengguna.edit', compact('pengguna'));
+    return view('pages.customer.edit', ['customer' => $customer]);
   }
 
   /**
@@ -124,50 +120,28 @@ class CustomerController extends Controller
         'umur' => 'required',
         'alamat' => 'required',
         'status' => 'required',
-        'email' => 'required|unique:pengguna,email',
-        'password' => 'required',
+        'email' => 'required|unique:customer,email',
       ],
       [
-        'nama.required' => 'Nama Pengguna wajib diisi',
-        'umur.required' => 'Umur Pengguna wajib diisi',
-        'alamat.required' => 'Alamat Pengguna wajib diisi',
-        'status.required' => 'Status Pengguna wajib diisi',
-        'email.required' => 'Email Pengguna wajib diisi',
-        'email.unique' => 'Email Pengguna yang diisikan sudah ada dalam database',
-        'password.required' => 'Password Pengguna wajib diisi',
+        'nama.required' => 'Nama Customer wajib diisi',
+        'umur.required' => 'Umur Customer wajib diisi',
+        'alamat.required' => 'Alamat Customer wajib diisi',
+        'status.required' => 'Status Customer wajib diisi',
+        'email.required' => 'Email Customer wajib diisi',
+        'email.unique' => 'Email Customer yang diisikan sudah ada dalam database',
       ]
     );
 
-    $nama = $request->nama;
-    $umur = $request->umur;
-    $alamat = $request->alamat;
-    $status = $request->status;
-    $email = $request->email;
-    $password = $request->password;
-
-    try {
-      $pengguna = new Pengguna();
-      $pengguna->nama = $nama;
-      $pengguna->umur = $umur;
-      $pengguna->alamat = $alamat;
-      $pengguna->status = $status;
-      $pengguna->email = $email;
-      $pengguna->password = bcrypt($password);
-      $pengguna->save();
-
-      // $request->session()->flash('msg', "Data dengan nama $nama berhasil ditambahkan!");
-      // return redirect('pengguna')->with('msg', "Data dengan nama $nama berhasil ditambahkan!");
-      return redirect()->to('pengguna')->with('msg-success', 'Berhasil melakukan update data');
-    } catch (\Throwable $th) {
-      echo $th;
-    }
-
-    // $data = [
-    //     'nama_obat' => $request->nama_obat,
-    //     'jenis_obat' => $request->jenis_obat,
-    // ];
-    // Pengguna::where('id_obat',$id)->update($data);
-    // return redirect()->to('obat')->with('msg-success', 'Berhasil melakukan update data');
+    $data = [
+      'nama' => $request->nama,
+      'umur' => $request->umur,
+      'alamat' => $request->alamat,
+      'status' => $request->status,
+      'email' => $request->email,
+      'password' => null,
+    ];
+    Pengguna::where('id_pengguna', $id)->update($data);
+    return redirect()->to('customer')->with('msg-success', 'Berhasil melakukan update data');
   }
 
   /**
@@ -176,16 +150,16 @@ class CustomerController extends Controller
    * @param  \App\Models\Pengguna  $pengguna
    * @return \Illuminate\Http\Response
    */
-  public function destroy(Pengguna $pengguna)
+  public function destroy(Pengguna $customer)
   {
-    $pengguna->delete();
-    return redirect()->route('pengguna.index')->with('msg-success', 'Berhasil menghapus data pengguna ' . $pengguna->nama);
+    $customer->delete();
+    return redirect()->route('customer.index')->with('msg-success', 'Berhasil menghapus data pengguna ' . $customer->nama);
   }
 
   public function cetak_pdf()
   {
-    $pengguna = Pengguna::all();
-    $pdf = PDF::loadview('pages.pengguna.pengguna_pdf', ['pengguna' => $pengguna]);
+    $customer = Pengguna::all();
+    $pdf = PDF::loadview('pages.customer.customer_pdf', ['customer' => $customer]);
     return $pdf->stream();
   }
 
