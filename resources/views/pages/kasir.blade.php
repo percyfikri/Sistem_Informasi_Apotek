@@ -218,7 +218,7 @@
             let item = items.find(item => item.id == id)
             if (item.type === 'obat') {
                 const obat = obats.find(o => o['id_obat'] == id)
-                const satuan_item = obat['stok-obat'].find(stok => stok.satuan == satuan.value)
+                const satuan_item = obat['stok_obat'].find(stok => stok.satuan == satuan.value)
                 subtotal.value = parseInt(satuan_item.harga) * kuantitas.value || 0
             } else {
                 subtotal.value = item.harga * kuantitas.value || 0
@@ -259,8 +259,12 @@
                                     class="form-control" onchange="sumSubTotal(event)"> ${item.type!='obat'?`<option value="${item.type}" selected></option>`:''}"</select>`
             cell4.innerHTML = `<input type="text" id="kuantitas-${item.id}" name="kuantitas[] value="1"
                                     class="form-control" onchange="sumSubTotal(event)">`
-            cell5.innerHTML = `<span class="m-0" id="subtotal-text-${item.id}"></span> <input type="hidden" id="subtotal-${item.id}" name="harga[]"
+            cell5.innerHTML = `<span class="m-0" id="subtotal-text-${item.id}">${ Number(0).toLocaleString('id-ID', {
+                style: 'currency',
+                currency: 'IDR'
+            })}</span> <input type="hidden" id="subtotal-${item.id}" name="harga[]"
                                     class="form-control item-subtotal" value="0"  >`
+
             items.push(item)
             if (item.type === 'obat') getItem(item.id)
             itemCount++;
@@ -273,7 +277,7 @@
                 success: function(response) {
                     const select = document.getElementById(`satuan-${id}`)
                     obats.push(response[0])
-                    response[0]['stok-obat'].forEach(function(item) {
+                    response[0]['stok_obat'].forEach(function(item) {
                         let option = document.createElement('option');
                         option.value = item.satuan;
                         option.text = item.satuan;

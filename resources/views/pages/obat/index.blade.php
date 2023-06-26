@@ -37,7 +37,7 @@
                             <div class="card-header">
                                 <h4>Data Obat</h4>
                                 <div class="card-header-action">
-                                    <a href="{{ url('obat/cetak_pdf') }}" class="btn btn-icon btn-primary icon-left">
+                                    <a href="{{ route('cetak.pdf.obat') }}" class="btn btn-icon btn-primary icon-left">
                                         <i class="fas fa-print"></i>
                                         Print PDF</a>
 
