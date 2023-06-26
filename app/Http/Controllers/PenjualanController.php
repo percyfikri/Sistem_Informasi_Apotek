@@ -97,9 +97,9 @@ class PenjualanController extends Controller
       $html .= '<h3>Data Penjualan ke-' . $count . '</h3>'; // Menambahkan nomor tabel
       $count++;
 
-      $html .= '<p><strong>1. Customer:</strong> ' . $item->customer->nama ?? '-' . '</p>';
-      $html .= '<p><strong>2. Apoteker:</strong> ' . $item->apoteker->nama ?? '-' . '</p>';
-      $html .= '<p><strong>3. Dokter:</strong> ' . $item->dokter->nama ?? '-' . '</p>';
+      $html .= '<p><strong>1. Nama Customer:</strong> ' . ($item->customer ? $item->customer->nama : '-') . '</p>';
+      $html .= '<p><strong>2. Nama Apoteker:</strong> ' . ($item->apoteker ? $item->apoteker->nama : '-') . '</p>';
+      $html .= '<p><strong>3. Nama Dokter:</strong> ' . ($item->dokter ? $item->dokter->nama : '-') . '</p>';
       $html .= '<p><strong>4. Tanggal:</strong> ' . $item->tanggal . '</p>';
 
       $html .= '<h3>Data Detail Penjualan</h3>'; // Menambahkan nomor tabel
