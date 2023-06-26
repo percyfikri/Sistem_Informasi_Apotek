@@ -62,9 +62,9 @@ class DetailPenjualanController extends Controller
         }
         return '-';
       })->addColumn('jenis', function ($dp) {
-        if ($dp->obat) return 'obat';
-        else if ($dp->jasa) return 'jasa';
-        else if ($dp->resep) return 'resep';
+        if ($dp->obat) return 'Obat';
+        else if ($dp->jasa) return 'Jasa';
+        else if ($dp->resep) return 'Resep';
         return '-';
       })
         ->make(true);
