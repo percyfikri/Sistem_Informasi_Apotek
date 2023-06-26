@@ -56,6 +56,13 @@
                                     value="{{ old('umur') }}">
                             </div>
                             <div class="form-group">
+                                <label>No Telepon</label>
+                                <input type="text" name="no_telepon"
+                                    class="form-control @if (old('no_telepon')) is-valid @endif
+                                @error('no_telepon') is-invalid @enderror"
+                                    value="{{ old('no_telepon') }}">
+                            </div>
+                            <div class="form-group">
                                 <label>Alamat</label>
                                 <textarea name="alamat"
                                     class="form-control @if (old('alamat')) is-valid @endif
@@ -65,9 +72,10 @@
                             <div class="form-group">
                                 <label>Status</label>
                                 <input type="hidden" name="status" value="customer">
-                                <input readonly type="text" class="form-control @if (old('status')) is-valid @endif @error('status') is-invalid @enderror"
-                                  value="{{ old('status', 'Customer') }}">
-                            </div>                                                     
+                                <input readonly type="text"
+                                    class="form-control @if (old('status')) is-valid @endif @error('status') is-invalid @enderror"
+                                    value="{{ old('status', 'Customer') }}">
+                            </div>
                             <div class="form-group">
                                 <label>Email</label>
                                 <input type="email" name="email"

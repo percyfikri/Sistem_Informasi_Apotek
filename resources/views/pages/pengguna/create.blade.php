@@ -61,6 +61,13 @@
                                 <input readonly type="text" class="form-control @if (old('status')) is-valid @endif @error('status') is-invalid @enderror"
                                   value="{{ old('status', 'Apoteker') }}">
                             </div>
+                               <div class="form-group">
+                                <label>No Telepon</label>
+                                <input type="text" name="no_telepon"
+                                    class="form-control @if (old('no_telepon')) is-valid @endif
+                                @error('no_telepon') is-invalid @enderror"
+                                    value="{{ old('no_telepon') }}">
+                            </div>
                             <div class="form-group">
                                 <label>Alamat</label>
                                 <textarea name="alamat"

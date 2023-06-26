@@ -27,61 +27,62 @@
                                         class="btn btn-icon btn-warning icon-left"><i class="far fa-edit"></i>
                                         Edit</a>
                                     <button class="btn btn-danger btn-icon icon-left"
-                                        data-action="{{ route('pengguna.destroy', $pengguna->id_pengguna) }}" data-toggle="modal"
-                                        data-target="#confirm-delete-modal"> <i class="fas fa-trash"></i>
+                                        data-action="{{ route('pengguna.destroy', $pengguna->id_pengguna) }}"
+                                        data-toggle="modal" data-target="#confirm-delete-modal"> <i
+                                            class="fas fa-trash"></i>
                                         Delete</button>
 
                                 </div>
                             </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="form-group col-12">
-                                            <label>Nama</label>
-                                            <input readonly type="text"
-                                                class="form-control"
-                                                value="{{ $pengguna->nama }}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-12">
-                                            <label>Umur</label>
-                                            <input readonly type="number"
-                                                class="form-control"
-                                                value="{{ $pengguna->umur }}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-12">
-                                            <label>Alamat</label>
-                                            <textarea readonly class="form-control summernote-simple">{{ $pengguna->alamat }}</textarea>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-12">
-                                            <label>Status</label>
-                                            <input readonly type="text"
-                                                class="form-control"
-                                                value="{{ $pengguna->status }}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-12">
-                                            <label>Email</label>
-                                            <input readonly type="email"
-                                                class="form-control"
-                                                value="{{ $pengguna->email }}">
-                                        </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Nama</label>
+                                        <input readonly type="text" class="form-control" value="{{ $pengguna->nama }}">
                                     </div>
                                 </div>
-                                <div class="card-footer text-right">
-                                    <a class="btn btn-primary float-left" href="{{ route('pengguna.index') }}">Kembali</a></div>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Umur</label>
+                                        <input readonly type="number" class="form-control" value="{{ $pengguna->umur }}">
+                                    </div>
                                 </div>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>No Telepon</label>
+                                        <input readonly type="text" class="form-control"
+                                            value="{{ $pengguna->no_telepon }}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Alamat</label>
+                                        <textarea readonly class="form-control summernote-simple">{{ $pengguna->alamat }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Status</label>
+                                        <input readonly type="text" class="form-control" value="{{ $pengguna->status }}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Email</label>
+                                        <input readonly type="email" class="form-control" value="{{ $pengguna->email }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-right">
+                                <a class="btn btn-primary float-left" href="{{ route('pengguna.index') }}">Kembali</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <x-modal.confirm-delete />
+    </div>
+    </section>
+    <x-modal.confirm-delete />
 
     </div>
 @endsection

@@ -16,10 +16,11 @@ return new class extends Migration
     Schema::create('pengguna', function (Blueprint $table) {
       $table->increments('id_pengguna');
       $table->string('nama')->index();
-      $table->string('umur');
-      $table->string('status');
-      $table->string('alamat');
-      $table->string('email')->unique();
+      $table->integer('umur')->nullable();
+      $table->string('status', 10)->nullable();
+      $table->string('alamat', 255)->nullable();
+      $table->string('no_telepon', 16)->nullable();
+      $table->string('email')->unique()->nullable();
       $table->string('password')->nullable();
       $table->timestamps();
       $table->softDeletes();

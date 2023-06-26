@@ -27,8 +27,9 @@
                                         class="btn btn-icon btn-warning icon-left"><i class="far fa-edit"></i>
                                         Edit</a>
                                     <button class="btn btn-danger btn-icon icon-left"
-                                        data-action="{{ route('dokter.destroy', $dokter->id_pengguna) }}" data-toggle="modal"
-                                        data-target="#confirm-delete-modal"> <i class="fas fa-trash"></i>
+                                        data-action="{{ route('dokter.destroy', $dokter->id_pengguna) }}"
+                                        data-toggle="modal" data-target="#confirm-delete-modal"> <i
+                                            class="fas fa-trash"></i>
                                         Delete</button>
 
                                 </div>
@@ -50,6 +51,13 @@
                                     <div class="form-group col-12">
                                         <label>Status</label>
                                         <input readonly type="text" class="form-control" value="{{ $dokter->status }}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>No Telepon</label>
+                                        <input readonly type="text" class="form-control"
+                                            value="{{ $dokter->no_telepon }}">
                                     </div>
                                 </div>
                                 <div class="row">

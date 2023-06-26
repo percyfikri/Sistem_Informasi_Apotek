@@ -52,6 +52,13 @@
                                         <input readonly type="text" class="form-control" value="{{ $customer->status }}">
                                     </div>
                                 </div>
+                                 <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>No Telepon</label>
+                                        <input readonly type="text" class="form-control"
+                                            value="{{ $customer->no_telepon }}">
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="form-group col-12">
                                         <label>Alamat</label>

@@ -17,12 +17,12 @@ class PenggunaController extends Controller
    */
   public function index(Request $request)
   {
-      if ($request->ajax()) {
-          return DataTables::of(Pengguna::whereIn('status', ['apoteker'])->get())->toJson();
-      }
-      return view('pages.pengguna.index');
+    if ($request->ajax()) {
+      return DataTables::of(Pengguna::whereIn('status', ['apoteker'])->get())->toJson();
+    }
+    return view('pages.pengguna.index');
   }
-  
+
   /**
    * Show the form for creating a new resource.
    *
@@ -44,16 +44,15 @@ class PenggunaController extends Controller
     $request->validate(
       [
         'nama' => 'required',
-        'umur' => 'required',
-        'alamat' => 'required',
+        'umur' => 'numeric',
+        'alamat' => 'string',
+        'no_telepon' => 'numeric',
         'status' => 'required',
-        'email' => 'required',
+        'email' => 'required|email',
         'password' => 'required',
       ],
       [
         'nama.required' => 'Nama Pengguna wajib diisi',
-        'umur.required' => 'Umur Pengguna wajib diisi',
-        'alamat.required' => 'Alamat Pengguna wajib diisi',
         'status.required' => 'Status Pengguna wajib diisi',
         'email.required' => 'Email Pengguna wajib diisi',
         'password.required' => 'Password Pengguna wajib diisi',
@@ -63,6 +62,8 @@ class PenggunaController extends Controller
     $nama = $request->nama;
     $umur = $request->umur;
     $alamat = $request->alamat;
+    $no_telepon = $request->no_telepon;
+
     $status = $request->status;
     $email = $request->email;
     $password = $request->password;
@@ -71,7 +72,9 @@ class PenggunaController extends Controller
       $pengguna = new Pengguna();
       $pengguna->nama = $nama;
       $pengguna->umur = $umur;
+      $pengguna->no_telepon = $no_telepon;
       $pengguna->alamat = $alamat;
+
       $pengguna->status = $status;
       $pengguna->email = $email;
       $pengguna->password = bcrypt($password);
@@ -116,34 +119,38 @@ class PenggunaController extends Controller
    */
   public function update(Request $request, $id)
   {
-      $request->validate([
-          'nama' => 'required',
-          'umur' => 'required',
-          'alamat' => 'required',
-          'status' => 'required',
-          'email' => 'required',
-      ], [
-          'nama.required' => 'Nama Pengguna wajib diisi',
-          'umur.required' => 'Umur Pengguna wajib diisi',
-          'alamat.required' => 'Alamat Pengguna wajib diisi',
-          'status.required' => 'Status Pengguna wajib diisi',
-          'email.required' => 'Email Pengguna wajib diisi',
-      ]);
-  
-      try {
-          $pengguna = Pengguna::findOrFail($id);
-          $pengguna->nama = $request->nama;
-          $pengguna->umur = $request->umur;
-          $pengguna->alamat = $request->alamat;
-          $pengguna->status = $request->status;
-          $pengguna->email = $request->email;
-          $pengguna->save();
-  
-          return redirect()->route('pengguna.index')->with('msg-success', 'Berhasil mengubah data');
-      } catch (\Throwable $th) {
-          echo $th;
-      }
-  }  
+    $request->validate([
+      'nama' => 'required',
+      'umur' => 'numeric',
+      'alamat' => 'string',
+      'no_telepon' => 'numeric',
+      'status' => 'required',
+      'email' => 'required|email',
+      'password' => 'required',
+    ], [
+      'nama.required' => 'Nama Pengguna wajib diisi',
+      'umur.required' => 'Umur Pengguna wajib diisi',
+      'alamat.required' => 'Alamat Pengguna wajib diisi',
+      'status.required' => 'Status Pengguna wajib diisi',
+      'email.required' => 'Email Pengguna wajib diisi',
+    ]);
+
+    try {
+      $pengguna = Pengguna::findOrFail($id);
+      $pengguna->nama = $request->nama;
+      $pengguna->umur = $request->umur;
+      $pengguna->no_telepon = $request->no_telepon;
+
+      $pengguna->alamat = $request->alamat;
+      $pengguna->status = $request->status;
+      $pengguna->email = $request->email;
+      $pengguna->save();
+
+      return redirect()->route('pengguna.index')->with('msg-success', 'Berhasil mengubah data');
+    } catch (\Throwable $th) {
+      echo $th;
+    }
+  }
 
   /**
    * Remove the specified resource from storage.

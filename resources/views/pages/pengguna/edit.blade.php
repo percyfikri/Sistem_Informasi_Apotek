@@ -20,18 +20,18 @@
 
             <div class="section-body">
                 @if ($errors->any())
-                <div class="pt-3">
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <ul>
-                        @foreach ($errors->all() as $item)
-                            <li>{{ $item }}</li>
-                        @endforeach
-                        </ul>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="pt-3">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
                 @endif
                 <div class="card">
                     <div class="card-header">
@@ -57,6 +57,13 @@
                                     value="{{ old('umur', $pengguna->umur) }}">
                             </div>
                             <div class="form-group">
+                                <label>No Telepon</label>
+                                <input type="text" name="no_telepon"
+                                    class="form-control @if (old('no_telepon')) is-valid @endif
+                                @error('no_telepon') is-invalid @enderror"
+                                    value="{{ old('no_telepon', $pengguna->no_telepon) }}">
+                            </div>
+                            <div class="form-group">
                                 <label>Alamat</label>
                                 <textarea name="alamat"
                                     class="form-control @if (old('alamat')) is-valid @endif
@@ -66,9 +73,10 @@
                             <div class="form-group">
                                 <label>Status</label>
                                 <input type="hidden" name="status" value="apoteker">
-                                <input readonly type="text" class="form-control @if (old('status')) is-valid @endif @error('status') is-invalid @enderror"
-                                  value="{{ old('status', 'Apoteker', $pengguna->status) }}">
-                            </div>                     
+                                <input readonly type="text"
+                                    class="form-control @if (old('status')) is-valid @endif @error('status') is-invalid @enderror"
+                                    value="{{ old('status', 'Apoteker', $pengguna->status) }}">
+                            </div>
                             <div class="form-group">
                                 <label>Email</label>
                                 <input type="email" name="email"

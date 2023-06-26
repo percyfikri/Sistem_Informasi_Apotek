@@ -20,37 +20,15 @@
                                 @error('nama') is-invalid @enderror"
                                 value="{{ old('nama') }}">
                         </div>
-                        <div class="form-group">
-                            <label>Umur</label>
-                            <input type="number" name="umur"
-                                class="form-control @if (old('umur')) is-valid @endif
-                                @error('umur') is-invalid @enderror"
-                                value="{{ old('umur') }}">
-                        </div>
 
-                        <div class="form-group">
-                            <label>Alamat</label>
-                            <textarea name="alamat"
-                                class="form-control @if (old('alamat')) is-valid @endif
-                                @error('alamat') is-invalid @enderror"
-                                data-height="150">{{ old('alamat') }}</textarea>
-                        </div>
-                        {{-- <div class="form-group"> --}}
-                        {{-- <label>Status</label> --}}
+
                         <select class="form-control"hidden name="status"
                             class="form-control @if (old('status')) is-valid @endif
                                 @error('status') is-invalid @enderror"
                             value="{{ old('status') }}">
                             <option selected value="customer">Customer</option>
                         </select>
-                        {{-- </div> --}}
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" name="email"
-                                class="form-control @if (old('email')) is-valid @endif
-                                @error('email') is-invalid @enderror"
-                                value="{{ old('email') }}">
-                        </div>
+
                     </div>
 
                 </div>
@@ -78,7 +56,7 @@
                         type: "click"
                     });
                     $('#customer-table').DataTable().ajax.reload();
-                   
+
                 }
             })
         })

@@ -17,7 +17,7 @@ class DokterController extends Controller
    */
   public function index(Request $request)
   {
-if ($request->ajax()) {
+    if ($request->ajax()) {
       return DataTables::of(Pengguna::where('status', 'dokter')->get())->toJson();
     }
     return view('pages.dokter.index');
@@ -44,23 +44,27 @@ if ($request->ajax()) {
     $request->validate(
       [
         'nama' => 'required',
-        'umur' => 'required',
-        'alamat' => 'required',
+        'umur' => 'numeric',
+        'no_telepon' => 'numeric',
+        'alamat' => 'string',
         'status' => 'required',
-        'email' => 'required',
+        'email' => 'email',
       ],
       [
         'nama.required' => 'Nama Dokter wajib diisi',
-        'umur.required' => 'Umur Dokter wajib diisi',
-        'alamat.required' => 'Alamat Dokter wajib diisi',
+        // 'umur.required' => 'Umur Dokter wajib diisi',
+
+        // 'alamat.required' => 'Alamat Dokter wajib diisi',
         'status.required' => 'Status Dokter wajib diisi',
-        'email.required' => 'Email Dokter wajib diisi',
+        // 'email.required' => 'Email Dokter wajib diisi',
       ]
     );
 
     $nama = $request->nama;
     $umur = $request->umur;
     $alamat = $request->alamat;
+
+    $no_telepon = $request->no_telepon;
     $status = $request->status;
     $email = $request->email;
     $password = null;
@@ -69,7 +73,9 @@ if ($request->ajax()) {
       $dokter = new Pengguna();
       $dokter->nama = $nama;
       $dokter->umur = $umur;
+      $dokter->no_telepon = $no_telepon;
       $dokter->alamat = $alamat;
+
       $dokter->status = $status;
       $dokter->email = $email;
       $dokter->password = bcrypt($password);
@@ -114,33 +120,36 @@ if ($request->ajax()) {
    */
   public function update(Request $request, $id)
   {
-      $request->validate([
-          'nama' => 'required',
-          'umur' => 'required',
-          'alamat' => 'required',
-          'status' => 'required',
-          'email' => 'required',
-      ], [
-          'nama.required' => 'Nama Dokter wajib diisi',
-          'umur.required' => 'Umur Dokter wajib diisi',
-          'alamat.required' => 'Alamat Dokter wajib diisi',
-          'status.required' => 'Status Dokter wajib diisi',
-          'email.required' => 'Email Dokter wajib diisi',
-      ]);
-  
-      try {
-          $customer = Pengguna::findOrFail($id);
-          $customer->nama = $request->nama;
-          $customer->umur = $request->umur;
-          $customer->alamat = $request->alamat;
-          $customer->status = $request->status;
-          $customer->email = $request->email;
-          $customer->save();
-  
-          return redirect()->route('dokter.index')->with('msg-success', 'Berhasil mengubah data');
-      } catch (\Throwable $th) {
-          echo $th;
-      }
+    $request->validate([
+      'nama' => 'required',
+      'umur' => 'numeric',
+      'no_telepon' => 'numeric',
+      'alamat' => 'string',
+      'status' => 'required',
+      'email' => 'email',
+    ], [
+      'nama.required' => 'Nama Dokter wajib diisi',
+      'umur.required' => 'Umur Dokter wajib diisi',
+      'alamat.required' => 'Alamat Dokter wajib diisi',
+      'status.required' => 'Status Dokter wajib diisi',
+      'email.required' => 'Email Dokter wajib diisi',
+    ]);
+
+    try {
+      $customer = Pengguna::findOrFail($id);
+      $customer->nama = $request->nama;
+      $customer->umur = $request->umur;
+      $customer->no_telepon = $request->no_telepon;
+
+      $customer->alamat = $request->alamat;
+      $customer->status = $request->status;
+      $customer->email = $request->email;
+      $customer->save();
+
+      return redirect()->route('dokter.index')->with('msg-success', 'Berhasil mengubah data');
+    } catch (\Throwable $th) {
+      echo $th;
+    }
   }
 
   /**
