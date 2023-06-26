@@ -84,3 +84,5 @@ Route::delete('detail-resep/{id_resep}/{id_detail}', [DetailResepController::cla
 
 Route::get('/detail-resep/{id_resep}/{id_detail}/edit', [DetailResepController::class, 'edit'])->name('detail-resep.edit');
 Route::post('/detail-resep/{id_resep}/{id_detail}', [DetailResepController::class, 'update'])->name('detail-resep.update');
+
+Route::delete('detail_racikan/{id_racikan}/{id_obat}/{satuan}', [DetailRacikanController::class, 'destroy']);
