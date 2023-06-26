@@ -183,10 +183,17 @@ class ResepObatController extends Controller
 
   public function getAllResep()
   {
-    return DataTables::of(ResepObat::with('detail_resep', 'detail_resep.obat.stok_obat')->withSum('detail_resep as total', 'harga')->whereHas('detail_resep.obat.stok_obat', function ($query) {
-      $query->where('kuantitas', '>', 0);
-    })
-      ->get())->toJson();
+    return DataTables::of(ResepObat::with('detail_resep', 'detail_resep.obat.stok_obat')
+      ->withSum('detail_resep as total', 'harga')
+      ->whereHas('detail_resep.obat.stok_obat', function ($query) {
+        $query->where('kuantitas', '>', 0);
+      })->orWhereHas('detail_resep.racikan')->get())->toJson();
+    // ->orWhereHas('detail_resep.racikan', function ($query) {
+    //   $racikan = $query->with('detail_racikan')->get();
+    //   dd($racikan->with('obat.stok_obat', function ($query) {
+    //     $query->where('satuan', $racikan->satuan);
+    //   })->get());
+    // })
   }
 
   public function cetak_pdf()
@@ -220,7 +227,7 @@ class ResepObatController extends Controller
       $html .= '<p><strong>2. Customer  :</strong> ' . ($item->customer ? $item->customer->nama : '-') . '</p>';
       $html .= '<p><strong>3. Dokter    :</strong> ' . ($item->dokter ? $item->dokter->nama : '-') . '</p>';
       $html .= '<p><strong>4. Status    :</strong> ' . $item->status . '</p>';
-      $html .= '<p><strong>5. Tanggal   :</strong> ' . date('d-m-Y', strtotime($item->tanggal )). '</p>';
+      $html .= '<p><strong>5. Tanggal   :</strong> ' . date('d-m-Y', strtotime($item->tanggal)) . '</p>';
       $html .= '<p><strong>6. Deskripsi :</strong> ' . $item->deskripsi . '</p>';
 
       $html .= '<h3>Data Detail Resep Obat</h3>'; // Menambahkan nomor tabel

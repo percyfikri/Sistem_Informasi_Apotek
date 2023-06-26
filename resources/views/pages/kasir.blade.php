@@ -180,7 +180,8 @@
             const id = target.dataset.id
             const nama = target.dataset.nama
             const type = target.dataset.type
-            const harga = target.dataset.harga || 0
+            const harga = Number(target.dataset.harga) || 0
+            console.log(harga)
             addTableRow({
                 id,
                 nama,
@@ -252,8 +253,8 @@
                                     <input hidden type="text" name="nama[]"
                                     class="form-control" disabled value="${item.nama}">`
 
-            cell2.innerHTML = `<p class="m-0">${item.type}</p> <input type="text" hidden name="type[]"
-                                    class="form-control" id="type-${item.id}" disabled value="${item.type}">`
+            cell2.innerHTML = `<p class="m-0">${item.type}</p> <input type="hidden"  name="type[]"
+                                    class="form-control" id="type-${item.id}" value="${item.type}">`
             cell3.innerHTML =
                 `<select type="text"  id="satuan-${item.id}" name="satuan[]"
                                     class="form-control" onchange="sumSubTotal(event)"> ${item.type!='obat'?`<option value="${item.type}" selected></option>`:''}"</select>`

@@ -13,12 +13,7 @@
                     <span>Dashboard</span></a>
             </li>
             <li class="menu-header">Apoteker</li>
-            @if (Auth::user()->status == 'admin')
-                <li class="{{ Request::is('pengguna') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ url('pengguna') }}"><i class="fas fa-user"></i>
-                        <span>Pengguna</span></a>
-                </li>
-            @endif
+
 
             <li class="{{ Request::is('pengguna') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('pengguna') }}"><i class="fas fa-user"></i>

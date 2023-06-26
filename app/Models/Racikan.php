@@ -17,12 +17,9 @@ class Racikan extends Model
     'harga',
     'catatan'
   ];
-  public function racikan()
-  {
-    return $this->hasOne(Racikan::class, 'id_racikan');
-  }
+
   public function detail_racikan()
   {
-    return $this->hasOne(DetailRacikan::class, 'id_racikan');
+    return $this->hasMany(DetailRacikan::class, 'id_racikan');
   }
 }

@@ -150,6 +150,10 @@ class ObatController extends Controller
   }
   public function getAllObat()
   {
-    return DataTables::of(Obat::with('stok_obat', 'stok_obat.obat')->withCount('stok_obat as stok_obat_count')->having('stok_obat_count', '>', 0)->get())->toJson();
+    return DataTables::of(Obat::with('stok_obat')
+      ->withSum('stok_obat', 'kuantitas')
+      ->whereHas('stok_obat', function ($query) {
+        $query->where('kuantitas', '>', 0);
+      })->get())->toJson();
   }
 }

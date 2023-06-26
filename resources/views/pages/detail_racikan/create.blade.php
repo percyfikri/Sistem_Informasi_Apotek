@@ -20,18 +20,18 @@
 
             <div class="section-body">
                 @if ($errors->any())
-                <div class="pt-3">
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <ul>
-                        @foreach ($errors->all() as $item)
-                            <li>{{ $item }}</li>
-                        @endforeach
-                        </ul>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="pt-3">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
                 @endif
                 <div class="card">
                     <div class="card-header">
@@ -45,7 +45,7 @@
                                 <label for="id_obat">Nama Racikan</label>
                                 <select class="form-control" name="id_racikan" id="id_racikan">
                                     @foreach ($racikan as $rck)
-                                        <option value="{{$rck->id_racikan}}">{{$rck->nama_racikan}}</option>
+                                        <option value="{{ $rck->id_racikan }}">{{ $rck->nama_racikan }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -53,17 +53,17 @@
                                 <label for="id_obat">Nama Obat</label>
                                 <select class="form-control" name="id_obat" id="id_obat">
                                     @foreach ($obat as $obt)
-                                        <option value="{{$obt->id_obat}}">{{$obt->nama_obat}}</option>
+                                        <option value="{{ $obt->id_obat }}">{{ $obt->nama_obat }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Kuantitas</label>
                                 <div class="input-group">
-                                <input type="number" name="kuantitas"
-                                    class="form-control @if (old('kuantitas')) is-valid @endif 
+                                    <input type="number" name="kuantitas"
+                                        class="form-control @if (old('kuantitas')) is-valid @endif 
                                 @error('kuantitas') is-invalid @enderror"
-                                    value="{{ old('kuantitas') }}">
+                                        value="{{ old('kuantitas') }}">
                                 </div>
                             </div>
                             <div class="form-group">

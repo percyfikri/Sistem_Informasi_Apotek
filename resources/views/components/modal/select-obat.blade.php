@@ -17,6 +17,7 @@
                             <tr>
                                 <th>Nama Obat</th>
                                 <th>Jenis Obat</th>
+                                <th>Kuantitas</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -62,6 +63,10 @@
                     name: "jenis_obat",
                 },
                 {
+                    data: "stok_obat_sum_kuantitas",
+                    name: "kuantitas",
+                },
+                {
                     data: null,
                     orderable: false,
                     searchable: false,
@@ -74,6 +79,5 @@
                 },
             ],
         });
-
     </script>
 @endpush

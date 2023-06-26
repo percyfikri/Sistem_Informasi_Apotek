@@ -15,11 +15,11 @@ return new class extends Migration
   {
     Schema::create('penjualan', function (Blueprint $table) {
       $table->increments('id_penjualan');
-      $table->unsignedInteger('id_customer');
+      $table->unsignedInteger('id_customer')->nullable();
       $table->foreign('id_customer')->references('id_pengguna')->on('pengguna')->onDelete('cascade');
       $table->unsignedInteger('id_apoteker');
       $table->foreign('id_apoteker')->references('id_pengguna')->on('pengguna')->onDelete('cascade');
-      $table->unsignedInteger('id_dokter');
+      $table->unsignedInteger('id_dokter')->nullable();
       $table->foreign('id_dokter')->references('id_pengguna')->on('pengguna')->onDelete('cascade')->nullable();
       $table->datetime('tanggal');
       $table->timestamps();

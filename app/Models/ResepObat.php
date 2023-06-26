@@ -26,10 +26,7 @@ class ResepObat extends Model
     'tanggal' => 'datetime:d-m-Y H:i:s'
   ];
 
-  public function resep()
-  {
-    return $this->hasOne(ResepObat::class, 'id_resep');
-  }
+
   public function dokter()
   {
     return $this->belongsTo(Pengguna::class, 'id_dokter', 'id_pengguna');
