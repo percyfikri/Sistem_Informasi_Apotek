@@ -6,8 +6,10 @@ use App\Models\Pengguna;
 use App\Models\Penjualan;
 use App\Models\Racikan;
 use App\Models\ResepObat;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PageController extends Controller
 {
@@ -27,6 +29,9 @@ class PageController extends Controller
     $penjualanCount = Penjualan::count();
     $resepCount = ResepObat::count();
     $racikanCount = Racikan::count();
-    return view('pages.dashboard', compact('penggunaCount', 'penjualanCount', 'resepCount', 'racikanCount'));
+    $newestTransaction = Penjualan::orderBy("tanggal", 'desc')->take('5')->get();
+
+
+    return view('pages.dashboard', compact('newestTransaction', 'penggunaCount', 'penjualanCount', 'resepCount', 'racikanCount'));
   }
 }

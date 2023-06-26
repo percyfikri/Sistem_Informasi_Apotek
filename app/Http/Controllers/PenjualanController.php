@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Penjualan;
 use App\Models\DetailPenjualan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
 use Dompdf\Dompdf;
+use Illuminate\Support\Facades\DB;
 use PDF;
 
 class PenjualanController extends Controller
@@ -148,5 +150,67 @@ class PenjualanController extends Controller
 
     // Mengirimkan hasil PDF ke browser untuk diunduh
     $dompdf->stream('cetak-laporan-penjualan.pdf');
+  }
+
+  public function weekly_report()
+  {
+    $currentWeek = Carbon::now()->startOfWeek();
+    $endWeek = Carbon::now()->endOfWeek();
+    $data =
+      Penjualan::select(DB::raw('DAYNAME(tanggal) as day'), DB::raw('COUNT(*) as count'))
+      ->whereBetween('tanggal', [$currentWeek, $endWeek])
+      ->groupBy('day')
+      ->orderByRaw('DAYOFWEEK(tanggal)')
+      ->get();
+    $datesInWeek = [];
+    for ($date = $currentWeek; $date <= $endWeek; $date->addDay()) {
+      $datesInWeek[] = $date->format('l');
+    }
+    $chartData = [];
+    foreach ($datesInWeek as $date) {
+      $count = 0;
+      foreach ($data as $row) {
+        if ($row->day === $date) {
+          $count = $row->count;
+          break;
+        }
+      }
+      if ($row)
+        $chartData[] = $count;
+    }
+
+    $labels = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
+    $values = $chartData;
+    return response()->json(compact(['labels', 'values']));
+  }
+
+  public function monthly_report()
+  {
+    $currentMonth = Carbon::now()->startOfMonth();
+    $endMonth = Carbon::now()->endOfMonth();
+    $data =
+
+      Penjualan::select(DB::raw('DATE(tanggal) as date'), DB::raw('COUNT(*) as count'))
+      ->whereBetween('tanggal', [$currentMonth, $endMonth])
+      ->groupBy('date')->get();
+    $datesInMonth = [];
+    for ($date = $currentMonth; $date <= $endMonth; $date->addDay()) {
+      $datesInMonth[] = $date->format('d');
+    }
+    $chartData = [];
+    foreach ($datesInMonth as $date) {
+      $count = 0;
+      foreach ($data as $row) {
+        if (Carbon::createFromFormat('Y-m-d', $row->date)->format('d') === $date) {
+          $count = $row->count;
+          break;
+        }
+      }
+      $chartData[] = $count;
+    }
+
+    $labels = $datesInMonth;
+    $values = $chartData;
+    return response()->json(compact(['labels', 'values']));
   }
 }
