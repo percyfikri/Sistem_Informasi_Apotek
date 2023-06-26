@@ -2,18 +2,30 @@
 <html>
 
 <head>
-    <title>Laporan PDF Data Obat Apotek Arema</title>
+    <title>Laporan Data Obat Apotek Arema</title>
 </head>
 
 <body>
-    <style type="text/css">
-        table tr td,
-        table tr th {
-            font-size: 9pt;
+    <style>
+        .table-bordered {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        .table-bordered th,
+        .table-bordered td {
+            border: 1px solid #000000;
+            text-align: center;
+            padding: 8px;
+        }
+        
+        .table .tanggal {
+            text-align: left;
+            white-space: nowrap;
         }
     </style>
     <center>
-        <h5>Laporan Data Obat Apotek Arema</h4>
+        <h2>Laporan Data Obat Apotek Arema</h2>
     </center>
     <table class='table table-bordered'>
         <thead>
