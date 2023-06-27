@@ -68,6 +68,8 @@
                                                 <th>Nama</th>
                                                 <th>Status</th>
                                                 <th>Email</th>
+                                                <th>No Telepon</th>
+
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -120,6 +122,10 @@
                     {
                         data: 'email',
                         name: 'email'
+                    },
+                    {
+                        data: 'no_telepon',
+                        name: 'no_telepon'
                     },
                     {
                         data: null,

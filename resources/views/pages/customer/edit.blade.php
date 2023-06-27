@@ -20,18 +20,18 @@
 
             <div class="section-body">
                 @if ($errors->any())
-                <div class="pt-3">
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <ul>
-                        @foreach ($errors->all() as $item)
-                            <li>{{ $item }}</li>
-                        @endforeach
-                        </ul>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="pt-3">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
                 @endif
                 <div class="card">
                     <div class="card-header">
@@ -56,12 +56,12 @@
                                 @error('umur') is-invalid @enderror"
                                     value="{{ old('umur', $customer->umur) }}">
                             </div>
-                             <div class="form-group">
+                            <div class="form-group">
                                 <label>No Telepon</label>
                                 <input type="text" name="no_telepon"
                                     class="form-control @if (old('no_telepon')) is-valid @endif
                                 @error('no_telepon') is-invalid @enderror"
-                                    value="{{ old('no_telepon', $pengguna->no_telepon) }}">
+                                    value="{{ old('no_telepon', $customer->no_telepon) }}">
                             </div>
                             <div class="form-group">
                                 <label>Alamat</label>
@@ -73,8 +73,9 @@
                             <div class="form-group">
                                 <label>Status</label>
                                 <input type="hidden" name="status" value="customer">
-                                <input readonly type="text" class="form-control @if (old('status')) is-valid @endif @error('status') is-invalid @enderror"
-                                  value="{{ old('status', 'Costumer', $customer->status) }}">
+                                <input readonly type="text"
+                                    class="form-control @if (old('status')) is-valid @endif @error('status') is-invalid @enderror"
+                                    value="{{ old('status', 'Costumer', $customer->status) }}">
                             </div>
                             <div class="form-group">
                                 <label>Email</label>

@@ -67,6 +67,7 @@
                                                 <th>No</th>
                                                 <th>Nama</th>
                                                 <th>Umur</th>
+                                                <th>No Telepon</th>
                                                 <th>Alamat</th>
                                                 <th>Email</th>
                                                 <th>Action</th>
@@ -117,6 +118,10 @@
                     {
                         data: 'umur',
                         name: 'umur'
+                    },
+                    {
+                        data: 'no_telepon',
+                        name: 'no_telepon'
                     },
                     {
                         data: 'alamat',

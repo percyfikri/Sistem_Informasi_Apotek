@@ -16,21 +16,21 @@
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="{{ url('dashboard-general-dashboard') }}">Dashboard</a></div>
                     <div class="breadcrumb-item"><a href="{{ route('racikan.index') }}">Racikan</a></div>
-                    
+
                 </div>
             </div>
             <div class="section-body">
                 @if (session('msg-success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
-                    <div class="alert-body">
-                        <div class="alert-title">Sukses</div>
-                        {{ session('msg-success') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
+                        <div class="alert-body">
+                            <div class="alert-title">Sukses</div>
+                            {{ session('msg-success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
                 @endif
                 <div class="row">
                     <div class="col-12">
@@ -39,8 +39,8 @@
                                 <h4>Data Obat Racikan</h4>
 
                                 <div class="card-header-action">
-                                    <a href="{{ route('detail_racikan.create') }}" class="btn btn-icon btn-primary icon-left"><i
-                                            class="fas fa-plus"></i>
+                                    <a href="{{ route('detail_racikan.create') }}"
+                                        class="btn btn-icon btn-primary icon-left"><i class="fas fa-plus"></i>
                                         Tambah</a>
 
                                 </div>
@@ -54,7 +54,7 @@
                                                 <th>Nama Obat</th>
                                                 <th>Kuantitas</th>
                                                 <th>Satuan</th>
-                                               
+
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -81,7 +81,6 @@
     <script src="{{ asset('js/page/modules-datatables.js') }}"></script>
 
     <script>
-        
         $(function() {
             $('#users-table').DataTable({
                 processing: true,
@@ -92,15 +91,18 @@
                 order: [
                     [1, 'asc']
                 ],
-                ajax: '{!! route('detail_racikan.show',$racikan->id_racikan) !!}',
-                columns: [
-                    {
+                ajax: '{!! route('detail_racikan.show', $racikan->id_racikan) !!}',
+                columns: [{
                         data: 'racikan.nama_racikan',
-                        name: 'racikan.nama_racikan'
+                        name: 'racikan.nama_racikan',
+                        defaultContent: '-'
+
                     },
                     {
                         data: 'obat.nama_obat',
-                        name: 'obat.nama_obat'
+                        name: 'obat.nama_obat',
+                        defaultContent: '-'
+
                     },
                     {
                         data: 'kuantitas',
@@ -125,7 +127,7 @@
 
 
                 ],
-              
+
             });
         });
     </script>

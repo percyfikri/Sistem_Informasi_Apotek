@@ -85,7 +85,6 @@
     <script src="{{ asset('js/page/modules-datatables.js') }}"></script>
 
     <script>
-        console.log(@json($obat))
         $(function() {
             $('#users-table').DataTable({
                 processing: true,

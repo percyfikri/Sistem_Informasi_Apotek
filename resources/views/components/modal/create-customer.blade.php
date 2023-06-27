@@ -20,8 +20,20 @@
                                 @error('nama') is-invalid @enderror"
                                 value="{{ old('nama') }}">
                         </div>
-
-
+                        <div class="form-group">
+                            <label>No Telepon</label>
+                            <input type="text" name="no_telepon"
+                                class="form-control @if (old('no_telepon')) is-valid @endif
+                                @error('no_telepon') is-invalid @enderror"
+                                value="{{ old('no_telepon') }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Alamat</label>
+                            <textarea name="alamat"
+                                class="form-control @if (old('alamat')) is-valid @endif
+                                @error('alamat') is-invalid @enderror"
+                                data-height="150">{{ old('alamat') }}</textarea>
+                        </div>
                         <select class="form-control"hidden name="status"
                             class="form-control @if (old('status')) is-valid @endif
                                 @error('status') is-invalid @enderror"

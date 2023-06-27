@@ -17,22 +17,22 @@
                     <div class="breadcrumb-item active"><a href="{{ url('dashboard-general-dashboard') }}">Dashboard</a></div>
                     <div class="breadcrumb-item active"><a href="{{ route('resep-obat.index') }}">Resep Obat</a></div>
                     {{-- <div class="breadcrumb-item"><a href="{{ route('resep-obat.index') }}">Informasi Resep Obat</a></div> --}}
-                    <div class="breadcrumb-item" style="color: #6777ef" >Informasi Resep Obat</div>
+                    <div class="breadcrumb-item" style="color: #6777ef">Informasi Resep Obat</div>
                     <div class="breadcrumb-item">Detail Resep Obat</div>
                 </div>
             </div>
             <div class="section-body">
                 @if (session('msg-success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
-                    <div class="alert-body">
-                        <div class="alert-title">Sukses</div>
-                        {{ session('msg-success') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
+                        <div class="alert-body">
+                            <div class="alert-title">Sukses</div>
+                            {{ session('msg-success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
                 @endif
                 <div class="row">
                     <div class="col-12">
@@ -40,12 +40,13 @@
                             <div class="card-header">
                                 <h4>Data Resep Obat</h4>
                                 <div class="card-header-action">
-                                    
-                                    <a href="{{ route('detail-resep.create',$resepObat->id_resep) }}" class="btn btn-icon btn-primary icon-left mb-3"><i
-                                        class="fas fa-plus"></i>
-                                    Tambah 1
+
+                                    <a href="{{ route('detail-resep.create', $resepObat->id_resep) }}"
+                                        class="btn btn-icon btn-primary icon-left mb-3"><i class="fas fa-plus"></i>
+                                        Tambah 1
                                     </a>
-                                    <span class="tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="right" title="Gunakan Button Ini untuk menambahkan data yang sudah ada sebelumnya">
+                                    <span class="tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="right"
+                                        title="Gunakan Button Ini untuk menambahkan data yang sudah ada sebelumnya">
                                         <i class="fas fa-question-circle"></i>
                                     </span>
                                     <br>
@@ -53,14 +54,15 @@
                                         <i class="fas fa-plus"></i>
                                         Tambah 2
                                     </a>
-                                    <span class="tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="right" title="Gunakan Button Ini untuk menambahkan data pertama kali">
+                                    <span class="tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="right"
+                                        title="Gunakan Button Ini untuk menambahkan data pertama kali">
                                         <i class="fas fa-question-circle"></i>
                                     </span>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table-striped table table-bordered w-100" id="detail-resep-table" >
+                                    <table class="table-striped table table-bordered w-100" id="detail-resep-table">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -115,11 +117,14 @@
                     },
                     {
                         data: 'resep.nama_resep',
-                        name: 'resep.nama_resep'
+                        name: 'resep.nama_resep',
+                        defaultContent: '-'
+
                     },
                     {
                         data: 'obat.nama_obat',
-                        name: 'obat.nama_obat'
+                        name: 'obat.nama_obat',
+                        defaultContent: '-'
                     },
                     {
                         data: 'racikan.nama_racikan',
@@ -149,7 +154,7 @@
                             </div>`;
                         }
                     },
-                   
+
                 ],
                 rowCallback: function(row, data, index) {
                     $('td:eq(0)', row).html(index + 1);

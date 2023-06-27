@@ -46,11 +46,13 @@
                                         <table class="table-striped table" id="item-table">
                                             <thead>
                                                 <tr>
-                                                    <th style="width:25%">Nama</th>
+                                                    <th style="width:20%">Nama</th>
                                                     <th style="width:10%">Jenis</th>
                                                     <th style="width:25%">Satuan</th>
                                                     <th style="width:10%">Kuantitas</th>
                                                     <th style="width:30%">SubTotal</th>
+                                                    <th style="width:5%"></th>
+
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -241,11 +243,12 @@
             checkTableRow()
             const itemTable = document.getElementById("item-table");
             const row = itemTable.insertRow();
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
-            var cell4 = row.insertCell(3);
-            var cell5 = row.insertCell(4);
+            let cell1 = row.insertCell(0);
+            let cell2 = row.insertCell(1);
+            let cell3 = row.insertCell(2);
+            let cell4 = row.insertCell(3);
+            let cell5 = row.insertCell(4);
+            let cell6 = row.insertCell(5)
 
             cell1.innerHTML = `<input type="text" name="ids[]" id="id-${item.id}"
                                     class="form-control" hidden value="${item.id}">
@@ -265,12 +268,28 @@
                 currency: 'IDR'
             })}</span> <input type="hidden" id="subtotal-${item.id}" name="harga[]"
                                     class="form-control item-subtotal" value="0"  >`
-
+            cell6.innerHTML =
+                `<button  type="button" class="btn btn-icon btn-sm btn-danger"  onclick="removeItem(event,${item.id})"><i class="fas fa-times"></i></button>`
             items.push(item)
             if (item.type === 'obat') getItem(item.id)
             itemCount++;
         }
+        const removeItem = (e, id) => {
+            let target = e.target
+            if (target.tagName != 'TR') {
+                target = target.closest('tr');
+            }
+            target.remove()
 
+            let indexToRemove = items.findIndex((item) => item.id == id);
+            if (indexToRemove !== -1) {
+                items.splice(indexToRemove, 1);
+            }
+            total.innerHTML = Number(0).toLocaleString('id-ID', {
+                style: 'currency',
+                currency: 'IDR'
+            });
+        }
         const getItem = (id) => {
             $.ajax({
                 url: `/api/obat/${id}`,

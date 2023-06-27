@@ -61,7 +61,7 @@
                                 <input type="text" name="no_telepon"
                                     class="form-control @if (old('no_telepon')) is-valid @endif
                                 @error('no_telepon') is-invalid @enderror"
-                                    value="{{ old('no_telepon', $pengguna->no_telepon) }}">
+                                    value="{{ old('no_telepon', $dokter->no_telepon) }}">
                             </div>
                             <div class="form-group">
                                 <label>Alamat</label>
