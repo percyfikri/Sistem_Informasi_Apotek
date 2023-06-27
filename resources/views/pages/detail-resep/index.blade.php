@@ -43,10 +43,10 @@
 
                                     <a href="{{ route('detail-resep.create', $resepObat->id_resep) }}"
                                         class="btn btn-icon btn-primary icon-left mb-3"><i class="fas fa-plus"></i>
-                                        Tambah 1
+                                        Tambah
                                     </a>
                                     <span class="tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="right"
-                                        title="Digunakan untuk menambah data detail resep baru">
+                                        title="Gunakan untuk menambah data detail resep baru">
                                         <i class="fas fa-question-circle"></i>
                                     </span>
                                     {{-- <a href="{{ url('detail-resep/tambah') }}" class="btn btn-icon btn-success icon-left">
