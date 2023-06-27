@@ -223,7 +223,7 @@ class ResepObatController extends Controller
       $html .= '<h3>Data Resep Obat ke-' . $count . '</h3>'; // Menambahkan nomor tabel
       $count++;
 
-      $html .= '<p><strong>1. Resep     :</strong> ' . ($item->resep ? $item->resep->nama_resep : '-') . '</p>';
+      $html .= '<p><strong>1. Resep     :</strong> ' . ($item->nama_resep ? $item->nama_resep : '-') . '</p>';
       $html .= '<p><strong>2. Customer  :</strong> ' . ($item->customer ? $item->customer->nama : '-') . '</p>';
       $html .= '<p><strong>3. Dokter    :</strong> ' . ($item->dokter ? $item->dokter->nama : '-') . '</p>';
       $html .= '<p><strong>4. Status    :</strong> ' . $item->status . '</p>';

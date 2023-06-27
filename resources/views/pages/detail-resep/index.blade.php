@@ -46,18 +46,17 @@
                                         Tambah 1
                                     </a>
                                     <span class="tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="right"
-                                        title="Gunakan Button Ini untuk menambahkan data yang sudah ada sebelumnya">
+                                        title="Digunakan untuk menambah data detail resep baru">
                                         <i class="fas fa-question-circle"></i>
                                     </span>
-                                    <br>
-                                    <a href="{{ url('detail-resep/tambah') }}" class="btn btn-icon btn-success icon-left">
+                                    {{-- <a href="{{ url('detail-resep/tambah') }}" class="btn btn-icon btn-success icon-left">
                                         <i class="fas fa-plus"></i>
                                         Tambah 2
                                     </a>
                                     <span class="tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="right"
                                         title="Gunakan Button Ini untuk menambahkan data pertama kali">
                                         <i class="fas fa-question-circle"></i>
-                                    </span>
+                                    </span> --}}
                                 </div>
                             </div>
                             <div class="card-body">
