@@ -34,7 +34,8 @@ class LoginController extends Controller
     }
 
     return back()->withErrors([
-      'email' => 'Maaf email atau password anda salah'
+      'email' => 'Maaf email atau password anda salah',
+      'password' => 'Maaf email atau password anda salah'
     ])->onlyInput('email');
   }
 

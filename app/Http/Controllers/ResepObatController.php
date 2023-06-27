@@ -183,17 +183,15 @@ class ResepObatController extends Controller
 
   public function getAllResep()
   {
-    return DataTables::of(ResepObat::with('detail_resep', 'detail_resep.obat.stok_obat')
+    return DataTables::of(ResepObat::with('detail_resep', 'detail_resep.obat.stok_obat', 'detail_resep.racikan.detail_racikan.obat.stok_obat')
       ->withSum('detail_resep as total', 'harga')
       ->whereHas('detail_resep.obat.stok_obat', function ($query) {
         $query->where('kuantitas', '>', 0);
-      })->orWhereHas('detail_resep.racikan')->get())->toJson();
-    // ->orWhereHas('detail_resep.racikan', function ($query) {
-    //   $racikan = $query->with('detail_racikan')->get();
-    //   dd($racikan->with('obat.stok_obat', function ($query) {
-    //     $query->where('satuan', $racikan->satuan);
-    //   })->get());
-    // })
+      })
+      ->orWhereHas('detail_resep.racikan.detail_racikan.obat.stok_obat', function ($query) {
+        $query->where('kuantitas', '>', 0);
+      })
+      ->get())->toJson();
   }
 
   public function cetak_pdf()

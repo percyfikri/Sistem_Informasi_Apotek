@@ -179,11 +179,13 @@
             if (target.tagName != 'BUTTON') {
                 target = target.closest('button');
             }
+
             const id = target.dataset.id
+            const same = items.find(item => item.id == id)
+            if (same) return;
             const nama = target.dataset.nama
             const type = target.dataset.type
-            const harga = Number(target.dataset.harga) || 0
-            console.log(harga)
+            const harga = target.dataset.harga || 0
             addTableRow({
                 id,
                 nama,
@@ -216,7 +218,6 @@
             const satuan = document.getElementById(`satuan-${id}`)
             const subtotal = document.getElementById(`subtotal-${id}`);
             const subtotalText = document.getElementById(`subtotal-text-${id}`);
-
             const type = document.getElementById(`type-${id}`);
             let item = items.find(item => item.id == id)
             if (item.type === 'obat') {
@@ -285,10 +286,13 @@
             if (indexToRemove !== -1) {
                 items.splice(indexToRemove, 1);
             }
-            total.innerHTML = Number(0).toLocaleString('id-ID', {
+            const subtotals = Array.from(document.querySelectorAll('.item-subtotal'));
+            const sum = subtotals.reduce((acc, curr) => acc + parseFloat(curr.value), 0);
+            total.innerHTML = sum.toLocaleString('id-ID', {
                 style: 'currency',
                 currency: 'IDR'
             });
+
         }
         const getItem = (id) => {
             $.ajax({

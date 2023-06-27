@@ -3,28 +3,21 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no"
-        name="viewport">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title>Login &mdash; Apotek Arema</title>
 
     <!-- General CSS Files -->
-    <link rel="stylesheet"
-        href="{{ asset('library/bootstrap/dist/css/bootstrap.min.css') }}">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    <link rel="stylesheet" href="{{ asset('library/bootstrap/dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- CSS Libraries -->
-    <link rel="stylesheet"
-        href="{{ asset('library/bootstrap-social/bootstrap-social.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/bootstrap-social/bootstrap-social.css') }}">
 
     <!-- Template CSS -->
-    <link rel="stylesheet"
-        href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet"
-        href="{{ asset('css/components.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components.css') }}">
 </head>
 
 <body>
@@ -33,31 +26,20 @@
             <div class="d-flex align-items-stretch flex-wrap">
                 <div class="col-lg-4 col-md-6 col-12 order-lg-1 min-vh-100 order-2 bg-white">
                     <div class="m-3 p-4">
-                        <img src="{{ asset('img/stisla-fill.svg') }}"
-                            alt="logo"
-                            width="80"
+                        <img src="{{ asset('img/stisla-fill.svg') }}" alt="logo" width="80"
                             class="shadow-light rounded-circle mb-5 mt-2">
                         <h4 class="text-dark font-weight-normal">Halaman <span class="font-weight-bold">Login</span>
                         </h4>
                         <p class="text-muted"></p>
-                        <form method="POST"
-                            action="{{ url('login/proses') }}"
-                            class="needs-validation">
+                        <form method="POST" action="{{ url('login/proses') }}" class="needs-validation">
                             @csrf
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input id="email"
-                                    type="email"
+                                <input id="email" type="email"
                                     class="form-control
-                                    @error('email')
-                                        is-invalid
-                                    @enderror"
-                                    name="email"
-                                    tabindex="1"
-                                    autofocus>
-                                <div class="invalid-feedback">
-                                    Mohon masukkan email anda!
-                                </div>
+                                 @if (old('email')) is-valid @endif 
+                                    @error('email') is-invalid @enderror"
+                                    name="email" tabindex="1" value="{{ old('email') }}" autofocus>
 
                                 @error('email')
                                     <div class="invalid-feedback">
@@ -69,20 +51,14 @@
 
                             <div class="form-group">
                                 <div class="d-block">
-                                    <label for="password"
-                                        class="control-label">Password</label>
+                                    <label for="password" class="control-label">Password</label>
                                 </div>
-                                <input id="password"
-                                    type="password"
+                                <input id="password" type="password"
                                     class="form-control
-                                    @error('password')
-                                        is-invalid
-                                    @enderror"
-                                    name="password"
-                                    tabindex="2">
-                                <div class="invalid-feedback">
-                                    Mohon masukkan password anda!
-                                </div>
+                                   @if (old('password')) is-valid @endif 
+                                    @error('password') is-invalid @enderror"
+                                    name="password" tabindex="2">
+
 
                                 @error('password')
                                     <div class="invalid-feedback">
@@ -109,8 +85,7 @@
                                     class="float-left mt-3">
                                     Forgot Password?
                                 </a> --}}
-                                <button type="submit"
-                                    class="btn btn-primary btn-lg btn-icon icon-right"
+                                <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right"
                                     tabindex="4">
                                     Login
                                 </button>
@@ -118,14 +93,14 @@
 
                         </form>
 
-                        <div class="text-small mt-5 text-center">
+                        {{-- <div class="text-small mt-5 text-center">
 
                             <div class="mt-2">
                                 <a href="#">Privacy Policy</a>
                                 <div class="bullet"></div>
                                 <a href="#">Terms of Service</a>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="col-lg-8 col-12 order-lg-2 min-vh-100 background-walk-y position-relative overlay-gradient-bottom order-1"
