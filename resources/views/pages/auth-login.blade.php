@@ -81,10 +81,10 @@
                             </div> --}}
 
                             <div class="form-group text-right">
-                                {{-- <a href="auth-forgot-password.html"
-                                    class="float-left mt-3">
-                                    Forgot Password?
-                                </a> --}}
+                                <a href="{{ url('home') }}"
+                                    class="btn btn-primary btn-lg btn-icon icon-left">
+                                        <i class="fas fa-arrow-left"></i>
+                                </a>
                                 <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right"
                                     tabindex="4">
                                     Login
