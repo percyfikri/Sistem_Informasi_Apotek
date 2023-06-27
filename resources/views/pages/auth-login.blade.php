@@ -80,17 +80,16 @@
                                 </div>
                             </div> --}}
 
-                            <div class="form-group text-right">
-                                <a href="{{ url('home') }}"
-                                    class="btn btn-primary btn-lg btn-icon icon-left">
-                                        <i class="fas fa-arrow-left"></i>
+                            <div class="form-group d-flex justify-content-between">
+                                <a href="{{ url('home') }}" class="btn btn-primary btn-lg btn-icon icon-left">
+                                    Kembali
                                 </a>
-                                <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right"
-                                    tabindex="4">
+                                <button type="submit" class="btn btn-primary btn-lg btn-icon icon-right text-right" tabindex="4">
                                     Login
                                 </button>
                             </div>
-
+                            
+                            
                         </form>
 
                         {{-- <div class="text-small mt-5 text-center">
