@@ -37,7 +37,7 @@
                                 <label for="email">Email</label>
                                 <input id="email" type="email"
                                     class="form-control
-                                 @if (old('email')) is-valid @endif 
+                                 @if (old('email')) is-valid @endif
                                     @error('email') is-invalid @enderror"
                                     name="email" tabindex="1" value="{{ old('email') }}" autofocus>
 
@@ -55,7 +55,7 @@
                                 </div>
                                 <input id="password" type="password"
                                     class="form-control
-                                   @if (old('password')) is-valid @endif 
+                                   @if (old('password')) is-valid @endif
                                     @error('password') is-invalid @enderror"
                                     name="password" tabindex="2">
 
@@ -104,12 +104,12 @@
                     </div>
                 </div>
                 <div class="col-lg-8 col-12 order-lg-2 min-vh-100 background-walk-y position-relative overlay-gradient-bottom order-1"
-                    data-background="{{ asset('img/unsplash/login-bg.jpg') }}">
+                    data-background="{{ asset('img/unsplash/login-bg3.jpg') }}">
                     <div class="absolute-bottom-left index-2">
                         <div class="text-light p-5 pb-2">
                             <div class="mb-5 pb-3">
-                                <h1 class="display-4 font-weight-bold mb-2">Kesehatan Nomor Satu</h1>
-                                <h5 class="font-weight-normal text-muted-transparent">Jagalah kesehatan kalian!</h5>
+                                <h1 class="display-4 font-weight-bold mb-2"></h1>
+                                <h5 class="font-weight-normal text-muted-transparent"></h5>
                             </div>
                             {{-- Photo by <a class="text-light bb"
                                 target="_blank"
