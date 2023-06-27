@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Halaman Detail Pengguna')
+@section('title', 'Halaman Detail Apoteker')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -10,11 +10,11 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Detail Pengguna</h1>
+                <h1>Detail Apoteker</h1>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="{{ url('dashboard-general-dashboard') }}">Dashboard</a></div>
-                    <div class="breadcrumb-item active"><a href="{{ route('pengguna.index') }}">Pengguna</a></div>
-                    <div class="breadcrumb-item">Detail Pengguna</div>
+                    <div class="breadcrumb-item active"><a href="{{ route('pengguna.index') }}">Apoteker</a></div>
+                    <div class="breadcrumb-item">Detail Apoteker</div>
                 </div>
             </div>
             <div class="section-body">

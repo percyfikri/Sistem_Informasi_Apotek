@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Halaman Edit Pengguna')
+@section('title', 'Halaman Edit Apoteker')
 
 @push('style')
     <link rel="stylesheet" href="{{ asset('library/select2/dist/css/select2.min.css') }}">
@@ -10,11 +10,11 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Edit Pengguna</h1>
+                <h1>Edit Apoteker</h1>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="{{ url('dashboard-general-dashboard') }}">Dashboard</a></div>
-                    <div class="breadcrumb-item active"><a href="{{ route('pengguna.index') }}">Pengguna</a></div>
-                    <div class="breadcrumb-item">Edit Pengguna</div>
+                    <div class="breadcrumb-item active"><a href="{{ route('pengguna.index') }}">Apoteker</a></div>
+                    <div class="breadcrumb-item">Edit Apoteker</div>
                 </div>
             </div>
 
@@ -35,7 +35,7 @@
                 @endif
                 <div class="card">
                     <div class="card-header">
-                        <h4>Edit Pengguna</h4>
+                        <h4>Edit Apoteker</h4>
 
                     </div>
                     <form action="{{ route('pengguna.update', $pengguna->id_pengguna) }}" method="POST">

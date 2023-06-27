@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Halaman Data Pengguna')
+@section('title', 'Halaman Data Apoteker')
 
 @push('style')
     <link rel="stylesheet" href="{{ asset('library/datatables/media/css/dataTables.bootstrap4.min.css') }}">
@@ -11,11 +11,11 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Pengguna</h1>
+                <h1>Apoteker</h1>
 
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="{{ url('dashboard-general-dashboard') }}">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="{{ route('pengguna.index') }}">Pengguna</a></div>
+                    <div class="breadcrumb-item"><a href="{{ route('pengguna.index') }}">Apoteker</a></div>
                 </div>
             </div>
             <div class="section-body">
@@ -47,7 +47,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Data Pengguna</h4>
+                                <h4>Data Apoteker</h4>
                                 <div class="card-header-action">
 
                                     <a href="{{ route('cetak.pdf.pengguna') }}" class="btn btn-icon btn-primary icon-left">

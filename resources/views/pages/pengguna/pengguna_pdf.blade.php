@@ -2,7 +2,7 @@
 <html>
 
     <head>
-        <title>Laporan Pengguna Apotek Arema</title>
+        <title>Laporan Apoteker Apotek Arema</title>
     </head>
 
     <body>
@@ -25,7 +25,7 @@
             }
         </style>
         <center>
-            <h2>Laporan Pengguna Apotek Arema</h2>
+            <h2>Laporan Apoteker Apotek Arema</h2>
         </center>
         <table class='table table-bordered'>
             <thead>
