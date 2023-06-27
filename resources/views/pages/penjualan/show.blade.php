@@ -33,8 +33,24 @@
                                 <div class="row">
                                     <div class="form-group col-12">
                                         <label>Nama Customer</label>
-                                        <input readonly type="text" class="form-control"
-                                            value="{{ $penjualan->customer->nama }}">
+                                        @if ($penjualan->customer?->nama)
+                                            <input readonly type="text" class="form-control"
+                                                value="{{ $penjualan->customer->nama }}">
+                                        @else
+                                            <input readonly type="text" class="form-control" value="-">
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Nama Dokter</label>
+                                        @if ($penjualan->dokter?->nama)
+                                            <input readonly type="text" class="form-control"
+                                                value="{{ $penjualan->dokter->nama }}">
+                                        @else
+                                            <input readonly type="text" class="form-control" value="-">
+                                        @endif
+
                                     </div>
                                 </div>
                                 <div class="row">

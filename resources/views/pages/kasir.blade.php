@@ -250,6 +250,7 @@
             let cell4 = row.insertCell(3);
             let cell5 = row.insertCell(4);
             let cell6 = row.insertCell(5)
+            if (item.type === 'obat') getItem(item.id)
 
             cell1.innerHTML = `<input type="text" name="ids[]" id="id-${item.id}"
                                     class="form-control" hidden value="${item.id}">
@@ -262,7 +263,7 @@
             cell3.innerHTML =
                 `<select type="text"  id="satuan-${item.id}" name="satuan[]"
                                     class="form-control" onchange="sumSubTotal(event)"> ${item.type!='obat'?`<option value="${item.type}" selected></option>`:''}"</select>`
-            cell4.innerHTML = `<input type="text" id="kuantitas-${item.id}" name="kuantitas[] value="1"
+            cell4.innerHTML = `<input type="text" id="kuantitas-${item.id}" name="kuantitas[]" value="0"
                                     class="form-control" onchange="sumSubTotal(event)">`
             cell5.innerHTML = `<span class="m-0" id="subtotal-text-${item.id}">${ Number(0).toLocaleString('id-ID', {
                 style: 'currency',
@@ -272,7 +273,6 @@
             cell6.innerHTML =
                 `<button  type="button" class="btn btn-icon btn-sm btn-danger"  onclick="removeItem(event,${item.id})"><i class="fas fa-times"></i></button>`
             items.push(item)
-            if (item.type === 'obat') getItem(item.id)
             itemCount++;
         }
         const removeItem = (e, id) => {
