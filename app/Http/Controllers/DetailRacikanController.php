@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Obat;
+use App\Models\StokObat;
 use App\Models\Racikan;
 use App\Models\DetailRacikan;
 use Illuminate\Http\Request;
@@ -71,6 +72,14 @@ class DetailRacikanController extends Controller
     $obat = new Obat;
     $obat->id_obat = $request->get('id_obat');
 
+     // Cek apakah kuantitas melebihi stok obat
+     if ($request->kuantitas > $obat->kuantitas) {
+      return redirect()->back()->with('msg-success', 'Stok obat tidak mencukupi.');
+     }
+    // Kurangi stok obat
+    $stokObat = StokObat::where('id_obat', $request->id_obat)->first();
+    $stokObat->kuantitas -= $request->kuantitas;
+    $stokObat->save();
 
     $dr->racikan()->associate($racikan);
     $dr->obat()->associate($obat);
