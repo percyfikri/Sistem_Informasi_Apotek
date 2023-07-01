@@ -203,6 +203,7 @@
             if (e.target.value > max) {
                 e.target.value = max
             }
+            sumSubTotal(e)
 
         };
         const checkTableRow = () => {
@@ -275,9 +276,9 @@
                 const obat = obats.find(o => o['id_obat'] == item.id)
                 const satuan_item = obat['stok_obat'].find(stok => stok.satuan == satuan.value)
 
-                cell4.innerHTML = `<input type="number" id="kuantitas-${item.id}" name="kuantitas[]" min="1" max="${satuan_item.kuantitas}" onchange="setMax(event,${satuan_item.kuantitas})" value="0"
+                cell4.innerHTML = `<input type="number" id="kuantitas-${item.id}" name="kuantitas[]" min="1" max="${satuan_item.kuantitas}"  onchange="setMax(event,${satuan_item.kuantitas})" value="0"
                                     class="form-control"   data-toggle="tooltip"
-                                    data-placement="left" title="Stok yang tersedia : ${satuan_item.kuantitas}" onchange="sumSubTotal(event)">
+                                    data-placement="left" title="Stok yang tersedia : ${satuan_item.kuantitas}" >
                                     `
             } else if (item.type === 'resep') {
                 console.log('resep')
