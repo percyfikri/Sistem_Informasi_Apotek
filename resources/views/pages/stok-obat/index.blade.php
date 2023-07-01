@@ -40,8 +40,18 @@
 
                                     <a href="{{ url('stok-obat/tambah') }}" class="btn btn-icon btn-primary icon-left"><i
                                             class="fas fa-plus"></i>
-                                        Tambah</a>
-
+                                        Tambah Baru</a>
+                                    <span class="tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="right"
+                                        title="Gunakan untuk menambah data stok obat baru">
+                                    <i class="fas fa-question-circle"></i>
+                                    <br>
+                                    </span>
+                                    <a href="{{ route('stok-obat.create', $obat->id_obat) }}"
+                                        class="btn btn-icon btn-success icon-left"><i class="fas fa-plus"></i>
+                                        Tambah Stok</a>
+                                    <span class="tooltip-icon" data-bs-toggle="tooltip" data-bs-placement="right"
+                                        title="Gunakan untuk menambah data stok obat yang sudah ada">
+                                    <i class="fas fa-question-circle"></i>
                                 </div>
                             </div>
                             <div class="card-body">

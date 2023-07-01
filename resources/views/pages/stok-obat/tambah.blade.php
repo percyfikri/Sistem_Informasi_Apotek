@@ -42,13 +42,28 @@
                         <div class="card-body">
                             @csrf
                             <div class="form-group">
+                                <label>Obat</label>
+                                <select id="id-obat" name="id_obat" class="form-control" required
+                                    onchange="changeObat(event)">
+                                    @if (old('id_obat'))
+                                        <option value="{{ old('id_obat') }}" selected>{{ old('nama_obat') }}
+                                        </option>
+                                    @endif
+                                </select>
+                                @error('id_obat')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            {{-- <div class="form-group">
                                 <label for="id_obat">Nama Obat</label>
                                 <select class="form-control" name="id_obat" id="id_obat">
                                     @foreach ($obat as $obt)
                                         <option value="{{ $obt->id_obat }}">{{ $obt->nama_obat }}</option>
                                     @endforeach
                                 </select>
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <label>Satuan</label>
                                 <input type="text" name="satuan"
@@ -101,6 +116,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
     <script type="text/javascript">
+        const changeObat = e => {
+            selectSatuan(e.target.value)
+        }
         $('#id-obat').select2({
             placeholder: 'Pilih Nama Obat',
             ajax: {
@@ -124,7 +142,24 @@
             var title = $(this).select2('data')[0].text;
             $('#nama-obat').val(title);
         });
+        const selectSatuan = (id) => {
+            $.ajax({
+                url: '/autocomplete/satuan',
+                dataType: 'json',
+                data: {
+                    id_obat: id
+                },
+                success: function(data) {
+                    $('#satuan').find('option').remove();
+                    data.forEach(e => {
+                        $('#satuan').append(` <option value="${e.satuan}">${e.satuan}
+                                        </option>`)
+                    });
 
+                }
+            })
+
+        }
         new Cleave('.currency', {
             numeral: true,
             numeralThousandsGroupStyle: 'thousand'
