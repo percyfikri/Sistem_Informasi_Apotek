@@ -42,21 +42,29 @@
                         <div class="card-body">
                             @csrf
                             <div class="form-group">
-                                <label for="id_obat">Nama Racikan</label>
-                                <select class="form-control" name="id_racikan" id="id_racikan">
-                                    @foreach ($racikan as $rck)
-                                        <option value="{{ $rck->id_racikan }}">{{ $rck->nama_racikan }}</option>
-                                    @endforeach
-                                </select>
+                                <label for="id_racikan">Nama Racikan</label>
+                                <input hidden readonly type="text" name="id_racikan" class="form-control"
+                                    value="{{ $racikan->id_racikan }}">
+                                <input readonly type="text" name="nama_racikan" class="form-control"
+                                    value="{{ $racikan->nama_racikan }}">
                             </div>
                             <div class="form-group">
-                                <label for="id_obat">Nama Obat</label>
-                                <select class="form-control" name="id_obat" id="id_obat">
-                                    @foreach ($obat as $obt)
-                                        <option value="{{ $obt->id_obat }}">{{ $obt->nama_obat }}</option>
-                                    @endforeach
+                                <label>Obat</label>
+                                <select id="id-obat" name="id_obat" class="form-control" required
+                                    onchange="changeObat(event)">
+                                    @if (old('id_obat'))
+                                        <option value="{{ old('id_obat') }}" selected>{{ old('nama_obat') }}
+                                        </option>
+                                    @endif
                                 </select>
+                                @error('id_obat')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
+                            <input type="hidden" id="nama-obat" name="obat" />
+
                             <div class="form-group">
                                 <label>Kuantitas</label>
                                 <div class="input-group">
@@ -68,10 +76,19 @@
                             </div>
                             <div class="form-group">
                                 <label>Satuan</label>
-                                <input type="text" name="satuan"
-                                    class="form-control @if (old('satuan')) is-valid @endif 
-                                @error('satuan') is-invalid @enderror"
-                                    value="{{ old('satuan') }}">
+                                <select id="satuan" name="satuan" class="form-control" required>
+                                    <option value="" disabled selected>Pilih Obat Terlebih Dahulu
+                                    </option>
+                                    @if (old('satuan'))
+                                        <option value="{{ old('satuan') }}" selected>{{ old('satuan') }}
+                                        </option>
+                                    @endif
+                                </select>
+                                @error('satuan')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                         </div>
                         <div class="card-footer text-right">
@@ -91,18 +108,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
     <script type="text/javascript">
-        $('#id-racikan').select2({
-            placeholder: 'Pilih Nama Racikan',
+        const changeObat = e => {
+            selectSatuan(e.target.value)
+        }
+        $('#id-obat').select2({
+            placeholder: 'Pilih Nama Obat',
             ajax: {
-                url: '/autocomplete/racikan',
+                url: '/autocomplete/obat',
                 dataType: 'json',
                 delay: 250,
                 processResults: function(data) {
                     return {
                         results: $.map(data, function(item) {
                             return {
-                                text: item.nama_racikan,
-                                id: item.id_racikan
+                                text: item.nama_obat,
+                                id: item.id_obat
                             }
                         })
                     };
@@ -110,11 +130,28 @@
                 cache: true
             }
         });
-        $('#id_racikan').on('change', function(e) {
+        $('#id-obat').on('change', function(e) {
             var title = $(this).select2('data')[0].text;
-            $('#nama_racikan').val(title);
+            $('#nama-obat').val(title);
         });
+        const selectSatuan = (id) => {
+            $.ajax({
+                url: '/autocomplete/satuan',
+                dataType: 'json',
+                data: {
+                    id_obat: id
+                },
+                success: function(data) {
+                    $('#satuan').find('option').remove();
+                    data.forEach(e => {
+                        $('#satuan').append(` <option value="${e.satuan}">${e.satuan}
+                                        </option>`)
+                    });
 
+                }
+            })
+
+        }
         new Cleave('.currency', {
             numeral: true,
             numeralThousandsGroupStyle: 'thousand'

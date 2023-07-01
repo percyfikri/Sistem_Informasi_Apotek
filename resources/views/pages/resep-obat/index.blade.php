@@ -108,11 +108,15 @@
                     },
                     {
                         data: 'customer.nama',
-                        name: 'customer.nama'
+                        name: 'customer.nama',
+                        defaultContent: '-'
+
                     },
                     {
                         data: 'dokter.nama',
-                        name: 'dokter.nama'
+                        name: 'dokter.nama',
+                        defaultContent: '-'
+
                     },
                     {
                         data: 'status',

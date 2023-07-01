@@ -7,6 +7,7 @@ use App\Models\StokObat;
 use App\Models\Racikan;
 use App\Models\DetailRacikan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Illuminate\Validation\Validator;
 use Yajra\DataTables\Facades\DataTables;
@@ -31,11 +32,10 @@ class DetailRacikanController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function create(): View
+  public function create($id_racikan)
   {
-    $racikan = Racikan::all(); //mendapatkan data dari tabel racikan
-    $obat = Obat::all(); //mendapatkan data dari tabel obat
-    return view('pages.detail_racikan.create', compact('racikan', 'obat'));
+    $racikan = Racikan::find($id_racikan);
+    return view('pages.detail_racikan.create', compact('racikan'));
   }
   /**
    * Store a newly created resource in storage.
@@ -96,8 +96,8 @@ class DetailRacikanController extends Controller
    */
   public function show(Request $request, $id_racikan)
   {
+    $racikan = Racikan::find($id_racikan);
     // menampilkan detail data racikan dengan menemukan berdasarkan id_racikan
-    $racikan = Racikan::where('id_racikan', $id_racikan)->first();
     if ($request->ajax()) {
       return DataTables::of(DetailRacikan::with('racikan', 'obat')->where('id_racikan', $id_racikan)->get())->toJson();
     }
@@ -113,12 +113,10 @@ class DetailRacikanController extends Controller
    * @param  \App\Models\DetailRacikan  $detailRacikan
    * @return \Illuminate\Http\Response
    */
-  public function edit($detailRacikan)
+  public function edit(DetailRacikan $detailRacikan)
   {
-    $detailRacikan = DetailRacikan::with('racikan')->where('id_racikan', $detailRacikan)->first();
-    $racikan = Racikan::all(); //mendapatkan data dari tabel racikan
-    $obat = Obat::all(); // Mengambil data dari tabel Obat
-    return view('pages.detail_racikan.edit', compact('detailRacikan', 'racikan', 'obat'));
+
+    return view('pages.detail_racikan.edit', compact('detailRacikan'));
   }
 
   /**
@@ -131,10 +129,11 @@ class DetailRacikanController extends Controller
   public function update(Request $request, DetailRacikan $detailRacikan)
   {
     // melakukan validasi data
+
     $request->validate(
       [
         'id_racikan' => 'required',
-        'id_obat' => 'requiired',
+        'id_obat' => 'required',
         'kuantitas' => 'required',
         'satuan' => 'required',
 
@@ -144,7 +143,6 @@ class DetailRacikanController extends Controller
         'satuan.required' => 'satuan racikan wajib diisi',
       ]
     );
-
     $racikan = Racikan::find($request->get('id_racikan'));
     $obat = Obat::find($request->get('id_obat'));
 
@@ -154,15 +152,15 @@ class DetailRacikanController extends Controller
     $detailRacikan->racikan()->associate($racikan);
     $detailRacikan->obat()->associate($obat);
 
-    $id_racikan = $request->input('id_racikan');
     DB::table('detail_racikan')
-      ->where('id_racikan', $id_racikan)->update([
+      ->where('id_detail_racikan', $detailRacikan->id_detail_racikan)->update([
+        'id_obat' => $request->input('id_obat'),
         'kuantitas' => $request->input('kuantitas'),
         'satuan' => $request->input('satuan'),
       ]);
     $detailRacikan->save();
 
-    return redirect()->route('detail_racikan.index')->with('msg-success', 'Berhasil melakukan update data');
+    return redirect('detail_racikan/' . $detailRacikan->id_detail_racikan)->with('msg-success', 'Berhasil melakukan update data');
   }
 
   /**
@@ -171,11 +169,11 @@ class DetailRacikanController extends Controller
    * @param  \App\Models\DetailRacikan  $detailRacikan
    * @return \Illuminate\Http\Response
    */
-  public function destroy($id_racikan, $id_obat, $satuan)
+  public function destroy(DetailRacikan $detailRacikan)
   {
     // fungsi eloquent untuk menghapus data
-    DetailRacikan::where('id_racikan', $id_racikan)->where('id_obat', $id_obat)->where('satuan', $satuan)->delete();
-    return redirect('detail_racikan/' . $id_racikan)
+    DetailRacikan::where('id_detail_racikan', $detailRacikan->id_detail_racikan)->delete();
+    return redirect('detail_racikan/' . $detailRacikan->id_racikan)
       ->with('msg-success', 'Data Berhasil Dihapus');
   }
 }

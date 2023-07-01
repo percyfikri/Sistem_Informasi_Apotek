@@ -127,7 +127,9 @@
                     },
                     {
                         data: 'racikan.nama_racikan',
-                        name: 'racikan.nama_racikan'
+                        name: 'racikan.nama_racikan',
+                        defaultContent: '-'
+
                     },
                     {
                         data: 'kuantitas',
@@ -135,7 +137,9 @@
                     },
                     {
                         data: 'satuan',
-                        name: 'satuan'
+                        name: 'satuan',
+                        defaultContent: '-'
+
                     },
                     {
                         data: 'harga',

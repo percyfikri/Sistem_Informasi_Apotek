@@ -96,7 +96,8 @@
                     },
                     {
                         data: 'customer.nama',
-                        name: 'customer.nama'
+                        name: 'customer.nama',
+                        defaultContent: '-'
                     },
                     {
                         data: 'apoteker.nama',

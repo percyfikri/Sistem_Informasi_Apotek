@@ -83,24 +83,7 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                            {{-- <div class="form-group">
-                                <label>Tanggal</label>
-                                <div class="input-group date" id="tanggal-picker" data-target-input="nearest">
-                                    <input type="date" name="tanggal" class="form-control datetimepicker-input"
-                                        data-target="#tanggal-picker" value="{{ old('tanggal') }}" />
-                                    <div class="input-group-append" data-target="#tanggal-picker" data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
-                                </div>
-                            </div> --}}
-                            {{-- <div class="form-group">
-                                <label>Tanggal</label>
-                                <input type="text" name="tanggal" class="form-control datepicker @error('tanggal') is-invalid @enderror" value="{{ old('tanggal', date('d/m/Y', strtotime($resepObat->tanggal))) }}">
-                                @error('tanggal')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div> --}}
-
+                          
                         </div>
                             <div class="card-footer text-right">
                                 <button type="submit" class="btn btn-success">Submit</button>

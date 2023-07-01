@@ -38,7 +38,7 @@
                         <h4>Edit Stok Obat</h4>
 
                     </div>
-                    <form action="{{ route('stok-obat.update', $stokObat->id_obat) }}" method="POST">
+                    <form action="{{ route('stok-obat.update', [$stokObat->id_obat, $stokObat->satuan]) }}" method="POST">
                         <div class="card-body">
                             @csrf
                             @method('PUT')

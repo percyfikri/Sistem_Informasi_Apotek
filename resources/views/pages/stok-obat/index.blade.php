@@ -41,9 +41,6 @@
                                     <a href="{{ url('stok-obat/tambah') }}" class="btn btn-icon btn-primary icon-left"><i
                                             class="fas fa-plus"></i>
                                         Tambah</a>
-                                    <a href="{{ route('stok-obat.create', $obat->id_obat) }}"
-                                        class="btn btn-icon btn-primary icon-left"><i class="fas fa-plus"></i>
-                                        Tambah Stok</a>
 
                                 </div>
                             </div>
@@ -121,10 +118,10 @@
                         render: function(data, type, row) {
                             return `<div class="buttons text-center">
                                                     <a
-                                                        href="${window.location.href}/edit"class="btn btn-icon icon-left btn-warning"><i
+                                                        href="${window.location.href}/edit/${data.satuan}"class="btn btn-icon icon-left btn-warning"><i
                                                             class="fas fa-pencil-alt"></i>Edit</a>
                                                     <button class="btn btn-danger btn-icon icon-left"
-                                data-action="${window.location.href}/${data.satuan}" data-toggle="modal"
+                              data-action="${window.location.href}/${data.satuan}" data-toggle="modal"
                                 data-target="#confirm-delete-modal"> <i class="fas fa-trash"></i>
                                 Delete</button>
                                                 </div>`

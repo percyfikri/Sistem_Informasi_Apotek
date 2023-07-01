@@ -39,7 +39,7 @@
                                 <h4>Data Obat Racikan</h4>
 
                                 <div class="card-header-action">
-                                    <a href="{{ route('detail_racikan.create') }}"
+                                    <a href="{{ route('detail-racikan.create', $racikan->id_racikan) }}"
                                         class="btn btn-icon btn-primary icon-left"><i class="fas fa-plus"></i>
                                         Tambah</a>
 
@@ -117,10 +117,12 @@
                         orderable: false,
                         render: function(data, type, row) {
                             return `<div class="buttons">
+                                <a href="${data.id_detail_racikan}/edit" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
+                                        
                                                     <button class="btn btn-danger btn-icon icon-left"
-                                data-action="${window.location.href}/${data.id_obat}/${data.satuan}" data-toggle="modal"
+                                data-action="${data.id_detail_racikan}" data-toggle="modal"
                                 data-target="#confirm-delete-modal"> <i class="fas fa-trash"></i>
-                                Delete</button>
+                                </button>
                                                 </div>`
                         }
                     },

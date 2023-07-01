@@ -128,8 +128,8 @@
                                     @foreach ($newestTransaction as $nt)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $nt->customer->nama }}</td>
-                                            <td>{{ $nt->apoteker->nama }}</td>
+                                            <td>{{ $nt->customer?->nama }}</td>
+                                            <td>{{ $nt->apoteker?->nama }}</td>
                                             <td>{{ \Carbon\Carbon::parse($nt->tanggal)->diffForhumans() }}</td>
                                             <td><a href="{{ route('penjualan.show', $nt->id_penjualan) }}"
                                                     class="btn btn-primary">Detail</a></td>

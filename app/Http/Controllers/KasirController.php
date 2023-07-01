@@ -36,6 +36,11 @@ class KasirController extends Controller
       ];
       if ($request->get('type')[$i] === 'obat') {
         $detail_penjualan['id_obat'] = $request->get('ids')[$i];
+        $kuantitas = StokObat::select('kuantitas')->where('id_obat', $detail_penjualan['id_obat'])
+          ->where('satuan', $detail_penjualan['satuan'])->get();
+        if ($kuantitas < $detail_penjualan) {
+        }
+
         $stokObat = StokObat::where('id_obat', $detail_penjualan['id_obat'])
           ->where('satuan', $detail_penjualan['satuan'])
           ->when('kuantitas' > 1, function ($query) use ($detail_penjualan) {

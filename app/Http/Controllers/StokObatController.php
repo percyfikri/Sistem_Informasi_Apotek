@@ -6,6 +6,8 @@ use App\Models\StokObat;
 use App\Models\Obat;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Svg\Gradient\Stop;
 use Yajra\DataTables\Facades\DataTables;
 
 class StokObatController extends Controller
@@ -50,13 +52,14 @@ class StokObatController extends Controller
     $request->validate(
       [
         'id_obat' => 'required',
-        'satuan' => 'required',
+        'satuan' => 'required|unique:stok_obat',
         'kuantitas' => 'required',
         'harga' => 'required',
       ],
       [
         'id_obat.required' => 'Nama Obat wajib diisi',
         'satuan.required' => 'Satuan Obat wajib diisi',
+        'satuan.unique' => 'Satuan sudah ada sebelumnya',
         'kuantitas.required' => 'Kuantitas Obat wajib diisi',
         'harga.required' => 'Harga Obat wajib diisi',
       ]
@@ -102,11 +105,11 @@ class StokObatController extends Controller
    * @param  \App\Models\StokObat  $stokObat
    * @return \Illuminate\Http\Response
    */
-  public function edit($stokObat)
+  public function edit($id_obat, $satuan)
   {
     //menampilkan detail data dengan menemukan berdasarkan Id
     //Obat untuk diedit
-    $stokObat = StokObat::with('obat')->where('id_obat', $stokObat)->first();
+    $stokObat = StokObat::with('obat')->where('id_obat', $id_obat)->where('satuan', $satuan)->first();
     $obat = Obat::all(); //mendapatkan data dari tabel obat
     return view('pages.stok-obat.edit', compact('stokObat', 'obat'));
   }
@@ -118,10 +121,10 @@ class StokObatController extends Controller
    * @param  \App\Models\StokObat  $stokObat
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, StokObat $stok)
+  public function update(Request $request, $id_obat, $satuan)
   {
     //melakukan validasi data
-    $request->validate(
+    $validatedData = $request->validate(
       [
         'id_obat' => 'required',
         'satuan' => 'required',
@@ -130,23 +133,28 @@ class StokObatController extends Controller
       ],
       [
         'satuan.required' => 'Satuan Obat wajib diisi',
+        'satuan.unique' => 'Satuan sudah ada sebelumnya',
         'kuantitas.required' => 'Kuantitas Obat wajib diisi',
         'harga.required' => 'Harga Obat wajib diisi',
       ]
     );
-
-    $stok = StokObat::with('obat')->where('id_obat', $request->get('id_obat'))->first();
-    $stok->satuan = $request->get('satuan');
-    $stok->kuantitas = $request->get('kuantitas');
-    $stok->harga = $request->get('harga');
-    $obat = new Obat;
-    $obat->id_obat = $request->get('id_obat');
-
+    $satuans = StokObat::select('satuan')->get();
+    foreach ($satuans as $s) {
+      if ($request->get('satuan') != $satuan && $request->get('satuan') == $s->satuan) {
+        return back()->withErrors([
+          'satuan' => 'Satuan obat sudah ada sebelumnya'
+        ]);
+      }
+    }
+    DB::table('stok_obat')
+      ->where('satuan', '=', $satuan)->where('id_obat', '=', $id_obat)
+      ->limit(1)->update($validatedData);
+    // $stok = StokObat::where('satuan', '=', $satuan)->where('id_obat', '=', $id_obat)->first();
+    // $stok->
+    // StokObat::where('id_obat', $id_obat)->where('satuan', $satuan)->firstOrFail()->update($request->all());
     //fungsi eloquent untuk menambah data dengan relasi belongsTo
-    $stok->obat()->associate($obat);
-    $stok->save();
     //jika data berhasil ditambahkan, akan kembali ke halaman utama
-    return redirect()->route('stok-obat.show', $stok->id_obat)->with('msg-success', 'Berhasil melakukan update data');
+    return redirect()->route('stok-obat.show', $request->get('id_obat'))->with('msg-success', 'Berhasil melakukan update data');
     // return redirect()->route('stok-obat.index',['stok-obat'=>$stok->id_obat])->with('msg-success', 'Berhasil merubah data');
   }
 
@@ -159,7 +167,8 @@ class StokObatController extends Controller
   public function destroy($id_obat, $satuan)
   {
     //fungsi eloquent untuk menghapus data
-    StokObat::find($id_obat)->delete();
+    $oldStok = StokObat::find($id_obat);
+    StokObat::find($id_obat)->where('satuan', $oldStok->satuan)->delete();
     return redirect()->route('stok-obat.show', $id_obat)
       ->with('msg-success', 'Data Berhasil Dihapus', $satuan);
   }

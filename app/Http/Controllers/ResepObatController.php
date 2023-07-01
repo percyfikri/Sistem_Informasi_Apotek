@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\DetailResep;
 use App\Models\Pengguna;
+use App\Models\Racikan;
 use App\Models\ResepObat;
+use App\Models\StokObat;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -126,8 +128,8 @@ class ResepObatController extends Controller
     $request->validate(
       [
         'nama_resep' => 'required',
-        'id_customer' => 'required',
-        'id_dokter' => 'required',
+        'id_customer' => 'nullable',
+        'id_dokter' => 'nullable',
         'status' => 'required',
         'deskripsi' => 'required',
 
@@ -274,5 +276,38 @@ class ResepObatController extends Controller
 
     // Mengirimkan hasil PDF ke browser untuk diunduh
     $dompdf->stream('Cetak-Laporan-Resep Obat.pdf');
+  }
+
+  function sumKuantitas(Request $request)
+  {
+    $sum = 0;
+    $resep = ResepObat::find(1);
+    while (true) {
+      foreach ($resep->detail_resep as $dr) {
+        if ($dr->id_obat) {
+          $stokObat = StokObat::select('kuantitas')->where('id_obat', $dr->id_obat)
+            ->where('satuan', $dr->satuan)
+            ->first();
+
+          if ($dr->kuantitas  * ($sum + 1) > $stokObat->kuantitas) {
+
+            return $sum;
+          }
+        }
+        if ($dr->id_racikan) {
+          $racikan = Racikan::with('detail_racikan')->find($dr->id_racikan);
+          foreach ($racikan->detail_racikan as $ds) {
+            $stokObat = StokObat::select('kuantitas')->where('id_obat', $ds->id_obat)
+              ->where('satuan', $ds->satuan)
+              ->first();
+            if ($ds->kuantitas * ($sum + 1)  > $stokObat->kuantitas) {
+              // break;
+            }
+          }
+        }
+      }
+      $sum++;
+    }
+    return true;
   }
 }

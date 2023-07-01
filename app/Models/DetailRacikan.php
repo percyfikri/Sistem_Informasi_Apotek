@@ -10,6 +10,9 @@ class DetailRacikan extends Model
   use HasFactory;
 
   protected $table = 'detail_racikan';
+  protected $primaryKey = 'id_detail_racikan';
+
+
 
   protected $fillable = [
     'id_racikan',
@@ -26,4 +29,3 @@ class DetailRacikan extends Model
     return $this->belongsTo(Obat::class, 'id_obat');
   }
 }
-

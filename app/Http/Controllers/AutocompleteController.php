@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Jasa;
 use App\Models\Obat;
 use App\Models\Pengguna;
+use App\Models\Racikan;
+use App\Models\ResepObat;
+use App\Models\StokObat;
 use Illuminate\Http\Request;
 
 class AutocompleteController extends Controller
@@ -50,5 +53,33 @@ class AutocompleteController extends Controller
         ->where('nama_jasa', 'LIKE', "%$search%")->get();
     }
     return response()->json($dataJasa);
+  }
+  public function getResep(Request $request)
+  {
+    $dataResep = [];
+    if ($request->has('q')) {
+      $search = $request->q;
+      $dataResep = ResepObat::select("id_resep", "nama_resep")
+        ->where('nama_resep', 'LIKE', "%$search%")->get();
+    }
+    return response()->json($dataResep);
+  }
+  public function getRacikan(Request $request)
+  {
+    $dataRacikan = [];
+    if ($request->has('q')) {
+      $search = $request->q;
+      $dataRacikan = Racikan::select("id_racikan", "nama_racikan")
+        ->where('nama_racikan', 'LIKE', "%$search%")->get();
+    }
+    return response()->json($dataRacikan);
+  }
+
+  public function getSatuan(Request $request)
+
+  {
+    $idObat = $request->get('id_obat');
+    $dataSatuan = StokObat::where('id_obat', $idObat)->get();
+    return response()->json($dataSatuan);
   }
 }

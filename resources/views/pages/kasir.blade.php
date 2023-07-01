@@ -198,7 +198,13 @@
         let itemCount = 0;
         const total = document.getElementById('total')
 
+        const setMax = (e, max) => {
+            console.log(e, max)
+            if (e.target.value > max) {
+                e.target.value = max
+            }
 
+        };
         const checkTableRow = () => {
             const table = document.getElementById("item-table");
             const tbody = table.querySelector('tbody');
@@ -240,7 +246,7 @@
             });
 
         }
-        const addTableRow = (item) => {
+        const addTableRow = async (item) => {
             checkTableRow()
             const itemTable = document.getElementById("item-table");
             const row = itemTable.insertRow();
@@ -250,7 +256,7 @@
             let cell4 = row.insertCell(3);
             let cell5 = row.insertCell(4);
             let cell6 = row.insertCell(5)
-            if (item.type === 'obat') getItem(item.id)
+
 
             cell1.innerHTML = `<input type="text" name="ids[]" id="id-${item.id}"
                                     class="form-control" hidden value="${item.id}">
@@ -263,8 +269,23 @@
             cell3.innerHTML =
                 `<select type="text"  id="satuan-${item.id}" name="satuan[]"
                                     class="form-control" onchange="sumSubTotal(event)"> ${item.type!='obat'?`<option value="${item.type}" selected></option>`:''}"</select>`
-            cell4.innerHTML = `<input type="text" id="kuantitas-${item.id}" name="kuantitas[]" value="0"
-                                    class="form-control" onchange="sumSubTotal(event)">`
+            if (item.type === 'obat') {
+                await getItem(item.id);
+                const satuan = document.getElementById(`satuan-${item.id}`)
+                const obat = obats.find(o => o['id_obat'] == item.id)
+                const satuan_item = obat['stok_obat'].find(stok => stok.satuan == satuan.value)
+
+                cell4.innerHTML = `<input type="number" id="kuantitas-${item.id}" name="kuantitas[]" min="1" max="${satuan_item.kuantitas}" onchange="setMax(event,${satuan_item.kuantitas})" value="0"
+                                    class="form-control"   data-toggle="tooltip"
+                                    data-placement="left" title="Stok yang tersedia : ${satuan_item.kuantitas}" onchange="sumSubTotal(event)">
+                                    `
+            } else if (item.type === 'resep') {
+                console.log('resep')
+            } else {
+
+                cell4.innerHTML = `<input type="number" id="kuantitas-${item.id}" name="kuantitas[]" value="0"
+                                  class="form-control kuantitas" onchange="sumSubTotal(event)">`
+            }
             cell5.innerHTML = `<span class="m-0" id="subtotal-text-${item.id}">${ Number(0).toLocaleString('id-ID', {
                 style: 'currency',
                 currency: 'IDR'
@@ -294,8 +315,8 @@
             });
 
         }
-        const getItem = (id) => {
-            $.ajax({
+        const getItem = async (id) => {
+            await $.ajax({
                 url: `/api/obat/${id}`,
                 type: 'GET',
                 success: function(response) {

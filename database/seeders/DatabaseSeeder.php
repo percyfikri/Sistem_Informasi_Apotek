@@ -21,9 +21,9 @@ class DatabaseSeeder extends Seeder
         StokObatSeeder::class,
         PenggunaSeeder::class,
         JasaSeeder::class,
-        PenjualanSeeder::class,
-        RacikanSeeder::class,
-        ResepObatSeeder::class,
+        // PenjualanSeeder::class,
+        // RacikanSeeder::class,
+        // ResepObatSeeder::class,
         // DetailPenjualanSeeder::class,
         // DetailRacikanSeeder::class,
         // DetailResepSeeder::class,
@@ -37,9 +37,9 @@ class DatabaseSeeder extends Seeder
     // \App\Models\Racikan::factory(20)->create();
     // \App\Models\StokObat::factory(20)->create();
     // \App\Models\Penjualan::factory(20)->create();
-    \App\Models\DetailPenjualan::factory(10)->create();
-    \App\Models\DetailRacikan::factory(10)->create();
-    \App\Models\DetailResep::factory(10)->create();
+    // \App\Models\DetailPenjualan::factory(10)->create();
+    // \App\Models\DetailRacikan::factory(10)->create();
+    // \App\Models\DetailResep::factory(10)->create();
 
     // \App\Models\User::factory(10)->create();
 

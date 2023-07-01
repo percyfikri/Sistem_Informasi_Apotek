@@ -47,6 +47,11 @@ Route::middleware(['auth.role:apoteker'])->group(function () {
     Route::get('apoteker', 'getApoteker')->name('apoteker');
     Route::get('customer', 'getCustomer')->name('customer');
     Route::get('obat', 'getObat')->name('obat');
+    Route::get('satuan', 'getSatuan')->name('satuan');
+
+    Route::get('resep', 'getResep')->name('resep');
+    Route::get('racikan', 'getRacikan')->name('racikan');
+
     Route::get('jasa', 'getJasa')->name('jasa');
   });
   Route::prefix('cetak')->as('cetak.')->group(function () {
@@ -69,8 +74,10 @@ Route::middleware(['auth.role:apoteker'])->group(function () {
   Route::resource('detail_penjualan', DetailPenjualanController::class);
   Route::resource('jasa', JasaController::class);
   Route::resource('obat', ObatController::class);
+  Route::resource('stok-obat', StokObatController::class)->except(['destroy', 'create', 'edit', 'update']);
   Route::delete('stok-obat/{id_obat}/{satuan}', [StokObatController::class, 'destroy']);
-  Route::resource('stok-obat', StokObatController::class)->except(['destroy', 'create']);
+  Route::get('stok-obat/{id_obat}/edit/{satuan}', [StokObatController::class, 'edit']);
+  Route::put('stok-obat/{id_obat}/{satuan}', [StokObatController::class, 'update'])->name('stok-obat.update');
   Route::get('stok-obat/{id_obat}/create', [StokObatController::class, 'create'])->name('stok-obat.create');
   Route::resource('resep-obat', ResepObatController::class);
   Route::resource('pengguna', PenggunaController::class);
@@ -93,4 +100,10 @@ Route::middleware(['auth.role:apoteker'])->group(function () {
   Route::post('/detail-resep/{id_resep}/{id_detail}', [DetailResepController::class, 'update'])->name('detail-resep.update');
 
   Route::delete('detail_racikan/{id_racikan}/{id_obat}/{satuan}', [DetailRacikanController::class, 'destroy']);
+
+  Route::delete('detail-resep/{id_resep}/{id_detail}', [DetailResepController::class, 'destroy']);
+  Route::get('detail-resep/sum/1', [ResepObatController::class, 'sumKuantitas']);
+
+
+  Route::get('detail-racikan/{id_racikan}/create', [DetailRacikanController::class, 'create'])->name('detail-racikan.create');
 });

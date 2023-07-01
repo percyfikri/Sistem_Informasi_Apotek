@@ -142,10 +142,5 @@
             var title = $(this).select2('data')[0].text;
             $('#nama-apoteker').val(title);
         });
-
-        new Cleave('.currency', {
-            numeral: true,
-            numeralThousandsGroupStyle: 'thousand'
-        });
     </script>
 @endpush

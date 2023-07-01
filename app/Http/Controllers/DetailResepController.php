@@ -28,11 +28,8 @@ class DetailResepController extends Controller
    */
   public function create($id_resep)
   {
-    $obat = Obat::all();
-    $racikan = Racikan::all();
-    // $detailResep = DetailResep::with('resep')->where('id_resep', $id_resep)->first();
     $resepObat = ResepObat::find($id_resep);
-    return view('pages.detail-resep.create', compact('resepObat', 'obat', 'racikan'));
+    return view('pages.detail-resep.create', compact('resepObat'));
   }
 
   /**
@@ -45,18 +42,21 @@ class DetailResepController extends Controller
   {
     // Validasi input data
     $validatedData = $request->validate([
-      'id_obat' => 'required',
-      'id_racikan' => 'required',
+      'id_item' => 'required',
+      'jenis' => 'required',
       'kuantitas' => 'required',
-      'satuan' => 'required',
+      'satuan' => $request->input('jenis') == 'obat' ? 'required' : 'nullable',
       'harga' => 'required',
     ]);
-
     // Simpan data resep obat ke database
     $detailResep = new DetailResep();
     $detailResep->id_resep = $id_resep;
-    $detailResep->id_obat = $request->input('id_obat');
-    $detailResep->id_racikan = $request->input('id_racikan');
+    if ($request->input('jenis') == 'obat') {
+      $detailResep->id_obat = $request->input('id_item');
+    }
+    if ($request->input('jenis') == 'racikan') {
+      $detailResep->id_racikan = $request->input('id_item');
+    }
     $detailResep->kuantitas = $request->input('kuantitas');
     $detailResep->satuan = $request->input('satuan');
     $detailResep->harga = $request->input('harga');
@@ -89,10 +89,9 @@ class DetailResepController extends Controller
    */
   public function edit($id_resep, $id_detail)
   {
-    $obat = Obat::all();
-    $racikan = Racikan::all();
+
     $detailResep = DetailResep::find($id_detail);
-    return view('pages.detail-resep.edit', compact('detailResep', 'obat', 'racikan',));
+    return view('pages.detail-resep.edit', compact('detailResep'));
   }
 
   /**
@@ -106,20 +105,22 @@ class DetailResepController extends Controller
   {
     // Validasi input data
     $validatedData = $request->validate([
-      'id_obat' => 'required',
-      'id_racikan' => 'required',
+      'id_item' => 'required',
+      'jenis' => 'required',
       'kuantitas' => 'required',
-      'satuan' => 'required',
+      'satuan' => $request->input('jenis') == 'obat' ? 'required' : 'nullable',
       'harga' => 'required',
     ]);
 
     // Simpan data resep obat ke database
     $detailResep = DetailResep::find($id_detail);
-    // $detailResep = new DetailResep();
 
-    // $detailResep->id_resep = $id_resep;
-    $detailResep->id_obat = $request->id_obat;
-    $detailResep->id_racikan = $request->id_racikan;
+    if ($request->input('jenis') == 'obat') {
+      $detailResep->id_obat = $request->input('id_item');
+    }
+    if ($request->input('jenis') == 'racikan') {
+      $detailResep->id_racikan = $request->input('id_item');
+    }
     $detailResep->kuantitas = $request->kuantitas;
     $detailResep->satuan = $request->satuan;
     $detailResep->harga = $request->harga;

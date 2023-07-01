@@ -17,7 +17,7 @@
                             <tr>
                                 <th>Nama Obat</th>
                                 <th>Jenis Obat</th>
-                                <th>Kuantitas</th>
+                                <th>Stok</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
