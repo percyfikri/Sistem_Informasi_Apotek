@@ -45,48 +45,43 @@ class DetailRacikanController extends Controller
    */
   public function store(Request $request)
   {
-    //melakukan validasi data
-    $request->validate(
-      [
-        'id_racikan' => 'required',
-        'id_obat' => 'required',
-        'kuantitas' => 'required',
-        'satuan' => 'required',
-
-      ],
-      [
-        'id_racikan.required' => 'Nama Racikan Wajib diisi',
-        'id_obat.required' => 'Nama Obat wajib diisi',
-        'kuantitas.required' => 'Kuantitas Racikan wajib diisi',
-        'satuan.required' => 'Satuan Racikan Wajib di isi',
-
-      ]
-    );
-    $dr = new DetailRacikan;
-    $dr->kuantitas = $request->get('kuantitas');
-    $dr->satuan = $request->get('satuan');
-
-    $racikan = new Racikan;
-    $racikan->id_racikan = $request->get('id_racikan');
-
-    $obat = new Obat;
-    $obat->id_obat = $request->get('id_obat');
-
-     // Cek apakah kuantitas melebihi stok obat
-     if ($request->kuantitas > $obat->kuantitas) {
-      return redirect()->back()->with('msg-success', 'Stok obat tidak mencukupi.');
-     }
-    // Kurangi stok obat
-    $stokObat = StokObat::where('id_obat', $request->id_obat)->first();
-    $stokObat->kuantitas -= $request->kuantitas;
-    $stokObat->save();
-
-    $dr->racikan()->associate($racikan);
-    $dr->obat()->associate($obat);
-    $dr->save();
-
-    return redirect('detail_racikan/' . $racikan->id_racikan)->with('msg-success', 'Berhasil menambahkan data');
-  }
+      $request->validate([
+          'id_racikan' => 'required',
+          'id_obat' => 'required',
+          'kuantitas' => 'required',
+          'satuan' => 'required',
+      ], [
+          'id_racikan.required' => 'Nama Racikan Wajib diisi',
+          'id_obat.required' => 'Nama Obat wajib diisi',
+          'kuantitas.required' => 'Kuantitas Racikan wajib diisi',
+          'satuan.required' => 'Satuan Racikan Wajib di isi',
+      ]);
+  
+      $dr = new DetailRacikan;
+      $dr->kuantitas = $request->get('kuantitas');
+      $dr->satuan = $request->get('satuan');
+  
+      $racikan = new Racikan;
+      $racikan->id_racikan = $request->get('id_racikan');
+  
+      $obat = Obat::findOrFail($request->get('id_obat'));
+  
+      // Cek apakah kuantitas melebihi stok obat
+      $stokObat = StokObat::where('id_obat', $obat->id_obat)->first();
+      if ($request->kuantitas > $stokObat->kuantitas) {
+          return redirect()->back()->with('msg-success', 'Stok obat tidak mencukupi.');
+      }
+  
+      // Kurangi stok obat
+      $stokObat->kuantitas -= $request->kuantitas;
+      $stokObat->save();
+  
+      $dr->racikan()->associate($racikan);
+      $dr->obat()->associate($obat);
+      $dr->save();
+  
+      return redirect('detail_racikan/' . $racikan->id_racikan)->with('msg-success', 'Berhasil menambahkan data');
+  }   
 
   /**
    * Display the specified resource.
@@ -128,40 +123,37 @@ class DetailRacikanController extends Controller
    */
   public function update(Request $request, DetailRacikan $detailRacikan)
   {
-    // melakukan validasi data
-
-    $request->validate(
-      [
-        'id_racikan' => 'required',
-        'id_obat' => 'required',
-        'kuantitas' => 'required',
-        'satuan' => 'required',
-
-      ],
-      [
-        'kuantitas.required' => 'Kuantitas racikan obat wajib diisi',
-        'satuan.required' => 'satuan racikan wajib diisi',
-      ]
-    );
-    $racikan = Racikan::find($request->get('id_racikan'));
-    $obat = Obat::find($request->get('id_obat'));
-
-    $detailRacikan->kuantitas = $request->get('kuantitas');
-    $detailRacikan->satuan = $request->get('satuan');
-
-    $detailRacikan->racikan()->associate($racikan);
-    $detailRacikan->obat()->associate($obat);
-
-    DB::table('detail_racikan')
-      ->where('id_detail_racikan', $detailRacikan->id_detail_racikan)->update([
-        'id_obat' => $request->input('id_obat'),
-        'kuantitas' => $request->input('kuantitas'),
-        'satuan' => $request->input('satuan'),
+      // Melakukan validasi data
+      $request->validate([
+          'id_racikan' => 'required',
+          'id_obat' => 'required',
+          'kuantitas' => 'required',
+          'satuan' => 'required',
+      ], [
+          'id_racikan.required' => 'Nama Racikan Wajib diisi',
+          'id_obat.required' => 'Nama Obat wajib diisi',
+          'kuantitas.required' => 'Kuantitas Racikan wajib diisi',
+          'satuan.required' => 'Satuan Racikan Wajib di isi',
       ]);
-    $detailRacikan->save();
-
-    return redirect('detail_racikan/' . $detailRacikan->id_detail_racikan)->with('msg-success', 'Berhasil melakukan update data');
-  }
+  
+      $racikan = Racikan::find($request->get('id_racikan'));
+      $obat = Obat::find($request->get('id_obat'));
+  
+      $detailRacikan->kuantitas = $request->get('kuantitas');
+      $detailRacikan->satuan = $request->get('satuan');
+  
+      $detailRacikan->racikan()->associate($racikan);
+      $detailRacikan->obat()->associate($obat);
+  
+      // Mengurangi stok obat
+      $stokObat = StokObat::where('id_obat', $obat->id_obat)->first();
+      $stokObat->kuantitas -= $request->get('kuantitas');
+      $stokObat->save();
+  
+      $detailRacikan->save();
+  
+      return redirect('detail_racikan/' . $detailRacikan->id_detail_racikan)->with('msg-success', 'Berhasil melakukan update data');
+  }  
 
   /**
    * Remove the specified resource from storage.
