@@ -63,7 +63,7 @@ class DetailResepController extends Controller
     $detailResep->save();
 
     // Redirect ke halaman yang diinginkan
-    return redirect()->route('detail-resep.show', $detailResep->id_resep)->with('success', 'Detail Resep Obat berhasil ditambahkan');
+    return redirect()->route('detail-resep.show', $detailResep->id_resep)->with('msg-success', 'Detail Resep Obat berhasil ditambahkan');
   }
 
   /**
@@ -127,7 +127,7 @@ class DetailResepController extends Controller
     $detailResep->save();
 
     // Redirect ke halaman yang diinginkan
-    return redirect()->route('detail-resep.show', $detailResep->id_resep)->with('success', 'Detail Resep Obat berhasil ditambahkan');
+    return redirect()->route('detail-resep.show', $detailResep->id_resep)->with('msg-success', 'Detail Resep Obat berhasil diubah');
   }
 
   /**
@@ -140,6 +140,6 @@ class DetailResepController extends Controller
   {
     DetailResep::find($id_detail)->delete();
     return redirect()->route('detail-resep.show', $id_resep)
-      ->with('msg-success', 'Data Berhasil Dihapus');
+      ->with('msg-msg-success', 'Data Berhasil Dihapus');
   }
 }
